@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "749707003705",
+    "project_id": "tremplistupdtaefirebase",
+    "storage_bucket": "tremplistupdtaefirebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:749707003705:android:62a819a13b8367555d4ae8",
+        "android_client_info": {
+          "package_name": "com.myapp.tremplist_update"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "749707003705-k8n0783jt79f1qul8pv91ga161aupv0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpRH2Ix7jlrMXBZkktJ25tYFbza3ljdlU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "749707003705-k8n0783jt79f1qul8pv91ga161aupv0p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
