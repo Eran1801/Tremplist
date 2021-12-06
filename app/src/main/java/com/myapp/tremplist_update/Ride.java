@@ -117,4 +117,8 @@ public class Ride {
         this.ride_cost = ride_cost;
     }
 
+    public int getId(){
+        return id;
+    }
+
 }

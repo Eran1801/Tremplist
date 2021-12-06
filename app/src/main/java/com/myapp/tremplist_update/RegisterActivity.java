@@ -117,8 +117,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void register_user_to_Database(String txt_first_name, String txt_last_name, String txt_telephone, String txt_password) {
         User user = new User(txt_first_name, txt_last_name, txt_telephone, txt_password);
 //        reference.child(txt_first_name).setValue(user);
-        FireBaseDBUser fb = new FireBaseDBUser();
-        fb.addUserToDB(user.getFirst_name(), user.getLast_name() , user.getPhone(), user.getPassword());
+        FireBaseDBActivity fb = new FireBaseDBActivity();
+        fb.addUserToDB(user);
     }
 
 
