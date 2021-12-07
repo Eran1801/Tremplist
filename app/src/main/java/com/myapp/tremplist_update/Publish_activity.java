@@ -115,6 +115,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                     } else if (TextUtils.isEmpty(tmp_sits)){
                         txt_sits.setError("Number of sits cannot be empty");
                         txt_sits.requestFocus();
+
                     } else if (TextUtils.isEmpty(tmp_ride_cost)){
                         txt_ride_cost.setError("Ride cost cannot be empty");
                         txt_ride_cost.requestFocus();
@@ -128,8 +129,20 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 //                        //hour passed
                     }
                     else {
-                        sits = Integer.parseInt(tmp_sits);
-                        ride_cost = Integer.parseInt(tmp_ride_cost);
+                        try {
+                            sits = Integer.parseInt(tmp_sits);
+                        }catch (Exception e){
+                            txt_sits.setError("Number of sits need to be only numbers");
+                            txt_sits.requestFocus();
+                        }
+
+                        try {
+                            ride_cost = Integer.parseInt(tmp_ride_cost);
+                        }catch (Exception e){
+                            txt_ride_cost.setError("the cost need to be only numbers");
+                            txt_ride_cost.requestFocus();
+                        }
+
                         Ride ride = new Ride(src_city, dst_city, date, hour, sits, ride_cost);
                         if(!car_color.isEmpty())
                             ride.setCar_color(car_color);
@@ -137,17 +150,9 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             ride.setCar_type(car_type);
 
                         fb = new FireBaseDBActivity();
+                        fb.setContext(Publish_activity.this);
                         fb.addRideToDB(ride);
-//                        if(!fb.addRideToDB(ride)){
-//                            Toast.makeText(Publish_activity.this, "Publishing Error: " , Toast.LENGTH_SHORT).show();
-//                        }
-//                        else{
-//                            Toast.makeText(Publish_activity.this, "Publish successfully" , Toast.LENGTH_SHORT).show();
-//                        }
-
                     }
-
-
                 }
             });
 
