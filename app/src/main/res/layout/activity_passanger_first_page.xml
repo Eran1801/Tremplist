@@ -20,7 +20,7 @@
         tools:layout_editor_absoluteY="73dp" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/search_ride"
         android:layout_width="195dp"
         android:layout_height="80dp"
         android:background="@drawable/button_vg"
@@ -35,7 +35,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/my_details_passenger"
         android:layout_width="195dp"
         android:layout_height="80dp"
         android:background="@drawable/button_vg"
@@ -50,7 +50,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/my_tremps"
         android:layout_width="195dp"
         android:layout_height="80dp"
         android:background="@drawable/button_vg"

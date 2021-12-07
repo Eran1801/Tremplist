@@ -92,15 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
 
-//            String txt_first_name, txt_last_name, txt_telephone,txt_password;
-//            txt_first_name = etRegFirstName.getText().toString();
-//            txt_last_name = etRegLastName.getText().toString();
-//            txt_telephone = etRegTelephone.getText().toString();
-//            txt_password = etRegPassword.getText().toString();
-
             register_user_to_Database(firstName,lastName,telephone,password);
-
-//            register_user_to_Database(txt_first_name,txt_last_name,txt_telephone,txt_password);
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
@@ -118,7 +110,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void register_user_to_Database(String txt_first_name, String txt_last_name, String txt_telephone, String txt_password) {
         User user = new User(txt_first_name, txt_last_name, txt_telephone, txt_password);
-//        reference.child(txt_first_name).setValue(user);
         FireBaseDBActivity fb = new FireBaseDBActivity();
         fb.addUserToDB(user);
     }

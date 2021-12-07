@@ -39,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+        to_passengerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PassangerFirstPage.class));
+                finish();
+            }
+        });
 
     }
 
