@@ -32,17 +32,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
-        to_passengerBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setContentView(R.layout.activity_passanger_first_page);
-            }
-        });
         to_driverBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("111111111111111111","11");
                 startActivity(new Intent(MainActivity.this, DriverFirstPage.class));
+                finish();
             }
         });
 

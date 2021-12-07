@@ -19,12 +19,13 @@ public class Ride {
 
     static int counter_of_drives = 0;
 
-    public Ride(String src, String dst, Date date, Hour hour, int free_sits, int cost) {
+    public Ride(String src, String dst, Date date, Hour hour, int sits, int cost) {
         this.src_city = src;
         this.dst_city = dst;
         this.date = date;
         this.hour = hour;
-        this.free_sits = free_sits;
+        this.sits = sits;
+        this.free_sits=sits;
         this.ride_cost = cost;
         this.id = counter_of_drives++;
     }

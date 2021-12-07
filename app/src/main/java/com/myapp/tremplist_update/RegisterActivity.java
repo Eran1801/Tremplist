@@ -92,13 +92,15 @@ public class RegisterActivity extends AppCompatActivity {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
 
-            String txt_first_name, txt_last_name, txt_telephone,txt_password;
-            txt_first_name = etRegFirstName.getText().toString();
-            txt_last_name = etRegLastName.getText().toString();
-            txt_telephone = etRegTelephone.getText().toString();
-            txt_password = etRegPassword.getText().toString();
+//            String txt_first_name, txt_last_name, txt_telephone,txt_password;
+//            txt_first_name = etRegFirstName.getText().toString();
+//            txt_last_name = etRegLastName.getText().toString();
+//            txt_telephone = etRegTelephone.getText().toString();
+//            txt_password = etRegPassword.getText().toString();
 
-            register_user_to_Database(txt_first_name,txt_last_name,txt_telephone,txt_password);
+            register_user_to_Database(firstName,lastName,telephone,password);
+
+//            register_user_to_Database(txt_first_name,txt_last_name,txt_telephone,txt_password);
 
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override

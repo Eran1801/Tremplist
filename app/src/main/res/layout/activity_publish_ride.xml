@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/dest_city"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -22,7 +22,7 @@
         app:layout_constraintVertical_bias="0.378"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/date"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -39,7 +39,7 @@
         app:layout_constraintVertical_bias="0.552"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/car_type"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -56,7 +56,7 @@
         app:layout_constraintVertical_bias="0.629"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/sits"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -73,7 +73,7 @@
         app:layout_constraintVertical_bias="0.702"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/free_sits"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -90,7 +90,7 @@
         app:layout_constraintVertical_bias="0.702"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/cost"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -107,7 +107,7 @@
         app:layout_constraintVertical_bias="0.806"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/car_color"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -124,7 +124,7 @@
         app:layout_constraintVertical_bias="0.629"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/hour"
         android:layout_width="148dp"
         android:layout_height="48dp"
@@ -141,7 +141,7 @@
         app:layout_constraintVertical_bias="0.552"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/dest_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -158,8 +158,8 @@
         app:layout_constraintVertical_bias="0.462"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
-        android:id="@+id/src_city2"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/src_city"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
@@ -175,7 +175,7 @@
         app:layout_constraintVertical_bias="0.219"
         app:layout_constraintWidth_percent=".8" />
 
-    <EditText
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/src_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -194,7 +194,7 @@
 
     <Button
         android:background="@color/cardview_dark_background"
-        android:id="@+id/publish_a_ride"
+        android:id="@+id/publish"
         android:layout_width="177dp"
         android:layout_height="48dp"
         android:textSize="18sp"

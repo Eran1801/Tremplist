@@ -8,7 +8,6 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
         myRef.child("users").child(user.getFirst_name()).setValue(user);
     }
     public void addRideToDB(Ride ride){
-        Log.d("55555555555","5555555555555");
         myRef.child("rides").child(ride.getId()+"").setValue(ride);
     }
 }
