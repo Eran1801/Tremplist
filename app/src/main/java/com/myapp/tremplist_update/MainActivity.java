@@ -2,6 +2,7 @@ package com.myapp.tremplist_update;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -40,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         to_driverBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setContentView(R.layout.activity_driver_first_page);
+                Log.d("111111111111111111","11");
+                startActivity(new Intent(MainActivity.this, DriverFirstPage.class));
             }
         });
 

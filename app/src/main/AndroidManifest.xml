@@ -19,6 +19,13 @@
             android:label="Driver Page"
             android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
 
+        <activity
+            android:name=".Publish_activity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="Publish ride"
+            android:parentActivityName=".DriverFirstPage"/>
+
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
         <activity

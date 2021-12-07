@@ -142,7 +142,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/dest_detail2"
+        android:id="@+id/dest_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
@@ -176,7 +176,7 @@
         app:layout_constraintWidth_percent=".8" />
 
     <EditText
-        android:id="@+id/dest_detail"
+        android:id="@+id/src_detail"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/edit_text_bg"
@@ -194,7 +194,7 @@
 
     <Button
         android:background="@color/cardview_dark_background"
-        android:id="@+id/button4"
+        android:id="@+id/publish_a_ride"
         android:layout_width="177dp"
         android:layout_height="48dp"
         android:textSize="18sp"

@@ -17,7 +17,7 @@ public class Ride {
     private int free_sits;
     private int ride_cost;
 
-    static int counter_of_drives = 0; // for which purpose ?
+    static int counter_of_drives = 0;
 
     public Ride(String src, String dst, Date date, Hour hour, int free_sits, int cost) {
         this.src_city = src;
