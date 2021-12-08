@@ -18,16 +18,30 @@ import java.util.ArrayList;
 
 public class show_search_resultsActivity  extends AppCompatActivity {
     private  Hour hour_from;
-    private  Hour hour_to;
-    private  Date date_from;
-    private  Date date_to;
-    private  String from, to;
+    private Hour hour_to;
+    private Date date_from;
+    private Date date_to;
+    private String from;
+    private String to;
     ListView listView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results);
+
+        from = getIntent().getStringExtra("src_city");
+        to= getIntent().getStringExtra("dest_city");
+        String[] d1 = getIntent().getStringExtra("date_from").split("/");
+        String[] d2 = getIntent().getStringExtra("date_to").split("/");
+        String[] h1 = getIntent().getStringExtra("hour_from").split(":");
+        String[] h2 = getIntent().getStringExtra("hour_from").split(":");
+
+        date_from= new Date(Integer.parseInt(d1[0]), Integer.parseInt(d1[1]), Integer.parseInt(d1[2]));
+        date_to= new Date(Integer.parseInt(d2[0]), Integer.parseInt(d2[1]), Integer.parseInt(d2[2]));
+        hour_from= new Hour(Integer.parseInt(h1[0]), Integer.parseInt(h1[1]));
+        hour_from= new Hour(Integer.parseInt(h2[0]), Integer.parseInt(h2[1]));
+
 
         listView=findViewById(R.id.list_view);
 
@@ -46,18 +60,25 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                 {
                     Ride ride = snapshot.getValue(Ride.class);
 
-//                    if(ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
-//                            && (ride.getDate().compareTo(date_from)>0
-//                                ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
-//                            && (ride.getDate().compareTo(date_to)<0
-//                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_from)<0))) {
+                    if(ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
+                            && ((ride.getDate().compareTo(date_from)>0
+                                ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
+                            && (ride.getDate().compareTo(date_to)<0
+                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_from)<0)))) {
 
                         String txt_to_add, car_color = "", car_type = "", from_details = "", to_details = "";
                         String from = "From: " + ride.getSrc_city(),
                                 to = "\nTo: " + ride.getDst_city(),
                                 date = "\nDate: " + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear(),
-                                hour = "\nHour: " + ride.getHour().getHour() + ":" + ride.getHour().getMinute(),
                                 available_sits = "\nfree sits: " + ride.getFree_sits() + " out of " + ride.getSits();
+                        String hour = "\nHour: ";
+                        if (ride.getHour().getHour()==0)
+                             hour+= "00:";
+                        else
+                            hour+=ride.getHour().getHour() + ":";
+                        if (ride.getHour().getMinute()==0)
+                            hour+="00";
+                        else  hour+= ride.getHour().getMinute();
 
                         if (!ride.getCar_color().isEmpty())
                             car_color = "\nthe car's color: " + ride.getCar_color();
@@ -72,7 +93,12 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                         ridesList.add(txt_to_add);
                         Log.d("add key", snapshot.getKey().toString());
 
-//                    }
+                    }
+
+//                    Log.d("*****1",(ride.getDate().compareTo(date_from))+"");
+//                    Log.d("*****2",(ride.getHour().compareTo(hour_from)) +"");
+//                    Log.d("*****3",(ride.getDate().compareTo(date_to)) +"");
+//                    Log.d("*****4",(ride.getHour().compareTo(hour_to)) +"");
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -85,13 +111,5 @@ public class show_search_resultsActivity  extends AppCompatActivity {
 
 
     }
-//    public void setSearchDetails(String From, String To, Date Date_from,
-//                                 Hour Hour_from,Date Date_to, Hour Hour_to){
-//        hour_to=new Hour(Hour_to);
-//        hour_from=new Hour(Hour_from);
-//        date_from=new Date(Date_from);
-//        date_to=new Date(Date_to);
-//        from=From;
-//        to=To;
-//    }
+
 }

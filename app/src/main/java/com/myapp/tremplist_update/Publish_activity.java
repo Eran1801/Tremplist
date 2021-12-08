@@ -76,8 +76,6 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish_ride);
         publish_Btn = findViewById(R.id.publish);
-        getUserByEmail("edenshkuri688@gmail.com");
-        Log.d("@@@@@@@@@@@@@@@@@","@@@@@@@@@@@@@@@2");
         txt_src_city = findViewById(R.id.src_city);
         txt_src_details = findViewById(R.id.src_detail);
         txt_dst_city = findViewById(R.id.dest_city);
@@ -158,7 +156,9 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             txt_ride_cost.requestFocus();
                         }
 
-                        Log.d("hereeee", "kkkkkk");
+//                        getUserByEmail("edenshkuri68@gmail.com");
+//
+                        Log.d("@@@@@@@@@@@@@@@@@","@@@@@@@@@@@@@@@2");
                         if(curr_user!=null)
                             Log.d("USER IS***", curr_user.getEmail()+", "+curr_user.getPhone());
                         else Log.d("USER IS***", "nullllll");
@@ -214,34 +214,6 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         }
         hour=new Hour(hourOfDay, minute);
         Log.d("THE TIME IS: ", "hour= "+hourOfDay+", minute= "+minute);
-    }
-
-    private void getUserByEmail(String email){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                for (DataSnapshot snapshot: datasnapshot.getChildren())
-                {
-                    Log.d("USER&&&",snapshot.getValue(User.class).getEmail()+", "+snapshot.getValue(User.class).getPhone());
-                    if(snapshot.getValue(User.class).getEmail().equals(email)){
-                        User tmpUser =new User(snapshot.getValue(User.class).getFirst_name(),
-                                snapshot.getValue(User.class).getLast_name(),
-                                snapshot.getValue(User.class).getPhone(),
-                                snapshot.getValue(User.class).getPassword(),
-                                snapshot.getValue(User.class).getEmail());
-                        setUserToRide(tmpUser);
-                        break;
-                    }
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 
 
