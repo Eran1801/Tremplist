@@ -2,7 +2,6 @@ package com.myapp.tremplist_update;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -42,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         to_passengerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, PassangerFirstPage.class));
+                startActivity(new Intent(MainActivity.this, PassengerFirstPage.class));
                 finish();
             }
         });

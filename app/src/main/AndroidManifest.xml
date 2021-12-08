@@ -27,11 +27,31 @@
             android:parentActivityName=".DriverFirstPage"/>
 
         <activity
-            android:name=".PassangerFirstPage"
+            android:name=".PassengerFirstPage"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="Passenger Page"
             android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
+
+        <activity
+            android:name=".Search_ridesActivity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="Search ride"
+            android:parentActivityName=".PassengerFirstPage"/>
+
+        <activity
+            android:name=".show_search_resultsActivity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="Rides"
+            android:parentActivityName=".Search_ridesActivity"/>
+<!--        <activity-->
+<!--            android:name=".show_search_resultsActivity"-->
+<!--            android:launchMode="singleTop"-->
+<!--            android:exported="true"-->
+<!--            android:label="Rides"-->
+<!--            android:parentActivityName=".PassengerFirstPage"/>-->
 
 
         <activity android:name=".LoginActivity"/>
