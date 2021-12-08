@@ -20,11 +20,10 @@ public class FireBaseDBActivity extends FirebaseBaseModel{
     }
 
     public void addUserToDB(User user){
-        myRef.child("users").child(user.getFirst_name()).setValue(user);
+        myRef.child("users").child(user.getId()+"").setValue(user);
     }
 
     public void addRideToDB(Ride ride){
-//        myRef.child("rides").child(ride.getId()+"").setValue(ride);
         myRef.child("rides").child(ride.getId()+"").setValue(ride).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

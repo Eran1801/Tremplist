@@ -5,24 +5,6 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<!--    <com.google.android.material.textfield.TextInputEditText-->
-<!--        android:id="@+id/search_hour"-->
-<!--        android:layout_width="328dp"-->
-<!--        android:layout_height="57dp"-->
-<!--        android:background="@drawable/edit_text_bg"-->
-<!--        android:hint="שעה"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:paddingTop="10dp"-->
-<!--        android:paddingRight="20dp"-->
-<!--        android:paddingBottom="10dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.493"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.731"-->
-<!--        app:layout_constraintWidth_percent=".8" />-->
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/search_dest_city"
         android:layout_width="328dp"
@@ -41,59 +23,116 @@
         app:layout_constraintVertical_bias="0.437"
         app:layout_constraintWidth_percent=".8" />
 
-<!--    <com.google.android.material.textfield.TextInputEditText-->
-<!--        android:id="@+id/search_date"-->
-<!--        android:layout_width="328dp"-->
-<!--        android:layout_height="57dp"-->
-<!--        android:background="@drawable/edit_text_bg"-->
-<!--        android:hint="תאריך"-->
-<!--        android:minHeight="48dp"-->
-<!--        android:paddingTop="10dp"-->
-<!--        android:paddingRight="20dp"-->
-<!--        android:paddingBottom="10dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.493"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.584"-->
-<!--        app:layout_constraintWidth_percent=".8" />-->
+    <TextView
+        android:id="@+id/start_from"
+        android:layout_width="80dp"
+        android:layout_height="57dp"
+        android:background="@color/white"
+        android:hint="החל מ-"
+        android:minHeight="48dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.589"
+        app:layout_constraintWidth_percent=".8" />
+
+
+    <TextView
+        android:id="@+id/end_time"
+        android:layout_width="80dp"
+        android:layout_height="57dp"
+        android:background="@color/white"
+        android:hint="עד ל-"
+        android:minHeight="48dp"
+        android:paddingTop="10dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="10dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.722"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709"
+        app:layout_constraintWidth_percent=".8" />
 
     <ImageButton
-        android:id="@+id/search_date"
+        android:id="@+id/search_date_from"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:onClick="image"
         android:paddingTop="10dp"
         android:paddingRight="15dp"
         android:paddingBottom="10dp"
+        android:src="@drawable/ic_calender"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.65"
+        app:layout_constraintHorizontal_bias="0.471"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58"
-        app:layout_constraintWidth_percent=".8"
-        android:layout_centerVertical="true"
-        android:onClick="image"
-        android:src="@drawable/ic_calender"/>
+        app:layout_constraintVertical_bias="0.581"
+        app:layout_constraintWidth_percent=".8" />
 
     <ImageButton
-        android:id="@+id/search_hour"
+        android:id="@+id/search_hour_from"
         android:layout_width="48dp"
         android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:onClick="image"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
+        android:src="@drawable/ic_clock"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.286"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.58"
-        app:layout_constraintWidth_percent=".8"
+        app:layout_constraintVertical_bias="0.581"
+        app:layout_constraintWidth_percent=".8" />
+
+    <ImageButton
+        android:id="@+id/search_date_to"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_centerVertical="true"
         android:onClick="image"
-        android:src="@drawable/ic_clock"/>
+        android:paddingTop="10dp"
+        android:paddingRight="15dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/ic_calender"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.471"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.699"
+        app:layout_constraintWidth_percent=".8" />
+
+    <ImageButton
+        android:id="@+id/search_hour_to"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:onClick="image"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        android:src="@drawable/ic_clock"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.286"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.699"
+        app:layout_constraintWidth_percent=".8" />
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/search_src_city"

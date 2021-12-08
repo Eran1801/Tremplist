@@ -17,22 +17,31 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 import java.util.Timer;
 
 public class Publish_activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     FireBaseDBActivity fb;
+    FirebaseAuth mAuth;
 
+    User curr_user;
     Button publish_Btn;
     private String src_city;
     private String src_details;
@@ -67,7 +76,8 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish_ride);
         publish_Btn = findViewById(R.id.publish);
-
+        getUserByEmail("edenshkuri688@gmail.com");
+        Log.d("@@@@@@@@@@@@@@@@@","@@@@@@@@@@@@@@@2");
         txt_src_city = findViewById(R.id.src_city);
         txt_src_details = findViewById(R.id.src_detail);
         txt_dst_city = findViewById(R.id.dest_city);
@@ -148,6 +158,11 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             txt_ride_cost.requestFocus();
                         }
 
+                        Log.d("hereeee", "kkkkkk");
+                        if(curr_user!=null)
+                            Log.d("USER IS***", curr_user.getEmail()+", "+curr_user.getPhone());
+                        else Log.d("USER IS***", "nullllll");
+
                         Ride ride = new Ride(src_city, dst_city, date, hour, sits, ride_cost);
                         if(!car_color.isEmpty())
                             ride.setCar_color(car_color);
@@ -163,6 +178,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
 
     }
+
     private void showDatePickerDialog(){
         DatePickerDialog datePickerDialog =new DatePickerDialog(
                 this, this,
@@ -198,5 +214,38 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         }
         hour=new Hour(hourOfDay, minute);
         Log.d("THE TIME IS: ", "hour= "+hourOfDay+", minute= "+minute);
+    }
+
+    private void getUserByEmail(String email){
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                for (DataSnapshot snapshot: datasnapshot.getChildren())
+                {
+                    Log.d("USER&&&",snapshot.getValue(User.class).getEmail()+", "+snapshot.getValue(User.class).getPhone());
+                    if(snapshot.getValue(User.class).getEmail().equals(email)){
+                        User tmpUser =new User(snapshot.getValue(User.class).getFirst_name(),
+                                snapshot.getValue(User.class).getLast_name(),
+                                snapshot.getValue(User.class).getPhone(),
+                                snapshot.getValue(User.class).getPassword(),
+                                snapshot.getValue(User.class).getEmail());
+                        setUserToRide(tmpUser);
+                        break;
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    private void setUserToRide(User u){
+        curr_user=new User(u);
     }
 }

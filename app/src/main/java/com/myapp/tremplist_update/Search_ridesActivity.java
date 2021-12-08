@@ -33,8 +33,11 @@ import java.util.Objects;
 public class Search_ridesActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
     Button search_Btn;
     String src_city, dest_city;
-    Date date;
-    Hour hour;
+    Date date_from, date_to;
+    Hour hour_from, hour_to;
+
+    boolean flag_date =false;
+    boolean flag_hour =false;
 
 
     TextInputEditText txt_src_city;
@@ -49,14 +52,28 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         txt_src_city = findViewById(R.id.search_src_city);
         txt_dest_city = findViewById(R.id.search_dest_city);
 
-        findViewById(R.id.search_date).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.search_date_from).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
 
-        findViewById(R.id.search_hour).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.search_hour_from).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment timePicker = new TimePickerFragment();
+                timePicker.show(getSupportFragmentManager(), "time picker");
+            }
+        });
+        findViewById(R.id.search_date_to).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDatePickerDialog();
+            }
+        });
+
+        findViewById(R.id.search_hour_to).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DialogFragment timePicker = new TimePickerFragment();
@@ -77,13 +94,9 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                     txt_dest_city.setError("Dest city cannot be empty");
                     txt_dest_city.requestFocus();
                 }else{//get the data from the firebase
-//
-                    Log.d("SRC= ", src_city);
-                    Log.d("DEST= ", dest_city);
-                    Log.d("DATE= ",date.getDay()+"/"+date.getMonth()+"/"+date.getYear());
-                    Log.d("HOUR= ", hour.getHour()+":"+hour.getMinute());
 
-//
+                    show_search_resultsActivity.setSearchDetails(src_city, dest_city, date_from, hour_from, date_to, hour_to);
+
                     startActivity(new Intent( Search_ridesActivity.this, show_search_resultsActivity.class));
 
                 }
@@ -104,13 +117,20 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        date=new Date(dayOfMonth, month, year);
+        if (!flag_date)
+            date_from=new Date(dayOfMonth, month, year);
+        else date_to=new Date(dayOfMonth, month, year);
+        flag_date=true;
     }
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        hour=new Hour(hourOfDay, minute);
-        Log.d("THE TIME IS: ", "hour= "+hourOfDay+", minute= "+minute);
+        if (!flag_hour)
+            hour_from=new Hour(hourOfDay, minute);
+        else
+            hour_from=new Hour(hourOfDay, minute);
+        flag_hour=true;
+
     }
 
 }
