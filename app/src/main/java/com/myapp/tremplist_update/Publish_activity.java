@@ -174,7 +174,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
     private void showTimePickerDialog(){
         TimePickerDialog timePickerDialog =new TimePickerDialog(
-                this, this,
+                this,  AlertDialog.THEME_HOLO_DARK,this,
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
                 Calendar.getInstance().get(Calendar.MINUTE)+5, true);
         timePickerDialog.show();
