@@ -15,14 +15,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class show_search_resultsActivity  extends AppCompatActivity {
-    private static Hour hour_from;
-    private static Hour hour_to;
-    private static com.myapp.tremplist_update.Date date_from;
-    private static com.myapp.tremplist_update.Date date_to;
-    private static String from, to;
+    private  Hour hour_from;
+    private  Hour hour_to;
+    private  Date date_from;
+    private  Date date_to;
+    private  String from, to;
     ListView listView;
 
 
@@ -46,11 +45,12 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                 for (DataSnapshot snapshot: datasnapshot.getChildren())
                 {
                     Ride ride = snapshot.getValue(Ride.class);
-                    if(ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
-                            && (ride.getDate().compareTo(date_from)>0
-                                ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
-                            && (ride.getDate().compareTo(date_to)<0
-                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_from)<0))) {
+
+//                    if(ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
+//                            && (ride.getDate().compareTo(date_from)>0
+//                                ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
+//                            && (ride.getDate().compareTo(date_to)<0
+//                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_from)<0))) {
 
                         String txt_to_add, car_color = "", car_type = "", from_details = "", to_details = "";
                         String from = "From: " + ride.getSrc_city(),
@@ -72,8 +72,7 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                         ridesList.add(txt_to_add);
                         Log.d("add key", snapshot.getKey().toString());
 
-                    }
-
+//                    }
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -86,13 +85,13 @@ public class show_search_resultsActivity  extends AppCompatActivity {
 
 
     }
-    public static void setSearchDetails(String From, String To,com.myapp.tremplist_update.Date Date_from,
-                                        Hour Hour_from, com.myapp.tremplist_update.Date Date_to, Hour Hour_to ){
-        hour_to=new Hour(Hour_to);
-        hour_from=new Hour(Hour_from);
+//    public void setSearchDetails(String From, String To, Date Date_from,
+//                                 Hour Hour_from,Date Date_to, Hour Hour_to){
+//        hour_to=new Hour(Hour_to);
+//        hour_from=new Hour(Hour_from);
 //        date_from=new Date(Date_from);
 //        date_to=new Date(Date_to);
-        from=From;
-        to=To;
-    }
+//        from=From;
+//        to=To;
+//    }
 }

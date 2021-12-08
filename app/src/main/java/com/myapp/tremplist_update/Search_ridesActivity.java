@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -84,6 +85,8 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         search_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("11111111111111111111", "11111111111111111");
+
                 src_city = Objects.requireNonNull(txt_src_city.getText()).toString();
                 dest_city = Objects.requireNonNull(txt_dest_city.getText()).toString();
 
@@ -95,9 +98,15 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                     txt_dest_city.requestFocus();
                 }else{//get the data from the firebase
 
-                    show_search_resultsActivity.setSearchDetails(src_city, dest_city, date_from, hour_from, date_to, hour_to);
+                    Intent intent = new Intent(Search_ridesActivity.this, show_search_resultsActivity.class);
+                    intent.putExtra("src_city", src_city);
+                    intent.putExtra("dest_city", dest_city);
+                    intent.putExtra("date_from",date_from.getDay()+"/"+ date_from.getMonth()+"/"+date_from.getYear());
+                    intent.putExtra("date_to",date_to.getDay()+"/"+ date_to.getMonth()+"/"+date_to.getYear());
+                    intent.putExtra("hour_from", hour_from.getHour()+":"+hour_from.getMinute());
+                    intent.putExtra("hour_to", hour_to.getHour()+":"+hour_to.getMinute());
+                    startActivity(intent);
 
-                    startActivity(new Intent( Search_ridesActivity.this, show_search_resultsActivity.class));
 
                 }
 
@@ -128,7 +137,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         if (!flag_hour)
             hour_from=new Hour(hourOfDay, minute);
         else
-            hour_from=new Hour(hourOfDay, minute);
+            hour_to=new Hour(hourOfDay, minute);
         flag_hour=true;
 
     }

@@ -1,7 +1,5 @@
 package com.myapp.tremplist_update;
 
-import java.util.Comparator;
-
 public class Date implements Comparable<Date> {
     private int day;
     private int month;
@@ -62,4 +60,5 @@ public class Date implements Comparable<Date> {
             return 0;
         
     }
+
 }
