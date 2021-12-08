@@ -57,7 +57,8 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
     TextInputEditText txt_sits;
     TextInputEditText txt_ride_cost;
     TextInputEditText txt_date;
-    TextView b;
+    ImageButton btn_date;
+    ImageButton btn_time;
 
 
 
@@ -75,22 +76,28 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         txt_car_color = findViewById(R.id.car_color);
         txt_sits = findViewById(R.id.sits);
         txt_ride_cost = findViewById(R.id.cost);
-//        b = findViewById(R.id.date);
-        findViewById(R.id.date).setOnClickListener(new View.OnClickListener() {
+        btn_date = findViewById(R.id.date);
+        btn_time = findViewById(R.id.hour);
+
+
+        btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDatePickerDialog();
             }
         });
-        ImageButton button = findViewById(R.id.hour);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        btn_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DialogFragment timePicker = new TimePickerFragment();
-                timePicker.show(getSupportFragmentManager(), "time picker");
+                if(date == null){
+                    Toast.makeText(Publish_activity.this, "First choose date", Toast.LENGTH_SHORT).show();
+                    btn_date.requestFocus();
+                } else {
+                    showTimePickerDialog();
+                };
             }
         });
-
 
         publish_Btn.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
@@ -119,14 +126,12 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                     } else if (TextUtils.isEmpty(tmp_ride_cost)){
                         txt_ride_cost.setError("Ride cost cannot be empty");
                         txt_ride_cost.requestFocus();
-//                    }else if(LocalDateTime.now().getYear()>date.getYear()
-//                            || (LocalDateTime.now().getYear()==date.getYear() && LocalDateTime.now().getMonthValue()>date.getMonth())
-//                            ||(LocalDateTime.now().getYear()==date.getYear() && LocalDateTime.now().getMonthValue()==date.getMonth() &&
-//                               LocalDateTime.now().getDayOfMonth()>date.getDay())){
-////                        //the date passed
-//                    }else if(LocalDateTime.now().getHour()>hour.getHour()
-//                            ||(LocalDateTime.now().getHour()==hour.getHour() && LocalDateTime.now().getMinute()>hour.getMinute())){
-//                        //hour passed
+                    }else if (date == null) {
+                        Toast.makeText(Publish_activity.this, "Choose Date", Toast.LENGTH_SHORT).show();
+                        btn_date.requestFocus();
+                    }else if (hour == null) {
+                        Toast.makeText(Publish_activity.this, "Choose Time", Toast.LENGTH_SHORT).show();
+                        btn_time.requestFocus();
                     }
                     else {
                         try {
@@ -165,7 +170,14 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+    }
 
+    private void showTimePickerDialog(){
+        TimePickerDialog timePickerDialog =new TimePickerDialog(
+                this, this,
+                Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
+                Calendar.getInstance().get(Calendar.MINUTE)+5, true);
+        timePickerDialog.show();
     }
 
     @Override
@@ -175,6 +187,15 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        Calendar c = Calendar.getInstance();
+        if(date.getDay() == c.get(Calendar.DAY_OF_MONTH)){
+            if(hourOfDay < c.get(Calendar.HOUR_OF_DAY) ||
+                    hourOfDay==c.get(Calendar.HOUR_OF_DAY) && minute <= c.get(Calendar.MINUTE)) {
+                Toast.makeText(Publish_activity.this, "Cannot be before now", Toast.LENGTH_SHORT).show();
+                btn_time.requestFocus();
+                return;
+            }
+        }
         hour=new Hour(hourOfDay, minute);
         Log.d("THE TIME IS: ", "hour= "+hourOfDay+", minute= "+minute);
     }
