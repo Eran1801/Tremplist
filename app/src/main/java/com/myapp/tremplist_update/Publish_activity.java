@@ -198,7 +198,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        date=new Date(dayOfMonth, month, year);
+        date=new Date(dayOfMonth, month+1, year);
     }
 
     @Override

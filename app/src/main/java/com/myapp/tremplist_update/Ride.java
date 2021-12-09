@@ -2,15 +2,15 @@ package com.myapp.tremplist_update;
 
 import java.util.List;
 
-public class Ride{
+public class Ride {
 
-    private int id;
+    // private int id;
     private String src_city;
     private String src_details;
     private String dst_city;
     private String dst_details;
     private User Driver;
-    private List<User> trempists;
+    private List<User> tremplists;
 
 
     private Date date;
@@ -24,7 +24,7 @@ public class Ride{
 
     static int counter_of_drives = 0;
 
-    public Ride(){
+    public Ride() {
     }
 
     public Ride(String src, String dst, Date date, Hour hour, int sits, int cost) {
@@ -33,28 +33,28 @@ public class Ride{
         this.date = date;
         this.hour = hour;
         this.sits = sits;
-        this.free_sits=sits;
+        this.free_sits = sits;
         this.ride_cost = cost;
-        this.id = counter_of_drives++;
-        this.src_details="";
-        this.dst_details="";
-        this.car_color="";
-        this.car_type="";
+        //this.id = counter_of_drives++;
+        this.src_details = "";
+        this.dst_details = "";
+        this.car_color = "";
+        this.car_type = "";
     }
 
-    public Ride(String src,String src_details, String dst,String dst_details, Date date, Hour hour, int sits, int cost, String car_color, String car_type) {
+    public Ride(String src, String src_details, String dst, String dst_details, Date date, Hour hour, int sits, int cost, String car_color, String car_type) {
         this.src_city = src;
         this.dst_city = dst;
         this.date = date;
         this.hour = hour;
         this.sits = sits;
-        this.free_sits=sits;
+        this.free_sits = sits;
         this.ride_cost = cost;
-        this.id = counter_of_drives++;
-        this.src_details=src_details;
-        this.dst_details=dst_details;
-        this.car_color=car_color;
-        this.car_type=car_type;
+        //this.id = counter_of_drives++;
+        this.src_details = src_details;
+        this.dst_details = dst_details;
+        this.car_color = car_color;
+        this.car_type = car_type;
     }
 
 //    public Ride(Date date, String dst, int free_sits, Hour hour,int id, int cost, int sits, String src_city) {
@@ -156,10 +156,9 @@ public class Ride{
         this.ride_cost = ride_cost;
     }
 
-    public int getId(){
-        return id;
-    }
-
+//    public int getId(){
+//        return id;
+//    }
 
 
 }
