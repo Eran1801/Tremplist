@@ -61,8 +61,7 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                     Ride ride = snapshot.getValue(Ride.class);
 
                     if(ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
-                            && ((ride.getDate().compareTo(date_from)>0
-                                ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
+                            && ((ride.getDate().compareTo(date_from)>0 ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
                             && (ride.getDate().compareTo(date_to)<0
                             ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_to)<0)))) {
 
@@ -93,10 +92,10 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                         ridesList.add(txt_to_add);
                     }
 
-//                    Log.d("*****1",(ride.getDate().compareTo(date_from))+"");
-//                    Log.d("*****2",(ride.getHour().compareTo(hour_from)) +"");
-//                    Log.d("*****3",(ride.getDate().compareTo(date_to)) +"");
-//                    Log.d("*****4",(ride.getHour().compareTo(hour_to)) +"");
+                    Log.d("*****1",(ride.getDate().compareTo(date_from))+"");
+                    Log.d("*****2",(ride.getHour().compareTo(hour_from)) +"");
+                    Log.d("*****3",(ride.getDate().compareTo(date_to)) +"");
+                    Log.d("*****4",(ride.getHour().compareTo(hour_to)) +"");
                 }
                 adapter.notifyDataSetChanged();
             }

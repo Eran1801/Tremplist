@@ -103,6 +103,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                     intent.putExtra("date_to",date_to.getDay()+"/"+ date_to.getMonth()+"/"+date_to.getYear());
                     intent.putExtra("hour_from", hour_from.getHour()+":"+hour_from.getMinute());
                     intent.putExtra("hour_to", hour_to.getHour()+":"+hour_to.getMinute());
+//                    Log.d("tremp: ","src_city:"+src_city+"\n");
                     startActivity(intent);
 
 
@@ -125,8 +126,8 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         if (!flag_date)
-            date_from=new Date(dayOfMonth, month, year);
-        else date_to=new Date(dayOfMonth, month, year);
+            date_from=new Date(dayOfMonth, month+1, year);
+        else date_to=new Date(dayOfMonth, month+1, year);
         flag_date=true;
     }
 

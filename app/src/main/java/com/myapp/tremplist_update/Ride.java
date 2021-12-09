@@ -9,9 +9,6 @@ public class Ride {
     private String src_details;
     private String dst_city;
     private String dst_details;
-    private User Driver;
-    private List<User> tremplists;
-
 
     private Date date;
     private Hour hour;
@@ -22,7 +19,9 @@ public class Ride {
     private int free_sits;
     private int ride_cost;
 
-    static int counter_of_drives = 0;
+//    static int counter_of_drives = 0;
+    private User Driver;
+    private List<User> tremplists;
 
     public Ride() {
     }
@@ -40,6 +39,7 @@ public class Ride {
         this.dst_details = "";
         this.car_color = "";
         this.car_type = "";
+
     }
 
     public Ride(String src, String src_details, String dst, String dst_details, Date date, Hour hour, int sits, int cost, String car_color, String car_type) {
