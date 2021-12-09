@@ -35,12 +35,12 @@ public class show_search_resultsActivity  extends AppCompatActivity {
         String[] d1 = getIntent().getStringExtra("date_from").split("/");
         String[] d2 = getIntent().getStringExtra("date_to").split("/");
         String[] h1 = getIntent().getStringExtra("hour_from").split(":");
-        String[] h2 = getIntent().getStringExtra("hour_from").split(":");
+        String[] h2 = getIntent().getStringExtra("hour_to").split(":");
 
         date_from= new Date(Integer.parseInt(d1[0]), Integer.parseInt(d1[1]), Integer.parseInt(d1[2]));
         date_to= new Date(Integer.parseInt(d2[0]), Integer.parseInt(d2[1]), Integer.parseInt(d2[2]));
         hour_from= new Hour(Integer.parseInt(h1[0]), Integer.parseInt(h1[1]));
-        hour_from= new Hour(Integer.parseInt(h2[0]), Integer.parseInt(h2[1]));
+        hour_to= new Hour(Integer.parseInt(h2[0]), Integer.parseInt(h2[1]));
 
 
         listView=findViewById(R.id.list_view);
@@ -64,7 +64,7 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                             && ((ride.getDate().compareTo(date_from)>0
                                 ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
                             && (ride.getDate().compareTo(date_to)<0
-                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_from)<0)))) {
+                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_to)<0)))) {
 
                         String txt_to_add, car_color = "", car_type = "", from_details = "", to_details = "";
                         String from = "From: " + ride.getSrc_city(),
@@ -91,8 +91,6 @@ public class show_search_resultsActivity  extends AppCompatActivity {
 
                         txt_to_add = from + from_details + to + to_details + date + hour + available_sits + car_type + car_color;
                         ridesList.add(txt_to_add);
-                        Log.d("add key", snapshot.getKey().toString());
-
                     }
 
 //                    Log.d("*****1",(ride.getDate().compareTo(date_from))+"");

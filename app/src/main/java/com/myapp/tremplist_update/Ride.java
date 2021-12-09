@@ -1,5 +1,7 @@
 package com.myapp.tremplist_update;
 
+import java.util.List;
+
 public class Ride{
 
     private int id;
@@ -7,6 +9,9 @@ public class Ride{
     private String src_details;
     private String dst_city;
     private String dst_details;
+    private User Driver;
+    private List<User> trempists;
+
 
     private Date date;
     private Hour hour;

@@ -85,8 +85,6 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         search_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("11111111111111111111", "11111111111111111");
-
                 src_city = Objects.requireNonNull(txt_src_city.getText()).toString();
                 dest_city = Objects.requireNonNull(txt_dest_city.getText()).toString();
 

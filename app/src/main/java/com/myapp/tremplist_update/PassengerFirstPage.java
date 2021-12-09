@@ -17,8 +17,6 @@ public class PassengerFirstPage extends AppCompatActivity {
 
         search_rideBtn.setOnClickListener(view -> {
             startActivity(new Intent(PassengerFirstPage.this, Search_ridesActivity.class));
-//            startActivity(new Intent(PassengerFirstPage.this, show_search_resultsActivity.class));
-
         });
 
     }

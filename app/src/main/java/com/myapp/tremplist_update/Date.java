@@ -12,7 +12,7 @@ public class Date implements Comparable<Date> {
         this.year = y;
     }
 
-    public Date(com.myapp.tremplist_update.Date other) {
+    public Date(Date other) {
         this.day = other.day;
         this.month = other.month;
         this.year = other.year;
