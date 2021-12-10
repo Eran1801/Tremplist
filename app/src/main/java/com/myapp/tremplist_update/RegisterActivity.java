@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -92,13 +93,12 @@ public class RegisterActivity extends AppCompatActivity {
             rootNode = FirebaseDatabase.getInstance();
             reference = rootNode.getReference("users");
 
-            register_user_to_Database(firstName,lastName,telephone,password, email);
-
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
+                        register_user_to_Database(mAuth.getCurrentUser().getUid(), firstName,lastName,telephone,password, email);
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, "Registration Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -108,8 +108,8 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
-    private void register_user_to_Database(String txt_first_name, String txt_last_name, String txt_telephone, String txt_password, String txt_email) {
-        User user = new User(txt_first_name, txt_last_name, txt_telephone, txt_password, txt_email);
+    private void register_user_to_Database(String id, String txt_first_name, String txt_last_name, String txt_telephone, String txt_password, String txt_email) {
+        User user = new User(id, txt_first_name, txt_last_name, txt_telephone, txt_password, txt_email);
         FireBaseDBActivity fb = new FireBaseDBActivity();
         fb.addUserToDB(user);
     }

@@ -3,35 +3,34 @@ package com.myapp.tremplist_update;
 import androidx.annotation.NonNull;
 
 public class User {
-    // private static int index=0;
-    private String first_name, last_name, phone, password, email;
-    // private int id;
+    private static int index=0;
+    private String first_name, last_name, phone, password, confirm_password, email;
+    String id;
 
-    public User() {
-    }
 
-    public User(User other) {
+    public User(){}
+
+    public User(User other){
         this.first_name = other.first_name;
         this.last_name = other.last_name;
         this.phone = other.phone;
         this.password = other.password;
-        this.email = other.email;
-        // this.id=other.getId();
+        this.email=other.email;
+        this.id=other.id;
     }
 
-    public User(String first_name, String last_name, String phone, String password, String email) {
+    public User(String id, String first_name, String last_name, String phone, String password, String email) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
         this.password = password;
-        this.email = email;
-        // this.id=index++;
+        this.email=email;
+        this.id=id;
     }
 
-//    public int getId(){
-//        return id;
-//    }
-
+    public String getId(){
+        return id;
+    }
     public String getFirst_name() {
         return first_name;
     }
@@ -56,7 +55,6 @@ public class User {
         this.phone = phone;
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -65,7 +63,14 @@ public class User {
         this.password = password;
     }
 
-    public String getEmail() {
+    public String getConfirm_password() {
+        return confirm_password;
+    }
+
+    public void setConfirm_password(String confirm_password) {
+        this.confirm_password = confirm_password;
+    }
+    public String getEmail(){
         return email;
     }
 
@@ -74,7 +79,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "first_name='" + first_name + '\'' +
+                "id='" + id + '\'' +
                 ", last_name='" + last_name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", email='" + phone + '\'' +

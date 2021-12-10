@@ -70,6 +70,10 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                                 to = "\nTo: " + ride.getDst_city(),
                                 date = "\nDate: " + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear(),
                                 available_sits = "\nfree sits: " + ride.getFree_sits() + " out of " + ride.getSits();
+
+                        String Driver="\nDriver: \nname: "+ride.getDriver().getFirst_name()+" "
+                                +ride.getDriver().getLast_name()+"\nphone number: "+ride.getDriver().getPhone();
+
                         String hour = "\nHour: ";
                         if (ride.getHour().getHour()==0)
                              hour+= "00:";
@@ -88,14 +92,9 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                         if (!ride.getDst_details().isEmpty())
                             to_details = "\n      " + ride.getDst_details();
 
-                        txt_to_add = from + from_details + to + to_details + date + hour + available_sits + car_type + car_color;
+                        txt_to_add = from + from_details + to + to_details + date + hour + available_sits + car_type + car_color+Driver;
                         ridesList.add(txt_to_add);
                     }
-
-                    Log.d("*****1",(ride.getDate().compareTo(date_from))+"");
-                    Log.d("*****2",(ride.getHour().compareTo(hour_from)) +"");
-                    Log.d("*****3",(ride.getDate().compareTo(date_to)) +"");
-                    Log.d("*****4",(ride.getHour().compareTo(hour_to)) +"");
                 }
                 adapter.notifyDataSetChanged();
             }

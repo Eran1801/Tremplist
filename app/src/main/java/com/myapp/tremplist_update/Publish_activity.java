@@ -6,6 +6,7 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.provider.CalendarContract;
 import android.text.TextUtils;
 import android.util.Log;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.core.operation.ListenComplete;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -156,13 +158,6 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             txt_ride_cost.requestFocus();
                         }
 
-//                        getUserByEmail("edenshkuri68@gmail.com");
-//
-                        Log.d("@@@@@@@@@@@@@@@@@","@@@@@@@@@@@@@@@2");
-                        if(curr_user!=null)
-                            Log.d("USER IS***", curr_user.getEmail()+", "+curr_user.getPhone());
-                        else Log.d("USER IS***", "nullllll");
-
                         Ride ride = new Ride(src_city, dst_city, date, hour, sits, ride_cost);
                         if(!car_color.isEmpty())
                             ride.setCar_color(car_color);
@@ -170,7 +165,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             ride.setCar_type(car_type);
 
                         fb = new FireBaseDBActivity();
-//                        fb.setContext(Publish_activity.this);
+                        fb.setContext(Publish_activity.this);
                         fb.addRideToDB(ride);
                     }
                 }
@@ -178,6 +173,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
 
     }
+
 
     private void showDatePickerDialog(){
         DatePickerDialog datePickerDialog =new DatePickerDialog(
@@ -216,39 +212,5 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         Log.d("THE TIME IS: ", "hour= "+hourOfDay+", minute= "+minute);
     }
 
-    private void getUserByEmail(String email){
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users");
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                for (DataSnapshot snapshot: datasnapshot.getChildren())
-                {
-                    Log.d("USER&&&",snapshot.getValue(User.class).getEmail()+", "+snapshot.getValue(User.class).getPhone());
-                    if(snapshot.getValue(User.class).getEmail().equals(email)){
-                        Log.d("ANS= ", "yes");
-                        User tmpUser =new User(snapshot.getValue(User.class).getFirst_name(),
-                                snapshot.getValue(User.class).getLast_name(),
-                                snapshot.getValue(User.class).getPhone(),
-                                snapshot.getValue(User.class).getPassword(),
-                                snapshot.getValue(User.class).getEmail());
-                        setUserToRide(tmpUser);
-                        break;
-                    }else Log.d("ANS= ", "no");
-
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-    private void setUserToRide(User u){
-        curr_user=new User(u);
-    }
 
 }

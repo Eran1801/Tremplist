@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Ride {
 
-    // private int id;
+    private String id;
     private String src_city;
     private String src_details;
     private String dst_city;
@@ -19,7 +19,6 @@ public class Ride {
     private int free_sits;
     private int ride_cost;
 
-//    static int counter_of_drives = 0;
     private User Driver;
     private List<User> tremplists;
 
@@ -34,7 +33,6 @@ public class Ride {
         this.sits = sits;
         this.free_sits = sits;
         this.ride_cost = cost;
-        //this.id = counter_of_drives++;
         this.src_details = "";
         this.dst_details = "";
         this.car_color = "";
@@ -50,23 +48,11 @@ public class Ride {
         this.sits = sits;
         this.free_sits = sits;
         this.ride_cost = cost;
-        //this.id = counter_of_drives++;
         this.src_details = src_details;
         this.dst_details = dst_details;
         this.car_color = car_color;
         this.car_type = car_type;
     }
-
-//    public Ride(Date date, String dst, int free_sits, Hour hour,int id, int cost, int sits, String src_city) {
-//        this.src_city = src;
-//        this.dst_city = dst;
-//        this.date = date;
-//        this.hour = hour;
-//        this.sits = sits;
-//        this.free_sits=sits;
-//        this.ride_cost = cost;
-//        this.id = counter_of_drives++;
-//    }
 
     public String getSrc_city() {
         return src_city;
@@ -156,9 +142,17 @@ public class Ride {
         this.ride_cost = ride_cost;
     }
 
-//    public int getId(){
-//        return id;
-//    }
+    public String getId() {
+        return id;
+    }
+
+    public void setDriver(User r) {
+        this.Driver=new User(r);
+    }
+
+    public User getDriver(){
+        return Driver;
+    }
 
 
 }
