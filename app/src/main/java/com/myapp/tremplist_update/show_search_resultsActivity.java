@@ -2,8 +2,11 @@ package com.myapp.tremplist_update;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,34 +68,40 @@ public class show_search_resultsActivity  extends AppCompatActivity {
                             && (ride.getDate().compareTo(date_to)<0
                             ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_to)<0)))) {
 
-                        String txt_to_add, car_color = "", car_type = "", from_details = "", to_details = "";
-                        String from = "From: " + ride.getSrc_city(),
-                                to = "\nTo: " + ride.getDst_city(),
-                                date = "\nDate: " + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear(),
-                                available_sits = "\nfree sits: " + ride.getFree_sits() + " out of " + ride.getSits();
+                        String txt_to_add;
+                        String dest_src =ride.getSrc_city();
+                        if(!ride.getSrc_details().isEmpty())
+                            dest_src+="("+ride.getSrc_details()+")";
+                        dest_src+="-->"+ride.getDst_city();
+                        if(!ride.getDst_details().isEmpty())
+                            dest_src+="("+ride.getDst_details()+")";
 
-                        String Driver="\nDriver: \nname: "+ride.getDriver().getFirst_name()+" "
-                                +ride.getDriver().getLast_name()+"\nphone number: "+ride.getDriver().getPhone();
+                        String available_sits="\n"+"מקומות פנויים: "+ ride.getFree_sits()+" מתוך " + ride.getSits();
+                        String Driver="\nנהג/ת: "+ride.getDriver().getFirst_name()+" "+ride.getDriver().getLast_name()
+                                +", מספר פלאפון: "+ride.getDriver().getPhone();
 
-                        String hour = "\nHour: ";
+                        String hour="";
                         if (ride.getHour().getHour()==0)
-                             hour+= "00:";
+                            hour+= "00:";
                         else
                             hour+=ride.getHour().getHour() + ":";
                         if (ride.getHour().getMinute()==0)
                             hour+="00";
                         else  hour+= ride.getHour().getMinute();
 
-                        if (!ride.getCar_color().isEmpty())
-                            car_color = "\nthe car's color: " + ride.getCar_color();
-                        if (!ride.getCar_type().isEmpty())
-                            car_type = "\nthe car's type:" + ride.getCar_type();
-                        if (!ride.getSrc_details().isEmpty())
-                            from_details = "\n      " + ride.getSrc_details();
-                        if (!ride.getDst_details().isEmpty())
-                            to_details = "\n      " + ride.getDst_details();
+                        String date_hour = "\n" +hour+" ,"+ ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
-                        txt_to_add = from + from_details + to + to_details + date + hour + available_sits + car_type + car_color+Driver;
+
+                        String car_details="";
+                        if (!ride.getCar_color().isEmpty() && !ride.getCar_type().isEmpty())
+                            car_details = "\nפרטי הרכב: " + ride.getCar_type()+" ,"+ ride.getCar_color();
+                        else if (!ride.getCar_type().isEmpty())
+                            car_details ="\nסוג הרכב: "+ ride.getCar_type();
+                        else if (!ride.getCar_color().isEmpty())
+                            car_details = "\nצבע הרכב: "+ ride.getCar_color();
+
+
+                        txt_to_add = dest_src+date_hour+available_sits+car_details+Driver;
                         ridesList.add(txt_to_add);
                     }
                 }
@@ -104,7 +113,6 @@ public class show_search_resultsActivity  extends AppCompatActivity {
 
             }
         });
-
 
     }
 

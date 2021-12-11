@@ -163,6 +163,10 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             ride.setCar_color(car_color);
                         if(!car_type.isEmpty())
                             ride.setCar_type(car_type);
+                        if(!src_details.isEmpty())
+                            ride.setSrc_details(src_details);
+                        if(!dst_details.isEmpty())
+                            ride.setDst_details(dst_details);
 
                         fb = new FireBaseDBActivity();
                         fb.setContext(Publish_activity.this);
