@@ -46,19 +46,22 @@
             android:exported="true"
             android:label="Rides"
             android:parentActivityName=".Search_ridesActivity"/>
-<!--        <activity-->
-<!--            android:name=".show_search_resultsActivity"-->
-<!--            android:launchMode="singleTop"-->
-<!--            android:exported="true"-->
-<!--            android:label="Rides"-->
-<!--            android:parentActivityName=".PassengerFirstPage"/>-->
+        <!--        <activity-->
+        <!--            android:name=".show_search_resultsActivity"-->
+        <!--            android:launchMode="singleTop"-->
+        <!--            android:exported="true"-->
+        <!--            android:label="Rides"-->
+        <!--            android:parentActivityName=".PassengerFirstPage"/>-->
 
 
         <activity android:name=".LoginActivity"/>
+
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".MainActivity"/>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.Splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
