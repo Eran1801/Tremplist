@@ -10,15 +10,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="67dp"
-        android:layout_height="46dp"
+        android:layout_width="111dp"
+        android:layout_height="60dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:src="@drawable/logo_hitchhiker" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="534dp"
+        android:layout_width="353dp"
+        android:layout_height="609dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:orientation="vertical">
