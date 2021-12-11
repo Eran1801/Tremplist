@@ -7,7 +7,6 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tremplist_update">
@@ -46,19 +45,23 @@
             android:exported="true"
             android:label="Rides"
             android:parentActivityName=".Search_ridesActivity"/>
-<!--        <activity-->
-<!--            android:name=".show_search_resultsActivity"-->
-<!--            android:launchMode="singleTop"-->
-<!--            android:exported="true"-->
-<!--            android:label="Rides"-->
-<!--            android:parentActivityName=".PassengerFirstPage"/>-->
+        <!--        <activity-->
+        <!--            android:name=".show_search_resultsActivity"-->
+        <!--            android:launchMode="singleTop"-->
+        <!--            android:exported="true"-->
+        <!--            android:label="Rides"-->
+        <!--            android:parentActivityName=".PassengerFirstPage"/>-->
 
 
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".ForgotPasswordActivity"/>
+
         <activity android:name=".RegisterActivity"/>
+        <activity android:name=".MainActivity"/>
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".SplashScreenActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.Splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
