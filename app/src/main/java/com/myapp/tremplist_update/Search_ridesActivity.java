@@ -14,6 +14,7 @@ import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,27 +57,54 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         findViewById(R.id.search_date_from).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog();
+                showFromDatePickerDialog();
             }
         });
 
         findViewById(R.id.search_hour_from).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(date_from == null){
+                    Toast.makeText(Search_ridesActivity.this, "First choose date", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.search_date_from).requestFocus();
+                }
+                //TODO
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
         });
+
         findViewById(R.id.search_date_to).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDatePickerDialog();
+                if(date_from == null){
+                    Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.search_date_from).requestFocus();
+                }
+                if (hour_from == null){
+                    Toast.makeText(Search_ridesActivity.this, "First choose start time", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.search_hour_from).requestFocus();
+                }
+                showToDatePickerDialog();
             }
         });
 
         findViewById(R.id.search_hour_to).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(date_from == null){
+                    Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.search_date_from).requestFocus();
+                }
+                if (hour_from == null){
+                    Toast.makeText(Search_ridesActivity.this, "First choose start hour", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.search_hour_from).requestFocus();
+                }
+                if (date_to == null){
+                    Toast.makeText(Search_ridesActivity.this, "First choose end date", Toast.LENGTH_SHORT).show();
+                    findViewById(R.id.search_date_to).requestFocus();
+                }
+                //TODO
                 DialogFragment timePicker = new TimePickerFragment();
                 timePicker.show(getSupportFragmentManager(), "time picker");
             }
@@ -113,12 +141,24 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         });
 
     }
-    private void showDatePickerDialog(){
+    private void showFromDatePickerDialog(){
         DatePickerDialog datePickerDialog =new DatePickerDialog(
                 this, this,
                 Calendar.getInstance().get(Calendar.YEAR),
                 Calendar.getInstance().get(Calendar.MONTH),
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis()-1000);
+        datePickerDialog.show();
+
+    }
+    private void showToDatePickerDialog(){
+        DatePickerDialog datePickerDialog =new DatePickerDialog(
+                this, this,
+                Calendar.getInstance().get(Calendar.YEAR),
+                Calendar.getInstance().get(Calendar.MONTH),
+                Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+        java.util.Date minD = new java.util.Date(date_from.getYear(),date_from.getMonth(), date_from.getDay());
+        datePickerDialog.getDatePicker().setMinDate(minD.getTime());
         datePickerDialog.show();
 
     }
@@ -133,12 +173,28 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        if (!flag_hour)
-            hour_from=new Hour(hourOfDay, minute);
-        else
-            hour_to=new Hour(hourOfDay, minute);
-        flag_hour=true;
-
+        Calendar c = Calendar.getInstance();
+        if (!flag_hour) {
+            if(date_from.getDay() == c.get(Calendar.DAY_OF_MONTH)){
+                if(hourOfDay < c.get(Calendar.HOUR_OF_DAY) ||
+                        hourOfDay==c.get(Calendar.HOUR_OF_DAY) && minute <= c.get(Calendar.MINUTE)) {
+                    Toast.makeText(Search_ridesActivity.this, "Cannot be before now", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            hour_from = new Hour(hourOfDay, minute);
+        }else {
+            if(date_to.getDay() == date_from.getDay() &&
+                    date_to.getMonth() == date_from.getMonth()){
+                if(hourOfDay < hour_from.getHour() ||
+                        (hourOfDay == hour_from.getHour() && minute <= hour_from.getMinute())){
+                    Toast.makeText(Search_ridesActivity.this, "Cannot be before start", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+            hour_to = new Hour(hourOfDay, minute);
+            flag_hour = true;
+        }
     }
 
 }
