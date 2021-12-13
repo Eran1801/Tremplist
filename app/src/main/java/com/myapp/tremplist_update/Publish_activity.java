@@ -182,7 +182,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         TimePickerDialog timePickerDialog =new TimePickerDialog(
                 this,  AlertDialog.THEME_HOLO_DARK,this,
                 Calendar.getInstance().get(Calendar.HOUR_OF_DAY),
-                Calendar.getInstance().get(Calendar.MINUTE)+5, true);
+                Calendar.getInstance().get(Calendar.MINUTE), true);
         timePickerDialog.show();
     }
 
@@ -203,7 +203,6 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
             }
         }
         hour=new Hour(hourOfDay, minute);
-        Log.d("THE TIME IS: ", "hour= "+hourOfDay+", minute= "+minute);
     }
 
 
