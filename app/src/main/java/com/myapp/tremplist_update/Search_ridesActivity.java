@@ -39,8 +39,8 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
     Hour hour_from, hour_to;
     ImageButton date_fromBtn, hour_fromBtn, date_toBtn, hour_toBtn;
 
-    boolean flag_date =false;
-    boolean flag_hour =false;
+    boolean flag_date;
+    boolean flag_hour;
 
 
     TextInputEditText txt_src_city;
@@ -63,6 +63,8 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         date_fromBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                flag_date = false;
                 showFromDatePickerDialog();
             }
         });
@@ -70,6 +72,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         hour_fromBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flag_hour = false;
                 if (date_from == null) {
                     Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
                     date_fromBtn.requestFocus();
@@ -83,6 +86,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         date_toBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flag_date = true;
                 if(date_from == null){
                     Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
                     findViewById(R.id.search_date_from).requestFocus();
@@ -98,11 +102,12 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         hour_toBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                flag_hour = true;
                 if(date_from == null){
                     Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
                     date_fromBtn.requestFocus();
                 } else if (hour_from == null){
-                    Toast.makeText(Search_ridesActivity.this, "First choose start hour", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Search_ridesActivity.this, "First choose start time", Toast.LENGTH_SHORT).show();
                     hour_fromBtn.requestFocus();
                 } else if (date_to == null){
                     Toast.makeText(Search_ridesActivity.this, "First choose end date", Toast.LENGTH_SHORT).show();
@@ -133,29 +138,14 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                 }else if (hour_from == null){
                     Toast.makeText(Search_ridesActivity.this, "Choose from hour", Toast.LENGTH_SHORT).show();
                     hour_fromBtn.requestFocus();
-//                }else if(date_from.getDay() == c.get(Calendar.DAY_OF_MONTH)){
-//                    if(hour_from.getHour() < c.get(Calendar.HOUR_OF_DAY) ||
-//                            hour_from.getHour()==c.get(Calendar.HOUR_OF_DAY) && hour_from.getMinute() <= c.get(Calendar.MINUTE)) {
-//                        Toast.makeText(Search_ridesActivity.this, "Cannot be before now", Toast.LENGTH_SHORT).show();
-//                        hour_from = null;
-//                        hour_fromBtn.requestFocus();
-//                    }
                 } else if (date_to == null){
                     Toast.makeText(Search_ridesActivity.this, "Choose to date", Toast.LENGTH_SHORT).show();
                     date_toBtn.requestFocus();
                 }else if (hour_to == null) {
                     Toast.makeText(Search_ridesActivity.this, "Choose to hour", Toast.LENGTH_SHORT).show();
                     hour_toBtn.requestFocus();
-//                }else if(date_to.getDay() == date_from.getDay()){
-//                    if(hour_to.getHour() < hour_from.getHour() ||
-//                            hour_to.getHour()==hour_from.getHour() && hour_to.getMinute() <= hour_from.getMinute()) {
-//                        Toast.makeText(Search_ridesActivity.this, "Cannot be before from date and time", Toast.LENGTH_SHORT).show();
-//                        hour_to = null;
-//                        hour_toBtn.requestFocus();
-//                    }
                 } else
                     {//get the data from the firebase
-
                     Intent intent = new Intent(Search_ridesActivity.this, show_search_resultsActivity.class);
                     intent.putExtra("src_city", src_city);
                     intent.putExtra("dest_city", dest_city);
@@ -165,10 +155,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                     intent.putExtra("hour_to", hour_to.getHour()+":"+hour_to.getMinute());
 //                    Log.d("tremp: ","src_city:"+src_city+"\n");
                     startActivity(intent);
-
-
                 }
-
             }
         });
 
@@ -195,18 +182,19 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         c1.set(Calendar.DATE, date_from.getDay());
         c1.set(Calendar.YEAR, date_from.getYear());
         java.util.Date minD = c1.getTime();
-        System.out.println(minD);
         datePickerDialog.getDatePicker().setMinDate(minD.getTime());
         datePickerDialog.show();
     }
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        if (!flag_date)
-            date_from=new Date(dayOfMonth, month+1, year);
-        else date_to=new Date(dayOfMonth, month+1, year);
-        flag_date=true;
+        if (!flag_date) {
+            date_from = new Date(dayOfMonth, month + 1, year);
+        } else {
+            date_to=new Date(dayOfMonth, month+1, year);
+        }
     }
+
 
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -229,11 +217,8 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                     return;
                 }
             }
-            Toast.makeText(Search_ridesActivity.this, "HEREE", Toast.LENGTH_SHORT).show();
             hour_to = new Hour(hourOfDay, minute);
         }
-        flag_hour = true;
-
     }
 
 }
