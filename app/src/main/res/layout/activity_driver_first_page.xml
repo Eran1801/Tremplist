@@ -3,21 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_pages">
 
 
     <TextView
         android:id="@+id/driver"
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:text="           DRIVER"
-        android:textSize="43sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="נהג"
+        android:textSize="60sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/publish_ride"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="73dp" />
+        tools:layout_editor_absoluteY="80dp" />
 
     <Button
         android:id="@+id/publish_ride"
@@ -25,14 +30,17 @@
         android:layout_height="80dp"
         android:background="@drawable/button_vg"
         android:text="פרסם נסיעה"
-        android:textSize="16sp"
+        android:textSize="21sp"
+        app:autoSizeMaxTextSize="21sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.261"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintVertical_bias="0.305"
+        />
 
     <Button
         android:id="@+id/personal_infoBtn"
@@ -40,14 +48,17 @@
         android:layout_height="80dp"
         android:background="@drawable/button_vg"
         android:text="מידע אישי"
-        android:textSize="16sp"
+        android:textSize="21sp"
+        app:autoSizeMaxTextSize="21sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.66"
-        app:layout_constraintWidth_percent=".8" />
+        app:layout_constraintVertical_bias="0.695"
+        />
 
     <Button
         android:id="@+id/driver_my_rides"
@@ -55,14 +66,16 @@
         android:layout_height="80dp"
         android:background="@drawable/button_vg"
         android:text="הנסיעות שלי"
-        android:textSize="16sp"
+        android:textSize="21sp"
+        app:autoSizeMaxTextSize="21sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.46"
-        app:layout_constraintWidth_percent=".8" />
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

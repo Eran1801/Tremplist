@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_pages">
 
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/search_dest_city"
@@ -28,13 +29,13 @@
         android:id="@+id/start_from"
         android:layout_width="80dp"
         android:layout_height="57dp"
-        android:background="@color/white"
         android:hint="החל מ-"
         android:minHeight="48dp"
         android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
         android:textStyle="bold"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.246"
@@ -47,13 +48,13 @@
         android:id="@+id/end_time"
         android:layout_width="80dp"
         android:layout_height="57dp"
-        android:background="@color/white"
         android:hint="עד ל-"
         android:minHeight="48dp"
         android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
         android:textStyle="bold"
+        android:textColorHint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.246"
@@ -162,10 +163,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.898"
+        app:layout_constraintVertical_bias="0.9"
         app:layout_constraintWidth_percent=".8" />
 
 

@@ -3,21 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/background_pages">
 
 
     <TextView
         android:id="@+id/textView5"
-        android:layout_width="400dp"
-        android:layout_height="60dp"
-        android:text="      HITCHHIKER"
-        android:textSize="43sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="טרמפיסט"
+        android:textSize="60sp"
         android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/search_ride"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="73dp" />
+        tools:layout_editor_absoluteY="83dp" />
 
     <Button
         android:id="@+id/search_ride"
@@ -27,6 +31,9 @@
         android:text="חפש טרמפ"
         android:textSize="21sp"
         android:textStyle="bold"
+        app:autoSizeMaxTextSize="21sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,11 +49,14 @@
         android:text="מידע אישי"
         android:textSize="21sp"
         android:textStyle="bold"
+        app:autoSizeMaxTextSize="21sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.683"
+        app:layout_constraintVertical_bias="0.695"
         app:layout_constraintWidth_percent=".8" />
 
     <Button
@@ -57,12 +67,14 @@
         android:text="הטרמפים שלי"
         android:textSize="21sp"
         android:textStyle="bold"
+        app:autoSizeMaxTextSize="21sp"
+        app:autoSizeMinTextSize="12sp"
+        app:autoSizeStepGranularity="2sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499"
         app:layout_constraintWidth_percent=".8" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
