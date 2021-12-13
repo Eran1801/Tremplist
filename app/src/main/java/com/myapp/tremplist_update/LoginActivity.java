@@ -41,13 +41,17 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        // Login Button
         btnLogin.setOnClickListener(view -> {
             loginUser();
         });
+
+        // Register Button
         tvRegisterHere.setOnClickListener(view ->{
             startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
         });
 
+        // Forget password Button
         tvForgetPassword.setOnClickListener(view -> {
             startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class
             ));
@@ -57,9 +61,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void loginUser(){
+
+        // Getting the email and the password from the user
         String email = Objects.requireNonNull(etLoginEmail.getText()).toString();
         String password = Objects.requireNonNull(etLoginPassword.getText()).toString();
 
+        // Checking that is not empty
         if (TextUtils.isEmpty(email)){
             etLoginEmail.setError("Email cannot be empty");
             etLoginEmail.requestFocus();
@@ -67,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
             etLoginPassword.setError("Password cannot be empty");
             etLoginPassword.requestFocus();
         }else{
+            // using google function for signing with email and password
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {

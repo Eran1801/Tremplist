@@ -6,6 +6,11 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+/*
+In this class we implement the Passanger HomePage
+The option we have is a Search ride, My rides, and Personal info
+*/
+
 public class PassengerFirstPage extends AppCompatActivity {
     Button search_rideBtn;
     @Override
@@ -15,6 +20,7 @@ public class PassengerFirstPage extends AppCompatActivity {
 
         search_rideBtn= findViewById(R.id.search_ride);
 
+        // When you choose the search button
         search_rideBtn.setOnClickListener(view -> {
             startActivity(new Intent(PassengerFirstPage.this, Search_ridesActivity.class));
         });

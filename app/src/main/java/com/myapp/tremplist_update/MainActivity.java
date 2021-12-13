@@ -10,6 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
+// This is the main screen after Login to the app
+
 public class MainActivity extends AppCompatActivity {
 
     Button btnLogOut;
@@ -20,34 +23,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button to_passengerBtn = findViewById(R.id.to_passenger);
-        Button to_driverBtn = findViewById(R.id.to_driver);
+        Button to_passengerBtn = findViewById(R.id.to_passenger); // Passanger page
+        Button to_driverBtn = findViewById(R.id.to_driver); // Driver page
 
         btnLogOut = findViewById(R.id.btnLogout);
         mAuth = FirebaseAuth.getInstance();
 
+        // Log out button
         btnLogOut.setOnClickListener(view -> {
             mAuth.signOut();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
 
+        // Choose Driver page
         to_driverBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, DriverFirstPage.class));
-                finish();
             }
         });
+
+        // Choose Passanger page
         to_passengerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, PassengerFirstPage.class));
-                finish();
             }
         });
 
     }
 
+    // If the user is already login no need to login again
     @Override
     protected void onStart() {
         super.onStart();

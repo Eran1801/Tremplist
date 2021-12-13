@@ -3,34 +3,35 @@ package com.myapp.tremplist_update;
 import androidx.annotation.NonNull;
 
 public class User {
-    private static int index=0;
-    private String first_name, last_name, phone, password, confirm_password, email;
+    private String first_name, last_name, phone, password, email;
     String id;
 
 
-    public User(){}
+    public User() {
+    }
 
-    public User(User other){
+    public User(User other) {
         this.first_name = other.first_name;
         this.last_name = other.last_name;
         this.phone = other.phone;
         this.password = other.password;
-        this.email=other.email;
-        this.id=other.id;
+        this.email = other.email;
+        this.id = other.id;
     }
 
-    public User(String id, String first_name, String last_name, String phone, String password, String email) {
+    public User(String id, String first_name, String last_name, String phone, String email) {
+        this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
-        this.password = password;
-        this.email=email;
-        this.id=id;
+        this.email = email;
+
     }
 
-    public String getId(){
+    public String getId() {
         return id;
     }
+
     public String getFirst_name() {
         return first_name;
     }
@@ -63,17 +64,9 @@ public class User {
         this.password = password;
     }
 
-    public String getConfirm_password() {
-        return confirm_password;
-    }
-
-    public void setConfirm_password(String confirm_password) {
-        this.confirm_password = confirm_password;
-    }
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
-
 
     @NonNull
     @Override

@@ -3,47 +3,30 @@ package com.myapp.tremplist_update;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.ResultReceiver;
-import android.provider.CalendarContract;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.core.operation.ListenComplete;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
-import java.util.Timer;
+
+// In this class we implement the Publish a ride option for the Driver.
 
 public class Publish_activity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     FireBaseDBActivity fb;
-    FirebaseAuth mAuth;
 
-    User curr_user;
     Button publish_Btn;
     private String src_city;
     private String src_details;
@@ -67,10 +50,9 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
     TextInputEditText txt_car_color;
     TextInputEditText txt_sits;
     TextInputEditText txt_ride_cost;
-    TextInputEditText txt_date;
+
     ImageButton btn_date;
     ImageButton btn_time;
-
 
 
     @Override
@@ -89,7 +71,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         btn_date = findViewById(R.id.date);
         btn_time = findViewById(R.id.hour);
 
-
+        // Choose Date button
         btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,9 +79,11 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
             }
         });
 
+        // Choose Time button
         btn_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // if date not choose yet, toast error
                 if(date == null){
                     Toast.makeText(Publish_activity.this, "First choose date", Toast.LENGTH_SHORT).show();
                     btn_date.requestFocus();
@@ -109,11 +93,13 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
             }
         });
 
+        // Choose Publish button
         publish_Btn.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View view) {
 
+                    // Getting all the data from the Driver about the Ride
                     src_city = Objects.requireNonNull(txt_src_city.getText()).toString();
                     src_details = Objects.requireNonNull(txt_src_details.getText()).toString();
                     dst_city = Objects.requireNonNull(txt_dst_city.getText()).toString();
@@ -123,6 +109,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                     String tmp_sits = Objects.requireNonNull(txt_sits.getText()).toString();
                     String tmp_ride_cost = Objects.requireNonNull(txt_ride_cost.getText()).toString();
 
+                    // Checks if any of the fields is empty
                     if (TextUtils.isEmpty(src_city)) {
                         txt_src_city.setError("Src city cannot be empty");
                         txt_src_city.requestFocus();
@@ -158,6 +145,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             txt_ride_cost.requestFocus();
                         }
 
+
                         Ride ride = new Ride(src_city, dst_city, date, hour, sits, ride_cost);
                         if(!car_color.isEmpty())
                             ride.setCar_color(car_color);
@@ -170,6 +158,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
                         fb = new FireBaseDBActivity();
                         fb.setContext(Publish_activity.this);
+                        // Sending the ride to a function that will add it to the Database
                         fb.addRideToDB(ride);
                     }
                 }

@@ -31,11 +31,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         forgot_password_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String check = checkInputs();
-                // No problem occurs you may continue
+                String check = checkInputs(); // Check if there is error in the email
+
                 if (check.isEmpty()) {
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     String emailAddress = forgot_password_email.getText().toString();
+                    // using google function to reset a password
                     auth.sendPasswordResetEmail(emailAddress)
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

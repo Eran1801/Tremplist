@@ -19,8 +19,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class show_search_resultsActivity  extends AppCompatActivity {
-    private  Hour hour_from;
+// In this class we implement the search result that will show when a passanger want to find a ride
+
+public class show_search_resultsActivity extends AppCompatActivity {
+    private Hour hour_from;
     private Hour hour_to;
     private Date date_from;
     private Date date_to;
@@ -34,22 +36,30 @@ public class show_search_resultsActivity  extends AppCompatActivity {
         setContentView(R.layout.search_results);
 
         from = getIntent().getStringExtra("src_city");
-        to= getIntent().getStringExtra("dest_city");
+        to = getIntent().getStringExtra("dest_city");
+
+        /*
+        Here we store the date and the hour in a String array and each index store a part of the date and hour
+        d1 = [day,month,year]
+        h1 = [ hour, minutes]
+         */
+
         String[] d1 = getIntent().getStringExtra("date_from").split("/");
         String[] d2 = getIntent().getStringExtra("date_to").split("/");
         String[] h1 = getIntent().getStringExtra("hour_from").split(":");
         String[] h2 = getIntent().getStringExtra("hour_to").split(":");
 
-        date_from= new Date(Integer.parseInt(d1[0]), Integer.parseInt(d1[1]), Integer.parseInt(d1[2]));
-        date_to= new Date(Integer.parseInt(d2[0]), Integer.parseInt(d2[1]), Integer.parseInt(d2[2]));
-        hour_from= new Hour(Integer.parseInt(h1[0]), Integer.parseInt(h1[1]));
-        hour_to= new Hour(Integer.parseInt(h2[0]), Integer.parseInt(h2[1]));
+        date_from = new Date(Integer.parseInt(d1[0]), Integer.parseInt(d1[1]), Integer.parseInt(d1[2]));
+        date_to = new Date(Integer.parseInt(d2[0]), Integer.parseInt(d2[1]), Integer.parseInt(d2[2]));
+        hour_from = new Hour(Integer.parseInt(h1[0]), Integer.parseInt(h1[1]));
+        hour_to = new Hour(Integer.parseInt(h2[0]), Integer.parseInt(h2[1]));
 
 
-        listView=findViewById(R.id.list_view);
+        listView = findViewById(R.id.list_view);
 
-        ArrayList<String> ridesList=new ArrayList<>();
-        ArrayAdapter adapter= new ArrayAdapter<String>(show_search_resultsActivity.this, R.layout.list_item, ridesList);
+        // Here we use adapter to ... eden
+        ArrayList<String> ridesList = new ArrayList<>();
+        ArrayAdapter adapter = new ArrayAdapter<String>(show_search_resultsActivity.this, R.layout.list_item, ridesList);
         listView.setAdapter(adapter);
 
 
@@ -58,50 +68,52 @@ public class show_search_resultsActivity  extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
+                // if something has left from the last use
                 ridesList.clear();
-                for (DataSnapshot snapshot: datasnapshot.getChildren())
-                {
+                // An algorithm that imports me the relevant Rides according to what the passenger was looking for
+                for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     Ride ride = snapshot.getValue(Ride.class);
 
-                    if(ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
-                            && ((ride.getDate().compareTo(date_from)>0 ||(ride.getDate().compareTo(date_from)==0 && ride.getHour().compareTo(hour_from)>=0))
-                            && (ride.getDate().compareTo(date_to)<0
-                            ||(ride.getDate().compareTo(date_to)==0 && ride.getHour().compareTo(hour_to)<0)))) {
+                    assert ride != null; // make sure Ride not null
+                    if (ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
+                            && ((ride.getDate().compareTo(date_from) > 0 || (ride.getDate().compareTo(date_from) == 0 && ride.getHour().compareTo(hour_from) >= 0))
+                            && (ride.getDate().compareTo(date_to) < 0
+                            || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0)))) {
 
                         String txt_to_add;
-                        String dest_src =ride.getSrc_city();
-                        if(!ride.getSrc_details().isEmpty())
-                            dest_src+="("+ride.getSrc_details()+")";
-                        dest_src+="-->"+ride.getDst_city();
-                        if(!ride.getDst_details().isEmpty())
-                            dest_src+="("+ride.getDst_details()+")";
+                        String dest_src = ride.getSrc_city();
+                        if (!ride.getSrc_details().isEmpty())
+                            dest_src += "(" + ride.getSrc_details() + ")";
+                        dest_src += "-->" + ride.getDst_city();
+                        if (!ride.getDst_details().isEmpty())
+                            dest_src += "(" + ride.getDst_details() + ")";
 
-                        String available_sits="\n"+"מקומות פנויים: "+ ride.getFree_sits()+" מתוך " + ride.getSits();
-                        String Driver="\nנהג/ת: "+ride.getDriver().getFirst_name()+" "+ride.getDriver().getLast_name()
-                                +", מספר פלאפון: "+ride.getDriver().getPhone();
+                        String available_sits = "\n" + "מקומות פנויים: " + ride.getFree_sits() + " מתוך " + ride.getSits();
+                        String Driver = "\nנהג/ת: " + ride.getDriver().getFirst_name() + " " + ride.getDriver().getLast_name()
+                                + ", מספר פלאפון: " + ride.getDriver().getPhone();
 
-                        String hour="";
-                        if (ride.getHour().getHour()==0)
-                            hour+= "00:";
+                        String hour = "";
+                        if (ride.getHour().getHour() == 0)
+                            hour += "00:";
                         else
-                            hour+=ride.getHour().getHour() + ":";
-                        if (ride.getHour().getMinute()==0)
-                            hour+="00";
-                        else  hour+= ride.getHour().getMinute();
+                            hour += ride.getHour().getHour() + ":";
+                        if (ride.getHour().getMinute() == 0)
+                            hour += "00";
+                        else hour += ride.getHour().getMinute();
 
-                        String date_hour = "\n" +hour+" ,"+ ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
+                        String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
 
-                        String car_details="";
+                        String car_details = "";
                         if (!ride.getCar_color().isEmpty() && !ride.getCar_type().isEmpty())
-                            car_details = "\nפרטי הרכב: " + ride.getCar_type()+" ,"+ ride.getCar_color();
+                            car_details = "\nפרטי הרכב: " + ride.getCar_type() + " ," + ride.getCar_color();
                         else if (!ride.getCar_type().isEmpty())
-                            car_details ="\nסוג הרכב: "+ ride.getCar_type();
+                            car_details = "\nסוג הרכב: " + ride.getCar_type();
                         else if (!ride.getCar_color().isEmpty())
-                            car_details = "\nצבע הרכב: "+ ride.getCar_color();
+                            car_details = "\nצבע הרכב: " + ride.getCar_color();
 
 
-                        txt_to_add = dest_src+date_hour+available_sits+car_details+Driver;
+                        txt_to_add = dest_src + date_hour + available_sits + car_details + Driver;
                         ridesList.add(txt_to_add);
                     }
                 }

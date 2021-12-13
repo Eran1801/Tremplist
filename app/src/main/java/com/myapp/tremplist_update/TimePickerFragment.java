@@ -9,6 +9,7 @@ import androidx.fragment.app.DialogFragment;
 
 import java.util.Calendar;
 
+// This class is in charge of the TimePicking in any situation on the app
 public class TimePickerFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle saveInstanceState){

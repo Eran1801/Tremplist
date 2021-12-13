@@ -1,10 +1,9 @@
 package com.myapp.tremplist_update;
 
-import java.util.List;
+// In this class we implement the Ride class
 
 public class Ride {
 
-    private String id;
     private String src_city;
     private String src_details;
     private String dst_city;
@@ -15,12 +14,13 @@ public class Ride {
 
     private String car_type;
     private String car_color;
+
     private int sits;
     private int free_sits;
     private int ride_cost;
 
     private User Driver;
-    private List<User> tremplists;
+    //private List<User> passengers; // will be tha list of passengers in the Ride
 
     public Ride() {
     }
@@ -142,15 +142,11 @@ public class Ride {
         this.ride_cost = ride_cost;
     }
 
-    public String getId() {
-        return id;
-    }
-
     public void setDriver(User r) {
-        this.Driver=new User(r);
+        this.Driver = new User(r);
     }
 
-    public User getDriver(){
+    public User getDriver() {
         return Driver;
     }
 
