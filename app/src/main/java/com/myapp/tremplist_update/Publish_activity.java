@@ -3,6 +3,7 @@ package com.myapp.tremplist_update;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -135,6 +136,10 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                     else {
                         try {//check if the text field of the number of sits don't contains letters
                             sits = Integer.parseInt(tmp_sits);
+                            if(sits < 1){
+                                txt_sits.setError("Number of sits must be positive");
+                                txt_sits.requestFocus();
+                            }
                         }catch (Exception e){
                             txt_sits.setError("Number of sits need to be only numbers");
                             txt_sits.requestFocus();
@@ -142,6 +147,11 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
                         try {//check if the text field of the ride's cost don't contains letters
                             ride_cost = Integer.parseInt(tmp_ride_cost);
+                            if(ride_cost < 0) {
+                                txt_ride_cost.setError("Ride cost cannot be negative");
+                                txt_ride_cost.requestFocus();
+                                return;
+                            }
                         }catch (Exception e){
                             txt_ride_cost.setError("the cost need to be only numbers");
                             txt_ride_cost.requestFocus();
@@ -161,7 +171,9 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                         fb = new FireBaseDBActivity();
                         fb.setContext(Publish_activity.this); //set this context to the firebase activity(for the toast about success\not)
                         // Sending the ride to a function that will add it to the Database
+
                         fb.addRideToDB(ride);
+                        startActivity(new Intent(Publish_activity.this,DriverFirstPage.class));
                     }
                 }
             });
