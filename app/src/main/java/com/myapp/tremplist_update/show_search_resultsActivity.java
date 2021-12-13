@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-// In this class we implement the search result that will show when a passanger want to find a ride
+// In this class we implement the search result that will show when a passenger want to find a ride
 
 public class show_search_resultsActivity extends AppCompatActivity {
     private Hour hour_from;
@@ -57,7 +57,6 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
 
-        // Here we use adapter to ... eden
         ArrayList<String> ridesList = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter<String>(show_search_resultsActivity.this, R.layout.list_item, ridesList);
         listView.setAdapter(adapter);
@@ -70,11 +69,12 @@ public class show_search_resultsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 // if something has left from the last use
                 ridesList.clear();
-                // An algorithm that imports me the relevant Rides according to what the passenger was looking for
+                //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     Ride ride = snapshot.getValue(Ride.class);
 
                     assert ride != null; // make sure Ride not null
+                    //check if the current ride is fit to the search details
                     if (ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
                             && ((ride.getDate().compareTo(date_from) > 0 || (ride.getDate().compareTo(date_from) == 0 && ride.getHour().compareTo(hour_from) >= 0))
                             && (ride.getDate().compareTo(date_to) < 0
@@ -114,6 +114,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
 
                         txt_to_add = dest_src + date_hour + available_sits + car_details + Driver;
+                        //add the current ride (as a string) to the list
                         ridesList.add(txt_to_add);
                     }
                 }

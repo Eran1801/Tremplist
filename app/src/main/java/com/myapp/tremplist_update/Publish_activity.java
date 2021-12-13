@@ -58,7 +58,9 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set the xml that relevant for that activity
         setContentView(R.layout.activity_publish_ride);
+        //collect all the buttons and the text fields
         publish_Btn = findViewById(R.id.publish);
         txt_src_city = findViewById(R.id.src_city);
         txt_src_details = findViewById(R.id.src_detail);
@@ -71,7 +73,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         btn_date = findViewById(R.id.date);
         btn_time = findViewById(R.id.hour);
 
-        // Choose Date button
+        //listener to the Date button(if clicked)
         btn_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +81,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
             }
         });
 
-        // Choose Time button
+        //listener to the Hour button(if clicked)
         btn_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,18 +90,18 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                     Toast.makeText(Publish_activity.this, "First choose date", Toast.LENGTH_SHORT).show();
                     btn_date.requestFocus();
                 } else {
-                    showTimePickerDialog();
+                    showTimePickerDialog(); //present the timePicker
                 };
             }
         });
 
-        // Choose Publish button
+        //listener to the publish ride button(if clicked)
         publish_Btn.setOnClickListener(new View.OnClickListener() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onClick(View view) {
 
-                    // Getting all the data from the Driver about the Ride
+                    // Getting all the data about the ride from the text fields
                     src_city = Objects.requireNonNull(txt_src_city.getText()).toString();
                     src_details = Objects.requireNonNull(txt_src_details.getText()).toString();
                     dst_city = Objects.requireNonNull(txt_dst_city.getText()).toString();
@@ -131,21 +133,21 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                         btn_time.requestFocus();
                     }
                     else {
-                        try {
+                        try {//check if the text field of the number of sits don't contains letters
                             sits = Integer.parseInt(tmp_sits);
                         }catch (Exception e){
                             txt_sits.setError("Number of sits need to be only numbers");
                             txt_sits.requestFocus();
                         }
 
-                        try {
+                        try {//check if the text field of the ride's cost don't contains letters
                             ride_cost = Integer.parseInt(tmp_ride_cost);
                         }catch (Exception e){
                             txt_ride_cost.setError("the cost need to be only numbers");
                             txt_ride_cost.requestFocus();
                         }
 
-
+                        //build the ride according the given inputs
                         Ride ride = new Ride(src_city, dst_city, date, hour, sits, ride_cost);
                         if(!car_color.isEmpty())
                             ride.setCar_color(car_color);
@@ -157,7 +159,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                             ride.setDst_details(dst_details);
 
                         fb = new FireBaseDBActivity();
-                        fb.setContext(Publish_activity.this);
+                        fb.setContext(Publish_activity.this); //set this context to the firebase activity(for the toast about success\not)
                         // Sending the ride to a function that will add it to the Database
                         fb.addRideToDB(ride);
                     }

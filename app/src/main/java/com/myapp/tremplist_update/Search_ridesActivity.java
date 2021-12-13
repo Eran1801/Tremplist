@@ -20,7 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import java.util.Calendar;
 import java.util.Objects;
 
-// In this class we implement the search ride, when a passanger looks for a Ride
+// In this class we implement the search ride, when a passenger search for a Ride
 
 public class Search_ridesActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -39,7 +39,10 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //set the xml that relevant for that activity
         setContentView(R.layout.activity_find_ride);
+
+        //collect all the buttons and the text fields
         search_Btn = findViewById(R.id.find_ride);
 
         txt_src_city = findViewById(R.id.search_src_city);
@@ -54,8 +57,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         date_fromBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                flag_date = false; // eden
+                flag_date = false; // initialize a flag to know that's a "from" date that clicked
                 showFromDatePickerDialog();
             }
         });
@@ -64,6 +66,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         hour_fromBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // initialize a flag to know that's a "from" Hour that clicked
                 flag_hour = false;
                 if (date_from == null) {
                     Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
@@ -78,6 +81,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         date_toBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // initialize a flag to know that's a "to" date that clicked
                 flag_date = true;
                 if (date_from == null) {
                     Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
@@ -94,6 +98,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
         hour_toBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // initialize a flag to know that's a "to" Hour that clicked
                 flag_hour = true;
                 if (date_from == null) {
                     Toast.makeText(Search_ridesActivity.this, "First choose start date", Toast.LENGTH_SHORT).show();
@@ -117,7 +122,6 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
             public void onClick(View v) {
                 src_city = Objects.requireNonNull(txt_src_city.getText()).toString();
                 dest_city = Objects.requireNonNull(txt_dest_city.getText()).toString();
-//                Calendar c = Calendar.getInstance();
 
                 if (TextUtils.isEmpty(src_city)) {
                     txt_src_city.setError("Src city cannot be empty");
@@ -137,7 +141,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
                 } else if (hour_to == null) {
                     Toast.makeText(Search_ridesActivity.this, "Choose to hour", Toast.LENGTH_SHORT).show();
                     hour_toBtn.requestFocus();
-                } else {//get the data from the firebase
+                } else {//send the details for the search to the show_search_resultsActivity
                     Intent intent = new Intent(Search_ridesActivity.this, show_search_resultsActivity.class);
                     intent.putExtra("src_city", src_city);
                     intent.putExtra("dest_city", dest_city);
@@ -152,7 +156,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
 
     }
 
-    // When you picking a data from
+    // When you picking a "from" data
     private void showFromDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this, this,
@@ -164,7 +168,7 @@ public class Search_ridesActivity extends AppCompatActivity implements DatePicke
 
     }
 
-    // When you picking a data to
+    // When you picking a "to" data
     private void showToDatePickerDialog() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(
                 this, this,
