@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 public class My_rides_Activity extends AppCompatActivity {
     ListView listView;
-
     FirebaseAuth mAuth;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +38,7 @@ public class My_rides_Activity extends AppCompatActivity {
         ArrayList<String> ridesList = new ArrayList<>();
         ArrayAdapter adapter = new ArrayAdapter<String>(My_rides_Activity.this, R.layout.list_item, ridesList);
         listView.setAdapter(adapter);
-        
+
 
         mAuth = FirebaseAuth.getInstance();
         DatabaseReference referenceRide = FirebaseDatabase.getInstance().getReference().child("rides");
