@@ -27,6 +27,13 @@
             android:parentActivityName=".DriverFirstPage"/>
 
         <activity
+            android:name=".My_rides_Activity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="My rides"
+            android:parentActivityName=".DriverFirstPage"/>
+
+        <activity
             android:name=".PassengerFirstPage"
             android:launchMode="singleTop"
             android:exported="true"

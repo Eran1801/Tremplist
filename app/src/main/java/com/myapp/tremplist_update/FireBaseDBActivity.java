@@ -46,8 +46,12 @@ public class FireBaseDBActivity extends FirebaseBaseModel{
                                 Toast.makeText(context, "Publishing Error: "+ Objects.requireNonNull(task.getException()).getMessage() , Toast.LENGTH_SHORT).show();
                             }
                         }
-                    });                }
+                    });
+                }
+                notifyAll();
+
             }
+
         });
 
     }

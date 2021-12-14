@@ -171,14 +171,13 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                         fb = new FireBaseDBActivity();
                         fb.setContext(Publish_activity.this); //set this context to the firebase activity(for the toast about success\not)
                         // Sending the ride to a function that will add it to the Database
-
                         fb.addRideToDB(ride);
                         startActivity(new Intent(Publish_activity.this,DriverFirstPage.class));
+
+
                     }
                 }
             });
-
-
     }
 
 
