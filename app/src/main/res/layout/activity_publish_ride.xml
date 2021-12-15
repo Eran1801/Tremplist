@@ -128,14 +128,13 @@
         app:layout_constraintVertical_bias="0.332"
         app:layout_constraintWidth_percent=".8" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/publish"
         android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_centerVertical="true"
-        android:onClick="image"
         android:background="@drawable/button_vg"
-
+        android:onClick="image"
         android:src="@drawable/ic_calender"
         android:text="פרסם נסיעה"
         android:textSize="18sp"

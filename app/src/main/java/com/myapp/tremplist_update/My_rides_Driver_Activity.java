@@ -1,20 +1,13 @@
 package com.myapp.tremplist_update;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +18,7 @@ import java.util.ArrayList;
 
 // In this class we implement the search result that will show when a passenger want to find a ride
 
-public class My_rides_Activity extends AppCompatActivity {
+public class My_rides_Driver_Activity extends AppCompatActivity {
     ListView listView;
     FirebaseAuth mAuth;
 
@@ -36,7 +29,7 @@ public class My_rides_Activity extends AppCompatActivity {
         listView = findViewById(R.id.list_view);
 
         ArrayList<String> ridesList = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter<String>(My_rides_Activity.this, R.layout.list_item, ridesList);
+        ArrayAdapter adapter = new ArrayAdapter<String>(My_rides_Driver_Activity.this, R.layout.list_item, ridesList);
         listView.setAdapter(adapter);
 
 
@@ -68,14 +61,13 @@ public class My_rides_Activity extends AppCompatActivity {
 
 
                         String hour = "";
-                        if (ride.getHour().getHour() == 0)
-                            hour += "00:";
+                        if (ride.getHour().getHour() < 10)
+                            hour += "0"+ride.getHour().getHour();
                         else
                             hour += ride.getHour().getHour() + ":";
-                        if (ride.getHour().getMinute() == 0)
-                            hour += "00";
+                        if (ride.getHour().getMinute() < 10)
+                            hour += "0"+ride.getHour().getMinute();
                         else hour += ride.getHour().getMinute();
-
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
 

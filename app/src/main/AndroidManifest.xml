@@ -27,7 +27,7 @@
             android:parentActivityName=".DriverFirstPage"/>
 
         <activity
-            android:name=".My_rides_Activity"
+            android:name=".My_rides_Driver_Activity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"

@@ -48,7 +48,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel{
                         }
                     });
                 }
-                notifyAll();
+//                notifyAll();
 
             }
 

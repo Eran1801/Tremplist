@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/to_driver"
         android:layout_width="150dp"
         android:layout_height="80dp"
@@ -45,16 +45,16 @@
         app:layout_constraintVertical_bias="0.05"
         app:layout_constraintWidth_percent=".8" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/to_passenger"
         android:layout_width="150dp"
         android:layout_height="80dp"
         android:layout_marginTop="25dp"
-        android:background="@drawable/button_vg"
         android:text="טרמפיסט"
-        android:textSize="23sp"
+        android:textSize="22sp"
+        android:background="@drawable/button_vg"
         android:textStyle="bold"
-        app:autoSizeMaxTextSize="50sp"
+        app:autoSizeMaxTextSize="25sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
         app:autoSizeTextType="uniform"
@@ -100,12 +100,13 @@
         app:layout_constraintTop_toBottomOf="@+id/to_driver"
         tools:ignore="MissingConstraints" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="23dp"
         android:text="Logout"
+        android:background="@drawable/button_vg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

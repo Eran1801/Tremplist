@@ -23,7 +23,8 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="83dp" />
 
-    <Button
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/search_ride"
         android:layout_width="195dp"
         android:layout_height="80dp"
@@ -41,7 +42,7 @@
         app:layout_constraintVertical_bias="0.305"
         app:layout_constraintWidth_percent=".8" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/my_details_passenger"
         android:layout_width="195dp"
         android:layout_height="80dp"
@@ -59,7 +60,7 @@
         app:layout_constraintVertical_bias="0.695"
         app:layout_constraintWidth_percent=".8" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/my_tremps"
         android:layout_width="195dp"
         android:layout_height="80dp"

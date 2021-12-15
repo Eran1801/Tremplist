@@ -153,7 +153,7 @@
         app:layout_constraintVertical_bias="0.284"
         app:layout_constraintWidth_percent=".8" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/find_ride"
         android:layout_width="145dp"
         android:layout_height="52dp"

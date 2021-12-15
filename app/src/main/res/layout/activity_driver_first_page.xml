@@ -24,12 +24,13 @@
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteY="80dp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/publish_ride"
         android:layout_width="195dp"
         android:layout_height="80dp"
         android:background="@drawable/button_vg"
         android:text="פרסם נסיעה"
+
         android:textSize="21sp"
         app:autoSizeMaxTextSize="21sp"
         app:autoSizeMinTextSize="12sp"
@@ -42,7 +43,7 @@
         app:layout_constraintVertical_bias="0.305"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/personal_infoBtn"
         android:layout_width="195dp"
         android:layout_height="80dp"
@@ -60,7 +61,7 @@
         app:layout_constraintVertical_bias="0.695"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/driver_my_rides"
         android:layout_width="195dp"
         android:layout_height="80dp"

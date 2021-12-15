@@ -93,12 +93,12 @@ public class show_search_resultsActivity extends AppCompatActivity {
                                 + ", מספר פלאפון: " + ride.getDriver().getPhone();
 
                         String hour = "";
-                        if (ride.getHour().getHour() == 0)
-                            hour += "00:";
+                        if (ride.getHour().getHour() < 10)
+                            hour += "0"+ride.getHour().getHour();
                         else
                             hour += ride.getHour().getHour() + ":";
-                        if (ride.getHour().getMinute() == 0)
-                            hour += "00";
+                        if (ride.getHour().getMinute() < 10)
+                            hour += "0"+ride.getHour().getMinute();
                         else hour += ride.getHour().getMinute();
 
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();

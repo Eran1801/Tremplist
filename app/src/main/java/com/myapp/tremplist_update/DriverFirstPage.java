@@ -1,12 +1,8 @@
 package com.myapp.tremplist_update;
 
 import android.content.Intent;
-import android.content.pm.LabeledIntent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,7 +24,7 @@ public class DriverFirstPage extends AppCompatActivity {
 
 
         myRidesBtn.setOnClickListener(view -> {
-            startActivity(new Intent(DriverFirstPage.this, My_rides_Activity.class));
+            startActivity(new Intent(DriverFirstPage.this, My_rides_Driver_Activity.class));
         });
 
     }
