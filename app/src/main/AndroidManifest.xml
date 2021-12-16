@@ -53,13 +53,6 @@
             android:exported="true"
             android:label="Rides"
             android:parentActivityName=".Search_ridesActivity"/>
-        <!--        <activity-->
-        <!--            android:name=".show_search_resultsActivity"-->
-        <!--            android:launchMode="singleTop"-->
-        <!--            android:exported="true"-->
-        <!--            android:label="Rides"-->
-        <!--            android:parentActivityName=".PassengerFirstPage"/>-->
-
 
         <activity android:name=".LoginActivity"/>
         <activity android:name=".ForgotPasswordActivity"/>

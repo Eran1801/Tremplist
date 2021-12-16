@@ -1,12 +1,8 @@
 package com.myapp.tremplist_update;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +14,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 // In this class we implement the search result that will show when a passenger want to find a ride
 
@@ -29,7 +27,12 @@ public class show_search_resultsActivity extends AppCompatActivity {
     private String from;
     private String to;
     ListView listView;
+    List<Ride> rides;
+    ArrayList<String> ridesList;
 
+    public void setRideToJoin(int position){
+        Ride ride_to_join =new Ride(rides.get(position));
+    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,9 +59,11 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
 
         listView = findViewById(R.id.list_view);
+        ridesList = new ArrayList<>();
+        rides=new LinkedList<>();
 
-        ArrayList<String> ridesList = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter<String>(show_search_resultsActivity.this, R.layout.list_item, ridesList);
+
+        MyListAdapter adapter = new MyListAdapter(this, R.layout.list_item_search, ridesList);
         listView.setAdapter(adapter);
 
 
@@ -80,6 +85,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
                             && (ride.getDate().compareTo(date_to) < 0
                             || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0)))) {
 
+                        rides.add(ride);
                         String txt_to_add;
                         String dest_src = ride.getSrc_city();
                         if (!ride.getSrc_details().isEmpty())
@@ -90,7 +96,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
                         String available_sits = "\n" + "מקומות פנויים: " + ride.getFree_sits() + " מתוך " + ride.getSits();
                         String Driver = "\nנהג/ת: " + ride.getDriver().getFirst_name() + " " + ride.getDriver().getLast_name()
-                                + ", מספר פלאפון: " + ride.getDriver().getPhone();
+                                + "\nמספר פלאפון: " + ride.getDriver().getPhone();
 
                         String hour = "";
                         if (ride.getHour().getHour() < 10)

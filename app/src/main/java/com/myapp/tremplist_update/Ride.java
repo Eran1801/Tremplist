@@ -54,6 +54,21 @@ public class Ride {
         this.car_type = car_type;
     }
 
+    public Ride(Ride other) {
+        this.src_city = other.src_city;
+        this.dst_city = other.dst_city;
+        this.date = other.date;
+        this.hour = other.hour;
+        this.sits = other.sits;
+        this.free_sits = other.sits;
+        this.ride_cost = other.ride_cost;
+        this.src_details = other.src_details;
+        this.dst_details = other.dst_details;
+        this.car_color = other.car_color;
+        this.car_type = other.car_type;
+    }
+
+
     public String getSrc_city() {
         return src_city;
     }
