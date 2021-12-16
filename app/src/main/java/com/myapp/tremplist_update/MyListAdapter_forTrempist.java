@@ -1,6 +1,7 @@
 package com.myapp.tremplist_update;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.List;
 
-public class MyListAdapter extends ArrayAdapter<String> {
+public class MyListAdapter_forTrempist extends ArrayAdapter<String> {
+    FireBaseDBActivity fb;
     private int layout;
+    private int curr_position;
+    List<Ride> rides;
 
-    public MyListAdapter(@NonNull Context context, int resource, @NonNull List<String> objects) {
+    public MyListAdapter_forTrempist(@NonNull Context context, int resource, @NonNull List<String> objects, List<Ride> rides) {
         super(context, resource, objects);
         layout=resource;
+        this.rides=rides;
     }
 
     @NonNull
@@ -38,7 +45,12 @@ public class MyListAdapter extends ArrayAdapter<String> {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getContext(), position+" clicked", Toast.LENGTH_SHORT).show();
-
+                    Ride curr_ride= new Ride(rides.get(position));
+                    int free_sits = curr_ride.getFree_sits();
+                    curr_ride.setFree_sits(free_sits-1);
+                    fb = new FireBaseDBActivity();
+                    fb.setContext(getContext());
+                    fb.updateRideOnDB(curr_ride);
                 }
             });
             convertView.setTag(viewHolder);
@@ -50,8 +62,11 @@ public class MyListAdapter extends ArrayAdapter<String> {
 
         return convertView;
     }
-}
 
+    public void setRides_List(List<Ride> rides) {
+        this.rides=rides;
+    }
+}
 
 class ViewHolder{
     ImageView user_img;

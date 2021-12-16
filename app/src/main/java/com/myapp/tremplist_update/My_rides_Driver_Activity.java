@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class My_rides_Driver_Activity extends AppCompatActivity {
     ListView listView;
     FirebaseAuth mAuth;
+    ArrayList<String> ridesList;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +29,8 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
 
-        ArrayList<String> ridesList = new ArrayList<>();
-        ArrayAdapter adapter = new ArrayAdapter<String>(My_rides_Driver_Activity.this, R.layout.list_item, ridesList);
+        ridesList = new ArrayList<>();
+        MyListAdapter_forDriver adapter = new MyListAdapter_forDriver(this, R.layout.list_item_driver, ridesList);
         listView.setAdapter(adapter);
 
 

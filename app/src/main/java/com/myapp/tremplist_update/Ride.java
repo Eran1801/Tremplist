@@ -2,6 +2,9 @@ package com.myapp.tremplist_update;
 
 // In this class we implement the Ride class
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class Ride {
 
     private String src_city;
@@ -18,9 +21,10 @@ public class Ride {
     private int sits;
     private int free_sits;
     private int ride_cost;
+    private String id;
 
     private User Driver;
-    //private List<User> passengers; // will be tha list of passengers in the Ride
+    private LinkedList<User> trempists; // will be tha list of passengers in the Ride
 
     public Ride() {
     }
@@ -37,7 +41,8 @@ public class Ride {
         this.dst_details = "";
         this.car_color = "";
         this.car_type = "";
-
+        this.trempists=new LinkedList<>();
+        this.Driver=new User();
     }
 
     public Ride(String src, String src_details, String dst, String dst_details, Date date, Hour hour, int sits, int cost, String car_color, String car_type) {
@@ -52,13 +57,15 @@ public class Ride {
         this.dst_details = dst_details;
         this.car_color = car_color;
         this.car_type = car_type;
+        this.trempists=new LinkedList<>();
+        this.Driver=new User();
     }
 
     public Ride(Ride other) {
         this.src_city = other.src_city;
         this.dst_city = other.dst_city;
-        this.date = other.date;
-        this.hour = other.hour;
+        this.date = new Date(other.date);
+        this.hour =new Hour(other.hour);
         this.sits = other.sits;
         this.free_sits = other.sits;
         this.ride_cost = other.ride_cost;
@@ -66,6 +73,13 @@ public class Ride {
         this.dst_details = other.dst_details;
         this.car_color = other.car_color;
         this.car_type = other.car_type;
+        this.id= other.id;
+        if(other.Driver!= null)
+            this.Driver=new User(other.Driver);
+        else this.Driver=new User();
+        if(other.trempists!=null)
+            this.trempists = new LinkedList<>(other.trempists);
+        else this.trempists=new LinkedList<>();
     }
 
 
@@ -165,5 +179,40 @@ public class Ride {
         return Driver;
     }
 
+    public List<User> getTrempists(){
+        return trempists;
+    }
 
+    public void add_to_trempists(User trempist){
+        trempists.add(trempist);
+    }
+
+
+    public void setId(String id) {
+        this.id=id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String toString() {
+        return "Ride{" +
+                "src_city='" + src_city + '\'' +
+                ", src_details='" + src_details + '\'' +
+                ", dst_city='" + dst_city + '\'' +
+                ", dst_details='" + dst_details + '\'' +
+                ", date=" + date +
+                ", hour=" + hour +
+                ", car_type='" + car_type + '\'' +
+                ", car_color='" + car_color + '\'' +
+                ", sits=" + sits +
+                ", free_sits=" + free_sits +
+                ", ride_cost=" + ride_cost +
+                ", id='" + id + '\'' +
+                ", Driver=" + Driver +
+                ", trempists=" + trempists +
+                '}';
+    }
 }

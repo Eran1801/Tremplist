@@ -1,7 +1,6 @@
 package com.myapp.tremplist_update;
 
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -27,12 +26,14 @@ public class show_search_resultsActivity extends AppCompatActivity {
     private String from;
     private String to;
     ListView listView;
-    List<Ride> rides;
+    List<Ride> rides=new LinkedList<>();
     ArrayList<String> ridesList;
 
-    public void setRideToJoin(int position){
-        Ride ride_to_join =new Ride(rides.get(position));
-    }
+//    public static void setRideToJoin(int position) {
+//        Ride ride_to_join =new Ride(rides.get(position));
+//    }
+
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +61,10 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
         ridesList = new ArrayList<>();
-        rides=new LinkedList<>();
 
 
-        MyListAdapter adapter = new MyListAdapter(this, R.layout.list_item_search, ridesList);
+        MyListAdapter_forTrempist adapter = new MyListAdapter_forTrempist(this, R.layout.list_item_trempist, ridesList, rides);
         listView.setAdapter(adapter);
-
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
 
@@ -74,18 +73,23 @@ public class show_search_resultsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 // if something has left from the last use
                 ridesList.clear();
+                rides.clear();
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     Ride ride = snapshot.getValue(Ride.class);
-
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
-                    if (ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
+                    if (ride.getFree_sits()>0 && ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
                             && ((ride.getDate().compareTo(date_from) > 0 || (ride.getDate().compareTo(date_from) == 0 && ride.getHour().compareTo(hour_from) >= 0))
                             && (ride.getDate().compareTo(date_to) < 0
                             || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0)))) {
 
+                        String ride_key= snapshot.getKey();
+                        System.out.println("key= "+ride_key);
+                        ride.setId(ride_key);
+                        System.out.println(ride.toString());
                         rides.add(ride);
+
                         String txt_to_add;
                         String dest_src = ride.getSrc_city();
                         if (!ride.getSrc_details().isEmpty())

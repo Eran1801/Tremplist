@@ -48,12 +48,38 @@ public class FireBaseDBActivity extends FirebaseBaseModel{
                         }
                     });
                 }
-//                notifyAll();
-
             }
 
         });
 
     }
+
+    public void updateRideOnDB(Ride curr_ride) {
+
+        String UID= Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        myRef.child("users").child(UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                    // Adding the driver to the ride
+                    User Trempist= Objects.requireNonNull(task.getResult()).getValue(User.class);
+                    curr_ride.add_to_trempists(Trempist);
+                    myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(context, "you are successfully joined to the ride" , Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(context, "Error: "+ Objects.requireNonNull(task.getException()).getMessage() , Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            });
+
+        }
+
 }
 
