@@ -7,7 +7,7 @@
     android:background="@drawable/edit_text_bg">
 
     <ImageView
-        android:id="@+id/user_im_trempist"
+        android:id="@+id/user_im"
         android:layout_width="65dp"
         android:layout_height="65dp"
         android:layout_alignParentStart="true"
@@ -19,7 +19,7 @@
         android:layout_alignParentLeft="true" />
 
     <TextView
-        android:id="@+id/ride_details_trempist"
+        android:id="@+id/ride_details"
         android:layout_width="223dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -30,21 +30,21 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/black"
-        android:layout_toEndOf="@+id/user_im_trempist"
-        android:layout_toRightOf="@+id/user_im_trempist" />
+        android:layout_toEndOf="@+id/user_im"
+        android:layout_toRightOf="@+id/user_im" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/cancel_ride_trempist"
+        android:id="@+id/join_ride"
         android:layout_width="75dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/user_im_trempist"
+        android:layout_alignBottom="@+id/user_im"
         android:layout_centerVertical="true"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
         android:layout_marginBottom="9dp"
-        android:layout_toEndOf="@id/ride_details_trempist"
-        android:layout_toRightOf="@id/ride_details_trempist"
-        android:text="בטל הצטרפות"
+        android:layout_toEndOf="@id/ride_details"
+        android:layout_toRightOf="@id/ride_details"
+        android:text="הצטרף"
         android:textSize="12dp" />
 
 </RelativeLayout>

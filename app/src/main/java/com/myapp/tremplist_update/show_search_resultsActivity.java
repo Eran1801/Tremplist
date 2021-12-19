@@ -63,7 +63,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
         ridesList = new ArrayList<>();
 
 
-        MyListAdapter_forTrempist adapter = new MyListAdapter_forTrempist(this, R.layout.list_item_trempist, ridesList, rides);
+        MyListAdapter_forSearch adapter = new MyListAdapter_forSearch(this, R.layout.list_item_search, ridesList, rides);
         listView.setAdapter(adapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
@@ -87,7 +87,6 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
                         String ride_key= snapshot.getKey();
                         ride.setId(ride_key);
-                        System.out.println(ride.toString());
                         rides.add(ride);
 
                         String txt_to_add;
