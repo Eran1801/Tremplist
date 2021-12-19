@@ -13,17 +13,19 @@ The option we have is a Search ride, My rides, and Personal info
 
 public class PassengerFirstPage extends AppCompatActivity {
     Button search_rideBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passanger_first_page);
 
-        search_rideBtn= findViewById(R.id.search_ride);
+        search_rideBtn = findViewById(R.id.search_ride);
 
         // When you choose the search button
         search_rideBtn.setOnClickListener(view -> {
             startActivity(new Intent(PassengerFirstPage.this, Search_ridesActivity.class));
         });
+
 
     }
 }
