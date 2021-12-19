@@ -7,7 +7,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 /*
-In this class we implement the Passanger HomePage
+In this class we implement the Passenger HomePage
 The option we have is a Search ride, My rides, and Personal info
 */
 
