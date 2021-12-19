@@ -75,12 +75,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
         btn_time = findViewById(R.id.hour);
 
         //listener to the Date button(if clicked)
-        btn_date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDatePickerDialog();
-            }
-        });
+        btn_date.setOnClickListener(v -> showDatePickerDialog());
 
         //listener to the Hour button(if clicked)
         btn_time.setOnClickListener(new View.OnClickListener() {

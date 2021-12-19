@@ -1,68 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.myapp.tremplist_update">
 
-    <uses-permission android:name="android.premission.INTERNET"/>
+    <uses-permission android:name="android.premission.INTERNET" />
 
     <application
-        android:allowBackup="true"
+        android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
+        android:label="TrempList"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Tremplist_update"
-        android:label="TrempList">
-
+        tools:targetApi="lollipop">
         <activity
             android:name=".DriverFirstPage"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Driver Page"
-            android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".PersonalUserInfoActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:label="Personal Info"
+            android:parentActivityName=".DriverFirstPage"/>
         <activity
             android:name=".Publish_activity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Publish ride"
-            android:parentActivityName=".DriverFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".DriverFirstPage" />
         <activity
             android:name=".My_rides_Driver_Activity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".DriverFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".DriverFirstPage" />
         <activity
             android:name=".PassengerFirstPage"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Passenger Page"
-            android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".Search_ridesActivity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Search ride"
-            android:parentActivityName=".PassengerFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".PassengerFirstPage" />
         <activity
             android:name=".show_search_resultsActivity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Rides"
-            android:parentActivityName=".Search_ridesActivity"/>
-
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".ForgotPasswordActivity"/>
-
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".MainActivity"/>
+            android:launchMode="singleTop"
+            android:parentActivityName=".Search_ridesActivity" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.Splash" >
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
