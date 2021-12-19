@@ -24,7 +24,7 @@
             android:exported="true"
             android:launchMode="singleTop"
             android:label="Personal Info"
-            android:parentActivityName=".DriverFirstPage"/>
+            android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".Publish_activity"
             android:exported="true"

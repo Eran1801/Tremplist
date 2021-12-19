@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DriverFirstPage extends AppCompatActivity {
     Button publish_rideBtn;
     Button myRidesBtn;
-    Button personal_infoBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,20 +17,15 @@ public class DriverFirstPage extends AppCompatActivity {
 
         publish_rideBtn = (Button)findViewById(R.id.publish_ride);
         myRidesBtn = (Button)findViewById(R.id.driver_my_rides);
-        personal_infoBtn = (Button)findViewById(R.id.personal_infoBtn);
 
         publish_rideBtn.setOnClickListener(view -> {
             startActivity(new Intent(DriverFirstPage.this, Publish_activity.class));
         });
 
-
         myRidesBtn.setOnClickListener(view -> {
             startActivity(new Intent(DriverFirstPage.this, My_rides_Driver_Activity.class));
         });
 
-        personal_infoBtn.setOnClickListener(view -> {
-            startActivity(new Intent(DriverFirstPage.this,PersonalUserInfoActivity.class));
-        });
 
     }
 

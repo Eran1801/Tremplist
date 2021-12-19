@@ -25,8 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         Button to_passengerBtn = findViewById(R.id.to_passenger); // Passanger page
         Button to_driverBtn = findViewById(R.id.to_driver); // Driver page
+        Button to_personalInfo = findViewById(R.id.btnPersonalInfo) ;// personal info
 
-        btnLogOut = findViewById(R.id.btnLogout);
+        btnLogOut = findViewById(R.id.btnLogout2);
         mAuth = FirebaseAuth.getInstance();
 
         // Log out button
@@ -48,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, PassengerFirstPage.class));
+            }
+        });
+
+        to_personalInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,PersonalUserInfoActivity.class));
             }
         });
 
