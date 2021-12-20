@@ -8,18 +8,20 @@
     android:padding="0dp"
     tools:context=".RegisterActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="111dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/logo_hitchhiker" />
+
     <LinearLayout
         android:layout_width="354dp"
-        android:layout_height="698dp"
+        android:layout_height="544dp"
         android:layout_gravity="center"
         android:layout_marginTop="25dp"
         android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:layout_width="match_parent"
@@ -86,7 +88,8 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+           >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etRegPass"
@@ -96,23 +99,17 @@
                 android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <ImageButton
-            android:id="@+id/add_image_register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegister"
+            android:background="@drawable/button_vg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:background="@drawable/button_vg"
             android:text="Register" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="51dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="center"
             android:orientation="horizontal">
@@ -121,20 +118,20 @@
                 android:id="@+id/tvLoginHere"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
                 android:layout_marginRight="15dp"
                 android:text="Login here"
                 android:textColor="@color/teal_700"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginEnd="15dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginLeft="15dp"
                 android:text="Already registered"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp" />
         </LinearLayout>
 
     </LinearLayout>

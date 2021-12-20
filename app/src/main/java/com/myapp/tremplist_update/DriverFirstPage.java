@@ -22,10 +22,10 @@ public class DriverFirstPage extends AppCompatActivity {
             startActivity(new Intent(DriverFirstPage.this, Publish_activity.class));
         });
 
-
         myRidesBtn.setOnClickListener(view -> {
             startActivity(new Intent(DriverFirstPage.this, My_rides_Driver_Activity.class));
         });
+
 
     }
 

@@ -24,7 +24,7 @@ public class Ride {
     private String id;
 
     private User Driver;
-    private LinkedList<User> trempists; // will be the list of passengers in the Ride
+    private LinkedList<User> trempists; // will be tha list of passengers in the Ride
 
     public Ride() {
     }
@@ -74,9 +74,8 @@ public class Ride {
         this.car_color = other.car_color;
         this.car_type = other.car_type;
         this.id= other.id;
-        if(other.Driver!= null) {
-            this.Driver = new User(other.Driver);
-        }
+        if(other.Driver!= null)
+            this.Driver=new User(other.Driver);
         else this.Driver=new User();
         if(other.trempists!=null)
             this.trempists = new LinkedList<>(other.trempists);
@@ -180,7 +179,7 @@ public class Ride {
         return Driver;
     }
 
-    public LinkedList<User> getTrempists(){
+    public List<User> getTrempists(){
         return trempists;
     }
 

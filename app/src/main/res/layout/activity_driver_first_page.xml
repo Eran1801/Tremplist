@@ -32,34 +32,15 @@
         android:text="פרסם נסיעה"
 
         android:textSize="21sp"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="21sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.305"
-        />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/personal_infoBtn"
-        android:layout_width="195dp"
-        android:layout_height="80dp"
-        android:background="@drawable/button_vg"
-        android:text="מידע אישי"
-        android:textSize="21sp"
-        app:autoSizeMaxTextSize="21sp"
-        app:autoSizeMinTextSize="12sp"
-        app:autoSizeStepGranularity="2sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.695"
-        />
+        app:layout_constraintVertical_bias="0.368" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/driver_my_rides"
@@ -68,15 +49,15 @@
         android:background="@drawable/button_vg"
         android:text="הנסיעות שלי"
         android:textSize="21sp"
+        android:textStyle="bold"
         app:autoSizeMaxTextSize="21sp"
         app:autoSizeMinTextSize="12sp"
         app:autoSizeStepGranularity="2sp"
-        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintVertical_bias="0.6" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

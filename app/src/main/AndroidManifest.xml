@@ -3,7 +3,6 @@
     package="com.myapp.tremplist_update">
 
     <uses-permission android:name="android.premission.INTERNET"/>
-    <uses-permission android:name="android.premission.CAMERA"/>
 
     <application
         android:allowBackup="true"
