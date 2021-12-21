@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_pages"
     android:onClick="update">
 
     <TextView
@@ -12,8 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="16dp"
         android:gravity="center_horizontal"
-        android:text="Personal Info"
+        android:text="פרטים אישיים"
         android:textColor="@color/teal_700"
+
         android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -25,57 +27,66 @@
 
     <EditText
         android:id="@+id/personal_firstName"
-        android:layout_width="296dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="12dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:background="@drawable/edit_text_bg"
+        app:layout_constraintTop_toBottomOf="@id/updateBtn"
         app:layout_constraintBottom_toTopOf="@+id/personal_lastName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.995"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/personal_lastName"
-        android:layout_width="296dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:background="@drawable/edit_text_bg"
+        app:layout_constraintTop_toBottomOf="@id/personal_firstName"
         app:layout_constraintBottom_toTopOf="@+id/personal_telephone"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="SpeakableTextPresentCheck" />
-
-    <EditText
-        android:id="@+id/personal_email"
-        android:layout_width="296dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="48dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
         android:id="@+id/personal_telephone"
-        android:layout_width="296dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:ems="10"
         android:inputType="textPersonName"
+        android:background="@drawable/edit_text_bg"
+        app:layout_constraintTop_toBottomOf="@id/personal_lastName"
         app:layout_constraintBottom_toTopOf="@+id/personal_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/personal_email"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:background="@drawable/edit_text_bg"
+        android:layout_marginBottom="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/personal_telephone"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+
 
     <ImageView
         android:id="@+id/profile_picture"
@@ -83,35 +94,38 @@
         android:layout_height="267dp"
         app:layout_constraintBottom_toTopOf="@+id/personal_firstName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/updateBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:text="update"
-        app:layout_constraintBottom_toBottomOf="@+id/personal_email"
+        android:text="עדכן פרטים"
+        android:textStyle="bold"
+        android:background="@drawable/button_vg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.178"
+        app:layout_constraintHorizontal_bias="0.220"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintVertical_bias="0.475" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/take_picture"
-        android:layout_width="wrap_content"
+        android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:text="take a picture"
-        app:layout_constraintBottom_toBottomOf="@+id/personal_email"
+        android:text="הוסף תמונה"
+        android:textStyle="bold"
+        android:background="@drawable/button_vg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.793"
+        app:layout_constraintHorizontal_bias="0.780"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        app:layout_constraintVertical_bias="0.51" />
+        app:layout_constraintVertical_bias="0.475" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

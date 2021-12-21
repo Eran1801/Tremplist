@@ -45,9 +45,11 @@
         <entry key="..\:/TremplistNew/app/src/main/res/drawable-v24/edit_text_bg.xml" value="0.13125" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_driver_first_page.xml" value="0.2" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_find_ride.xml" value="0.264" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_forget_password.xml" value="0.1109375" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_login.xml" value="0.20364583333333333" />
-        <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_main.xml" value="0.1359375" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_passanger_first_page.xml" value="0.2" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_personal_user_info.xml" value="0.4" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_publish_ride.xml" value="0.264" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_register.xml" value="0.2406576980568012" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_splash_screen.xml" value="0.10208333333333333" />
@@ -76,17 +78,6 @@
         <entry key="..\:/Users/ERAN LEVY/AndroidStudioProjects/Tremplist_update/app/src/main/res/layout/activity_passanger_personal_info.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/ERAN LEVY/AndroidStudioProjects/Tremplist_update/app/src/main/res/layout/activity_publish_ride.xml" value="0.33" />
         <entry key="..\:/Users/ERAN LEVY/AndroidStudioProjects/Tremplist_update/app/src/main/res/layout/activity_register.xml" value="0.33" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_driver_first_page.xml" value="0.2175925925925926" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_login.xml" value="0.25416666666666665" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_main.xml" value="0.2175925925925926" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_passanger_first_page.xml" value="0.13020833333333334" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_passanger_history_rides.xml" value="0.13020833333333334" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_personal_user_info.xml" value="0.4" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_publish_ride.xml" value="0.4" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_register.xml" value="0.25" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_splash_screen.xml" value="0.13020833333333334" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/activity_upload_image.xml" value="0.16" />
-        <entry key="..\:/software_engineer/Tremplist/app/src/main/res/layout/list_item_driver.xml" value="0.13020833333333334" />
       </map>
     </option>
   </component>
