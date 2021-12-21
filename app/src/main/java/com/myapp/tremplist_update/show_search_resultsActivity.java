@@ -63,7 +63,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
         ridesList = new ArrayList<>();
 
 
-        MyListAdapter_forSearch adapter = new MyListAdapter_forSearch(this, R.layout.list_item_search, ridesList, rides);
+        MyListAdapter_forTrempist adapter = new MyListAdapter_forTrempist(this, R.layout.list_item_trempist, ridesList, rides);
         listView.setAdapter(adapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
@@ -76,7 +76,6 @@ public class show_search_resultsActivity extends AppCompatActivity {
                 rides.clear();
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-
                     Ride ride = snapshot.getValue(Ride.class);
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
@@ -86,7 +85,9 @@ public class show_search_resultsActivity extends AppCompatActivity {
                             || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0)))) {
 
                         String ride_key= snapshot.getKey();
+                        System.out.println("key= "+ride_key);
                         ride.setId(ride_key);
+                        System.out.println(ride.toString());
                         rides.add(ride);
 
                         String txt_to_add;

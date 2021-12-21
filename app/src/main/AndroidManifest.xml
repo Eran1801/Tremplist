@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myapp.tremplist_update">
 
-    <uses-permission android:name="android.premission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,6 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tremplist_update"
         android:label="TrempList">
+
+        <activity
+            android:name=".PersonalUserInfoActivity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="update details"
+            android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
 
         <activity
             android:name=".DriverFirstPage"

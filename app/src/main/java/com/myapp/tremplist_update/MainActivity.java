@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         to_personalInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,PersonalUserInfoActivity.class));
+                startActivity(new Intent(MainActivity.this, PersonalUserInfoActivity.class));
             }
         });
 

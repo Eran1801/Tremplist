@@ -2,8 +2,12 @@ package com.myapp.tremplist_update;
 
 // In this class we implement the Ride class
 
+import com.google.firebase.database.collection.ArraySortedMap;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Ride {
 
@@ -24,7 +28,7 @@ public class Ride {
     private String id;
 
     private User Driver;
-    private LinkedList<User> trempists; // will be tha list of passengers in the Ride
+    private Map<String , User> trempists; // will be tha list of passengers in the Ride
 
     public Ride() {
     }
@@ -41,7 +45,7 @@ public class Ride {
         this.dst_details = "";
         this.car_color = "";
         this.car_type = "";
-        this.trempists=new LinkedList<>();
+        this.trempists=new HashMap<>();
         this.Driver=new User();
     }
 
@@ -57,7 +61,7 @@ public class Ride {
         this.dst_details = dst_details;
         this.car_color = car_color;
         this.car_type = car_type;
-        this.trempists=new LinkedList<>();
+        this.trempists=new HashMap<>();
         this.Driver=new User();
     }
 
@@ -78,8 +82,8 @@ public class Ride {
             this.Driver=new User(other.Driver);
         else this.Driver=new User();
         if(other.trempists!=null)
-            this.trempists = new LinkedList<>(other.trempists);
-        else this.trempists=new LinkedList<>();
+            this.trempists = new HashMap<>(other.trempists);
+        else this.trempists=new HashMap<>();
     }
 
 
@@ -179,14 +183,17 @@ public class Ride {
         return Driver;
     }
 
-    public List<User> getTrempists(){
+    public Map<String,User> getTrempists(){
         return trempists;
     }
 
     public void add_to_trempists(User trempist){
-        trempists.add(trempist);
+        trempists.put(trempist.id, trempist);
     }
 
+    public void setTrempists(Map<String, User> trempists){
+        this.trempists=trempists;
+    }
 
     public void setId(String id) {
         this.id=id;
@@ -215,4 +222,5 @@ public class Ride {
                 ", trempists=" + trempists +
                 '}';
     }
+
 }

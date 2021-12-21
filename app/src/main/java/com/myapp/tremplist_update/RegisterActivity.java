@@ -1,6 +1,7 @@
 package com.myapp.tremplist_update;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,6 +9,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Base64;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,16 +24,23 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.Objects;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterActivity<privete> extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
@@ -41,12 +51,12 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText etRegLastName;
     TextInputEditText etRegTelephone;
 
+
     TextView tvLoginHere; // if you already register and want to login
     Button btnRegister;
-    ImageButton AddProfileImage;
-    ImageView ProfilePicture;
 
     FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,43 +72,20 @@ public class RegisterActivity extends AppCompatActivity {
 
         tvLoginHere = findViewById(R.id.tvLoginHere);
         btnRegister = findViewById(R.id.btnRegister);
-        AddProfileImage = findViewById(R.id.add_image_register);
-        ProfilePicture = findViewById(R.id.imageView4);
+
+
         mAuth = FirebaseAuth.getInstance();
 
-        AddProfileImage.setOnClickListener(view -> {
-            // request permission for camera
-            if(ContextCompat.checkSelfPermission(RegisterActivity.this, Manifest.permission.CAMERA)
-                    != PackageManager.PERMISSION_GRANTED){
-                ActivityCompat.requestPermissions(RegisterActivity.this, new String[]{
-                        Manifest.permission.CAMERA
-                }, 100);
-            }
-            take_picture();
-        });
+
 
         // Register button
         btnRegister.setOnClickListener(view -> {
             createUser();
         });
 
-        tvLoginHere.setOnClickListener(view -> {
-            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-        });
+
     }
 
-    private void take_picture() {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 100);
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 100){
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            ProfilePicture.setImageBitmap(bitmap);
-        }
-    }
 
     private void createUser() {
 
@@ -154,6 +141,7 @@ public class RegisterActivity extends AppCompatActivity {
         FireBaseDBActivity fb = new FireBaseDBActivity();
         fb.addUserToDB(user);
     }
+
 
 
 
