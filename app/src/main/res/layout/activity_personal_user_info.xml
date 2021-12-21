@@ -86,9 +86,7 @@
         android:paddingRight="10dp"
         tools:ignore="SpeakableTextPresentCheck" />
 
-
-
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/profile_picture"
         android:layout_width="280dp"
         android:layout_height="267dp"
@@ -97,9 +95,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0"
-        android:src="@drawable/logo_hitchhiker"
         tools:ignore="ImageContrastCheck"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:src="@drawable/no_image" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/updateBtn"
@@ -119,7 +116,7 @@
         android:id="@+id/take_picture"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:text="הוסף תמונה"
+        android:text="עדכן תמונה"
         android:textStyle="bold"
         android:background="@drawable/button_vg"
         app:layout_constraintBottom_toBottomOf="parent"

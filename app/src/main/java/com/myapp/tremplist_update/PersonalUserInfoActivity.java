@@ -12,6 +12,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -21,6 +22,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,11 +32,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.util.Objects;
 
 public class PersonalUserInfoActivity extends AppCompatActivity {
@@ -45,9 +51,9 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
     ImageView ProfilePicture;
 
     User user; //for profile picture
-
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String UID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+    private Bitmap my_image;
 
     StorageReference storage = FirebaseStorage.getInstance().getReference();
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://tremplistupdtaefirebase-default-rtdb.firebaseio.com/");
@@ -69,6 +75,12 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
         AddProfileImage = findViewById(R.id.take_picture);
         ProfilePicture = findViewById(R.id.profile_picture);
+        StorageReference storageReference = storage.child("profilePictures");
+
+
+
+
+
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -80,14 +92,23 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
                 telephone.setText(user.getPhone());
                 _email.setText(user.getEmail());
 
-                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profilePicture");
-                ProfilePicture = findViewById(R.id.profile_picture);
-
-//                // Load the image using Glide
-//                Glide.with(PersonalUserInfoActivity.this)
-//                        .using(new FirebaseImageLoader())
-//                        .load(storageReference)
-//                        .into(ProfilePicture);
+                try {
+                    final File localFile = File.createTempFile("img", "jpg");
+                    storageReference.child(user.getEmail()).getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            ProfilePicture.setImageBitmap(my_image);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+//                            Toast.makeText(PersonalUserInfoActivity.this, "שגיאה בעת הורדת תמונה", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
             }
 
