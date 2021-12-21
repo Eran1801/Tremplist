@@ -38,8 +38,8 @@ import java.util.Objects;
 
 public class PersonalUserInfoActivity extends AppCompatActivity {
 
-    private static final int PERMISSION_REQUEST_CODE = 200;
-    private EditText first_name, last_name, telephone, _email;
+    static final int PERMISSION_REQUEST_CODE = 200;
+    EditText first_name, last_name, telephone, _email;
     Button update;
     Button AddProfileImage;
     ImageView ProfilePicture;
@@ -79,6 +79,15 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
                 last_name.setText(user.getLast_name());
                 telephone.setText(user.getPhone());
                 _email.setText(user.getEmail());
+
+                StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("profilePicture");
+                ProfilePicture = findViewById(R.id.profile_picture);
+
+//                // Load the image using Glide
+//                Glide.with(PersonalUserInfoActivity.this)
+//                        .using(new FirebaseImageLoader())
+//                        .load(storageReference)
+//                        .into(ProfilePicture);
 
             }
 

@@ -88,7 +88,7 @@
 
 
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/profile_picture"
         android:layout_width="280dp"
         android:layout_height="267dp"
@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0"
-        android:src="@drawable/logo_hitchhiker" />
+        android:src="@drawable/logo_hitchhiker"
         tools:ignore="ImageContrastCheck"
         tools:srcCompat="@tools:sample/avatars" />
 
