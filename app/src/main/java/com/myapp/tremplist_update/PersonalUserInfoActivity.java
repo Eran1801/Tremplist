@@ -2,10 +2,17 @@ package com.myapp.tremplist_update;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -31,6 +38,7 @@ import java.util.Objects;
 
 public class PersonalUserInfoActivity extends AppCompatActivity {
 
+    private static final int PERMISSION_REQUEST_CODE = 200;
     private EditText first_name, last_name, telephone, _email;
     Button update;
     Button AddProfileImage;
@@ -84,6 +92,14 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
         AddProfileImage.setOnClickListener(view -> {
             if(user != null) {
+                if (checkPermission()) {
+                    //main logic or main code
+
+                    // . write your main code to execute, It will execute if the permission is already given.
+
+                } else {
+                    requestPermission();
+                }
                 uploadImage(view);
             }
             else {
@@ -96,8 +112,13 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
     public void saveUser(View view) {
         User user = new User(first_name.getText().toString(), last_name.getText().toString(), telephone.getText().toString(), _email.getText().toString());
-
-        myRef.setValue(user);
+        try {
+            myRef.setValue(user);
+            Toast.makeText(PersonalUserInfoActivity.this, "הידד הפרטים מעודכנים", Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     public void uploadImage(View v){
@@ -138,5 +159,60 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
                 Toast.makeText(PersonalUserInfoActivity.this, "Failed upload", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private boolean checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            return false;
+        }
+        return true;
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    // main logic
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            showMessageOKCancel("You need to allow access permissions",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermission();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(PersonalUserInfoActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
     }
 }
