@@ -1,5 +1,6 @@
 package com.myapp.tremplist_update;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +17,19 @@ import java.util.List;
 
 public class MyListAdapter_forDriver extends ArrayAdapter<String> {
     private int layout;
+    Context ApplicationContext;
+    Activity activity;
+    List<Ride> rides;
+    FireBaseDBActivity fb;
 
-    public MyListAdapter_forDriver(@NonNull Context context, int resource, @NonNull List<String> objects) {
+
+
+    public MyListAdapter_forDriver(@NonNull Context context, int resource, @NonNull List<String> objects, List<Ride> rides,  Context ApplicationContext, Activity activity) {
         super(context, resource, objects);
         layout=resource;
+        this.ApplicationContext=ApplicationContext;
+        this.activity=activity;
+        this.rides=rides;
     }
 
     @NonNull
@@ -35,8 +45,12 @@ public class MyListAdapter_forDriver extends ArrayAdapter<String> {
             viewHolder.cancel_ride.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(getContext(), position+" clicked", Toast.LENGTH_SHORT).show();
-
+                    Ride curr_ride= new Ride(rides.get(position));
+                    fb = new FireBaseDBActivity();
+                    fb.setContext(getContext());
+                    fb.setApplicationContext(ApplicationContext);
+                    fb.setActivity(activity);
+                    fb.Cancel_by_Driver(curr_ride);
                 }
             });
             convertView.setTag(viewHolder);

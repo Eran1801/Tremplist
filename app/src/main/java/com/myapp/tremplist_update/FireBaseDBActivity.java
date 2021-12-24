@@ -38,7 +38,6 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                     public void onComplete(@NonNull Task<InstanceIdResult> task) {
                         if (task.isSuccessful()) {
                             token_to_send_to = Objects.requireNonNull(task.getResult()).getToken();
-                            System.out.println("token= "+token_to_send_to);
                             myRef.child("tokens").child(user.id).setValue(token_to_send_to);
                         }
 
@@ -77,7 +76,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
 
     }
 
-    public void updateRideOnDB(Ride curr_ride) {
+    public void updateRideOnDB_join(Ride curr_ride) {
 
         String trempist_UID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
         myRef.child("users").child(trempist_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -97,7 +96,6 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                                 Toast.makeText(context, "you are successfully joined to the ride", Toast.LENGTH_SHORT).show();
 
                                 String driver_UID = curr_ride.getDriver().id;
-                                System.out.println("driver_UID= "+driver_UID);
                                 myRef.child("tokens").child(driver_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
                                     public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -130,6 +128,92 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
 
 
     }
+
+
+    public void updateRideOnDB_Cancel(Ride curr_ride) {
+
+        String trempist_UID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        myRef.child("users").child(trempist_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                }
+                else {
+                    // Adding the driver to the ride
+                    User Trempist = Objects.requireNonNull(task.getResult()).getValue(User.class);
+                    curr_ride.remove_from_Tremplists(Trempist);
+                    myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(context, "you are successfully canceled the ride", Toast.LENGTH_SHORT).show();
+                                String driver_UID = curr_ride.getDriver().id;
+                                myRef.child("tokens").child(driver_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (!task.isSuccessful()) {
+                                            Log.e("firebase", "Error getting data", task.getException());
+                                        } else {
+                                            // Adding the driver to the ride
+                                            String TOKEN = Objects.requireNonNull(task.getResult()).getValue(String.class);
+                                            FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                                    TOKEN,
+                                                    "ביטול הצטרפות",
+                                                    Trempist.getFirst_name()+" "+Trempist.getLast_name()+" ביטל את ההצטרפות לנסיעה שלך",
+                                                    ApplicationContext, activity);
+                                            notificationsSender.SendNotifications();
+
+                                        }
+                                    }
+
+                                });
+
+
+                            } else {
+                                Toast.makeText(context, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+    }
+
+
+    public void Cancel_by_Driver(Ride curr_ride) {
+        String driver_UID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        myRef.child("rides").child(curr_ride.getId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                for (String trempist_id: curr_ride.getTrempists().keySet()){
+                    myRef.child("tokens").child(trempist_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            if (!task.isSuccessful()) {
+                                Log.e("firebase", "Error getting data", task.getException());
+                            } else {
+                                // Adding the driver to the ride
+                                String TOKEN = Objects.requireNonNull(task.getResult()).getValue(String.class);
+                                FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                        TOKEN,
+                                        "ביטול נסיעה",
+                                        "): "+curr_ride.getDriver().getFirst_name()+" "+curr_ride.getDriver().getLast_name()+" ביטל את הנסיעה",
+                                        ApplicationContext, activity);
+                                notificationsSender.SendNotifications();
+
+                            }
+                        }
+
+                    });
+                }
+            }
+        });
+
+    }
+
 
     public void update_relevant_driver_details(User user_to_update, String UID) {
 

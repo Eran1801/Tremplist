@@ -191,6 +191,10 @@ public class Ride {
         trempists.put(trempist.id, trempist);
     }
 
+    public void remove_from_Tremplists(User trempist) {
+        trempists.remove(trempist.id);
+    }
+
     public void setTrempists(Map<String, User> trempists){
         this.trempists=trempists;
     }
@@ -222,5 +226,6 @@ public class Ride {
                 ", trempists=" + trempists +
                 '}';
     }
+
 
 }

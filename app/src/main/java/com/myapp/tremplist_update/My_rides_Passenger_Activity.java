@@ -1,5 +1,7 @@
 package com.myapp.tremplist_update;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -35,7 +37,10 @@ public class My_rides_Passenger_Activity extends AppCompatActivity {
         listView = findViewById(R.id.list_view);
 
         ridesList = new ArrayList<>();
-        MyListAdapter_forTrempist adapter = new MyListAdapter_forTrempist(this, R.layout.list_item_trempist, ridesList, rides);
+        Context ApplicationContext = getApplicationContext();
+        Activity activity = My_rides_Passenger_Activity.this;
+
+        MyListAdapter_forTrempist adapter = new MyListAdapter_forTrempist(this, R.layout.list_item_trempist, ridesList, rides, ApplicationContext, activity);
         listView.setAdapter(adapter);
 
         mAuth = FirebaseAuth.getInstance();
@@ -45,7 +50,6 @@ public class My_rides_Passenger_Activity extends AppCompatActivity {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                System.out.println("33333333333");
 
                 // if something has left from the last use
                 ridesList.clear();

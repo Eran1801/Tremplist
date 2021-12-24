@@ -1,5 +1,7 @@
 package com.myapp.tremplist_update;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -15,6 +17,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 // In this class we implement the search result that will show when a passenger want to find a ride
@@ -23,6 +27,8 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
     ListView listView;
     FirebaseAuth mAuth;
     ArrayList<String> ridesList;
+    List<Ride> rides=new LinkedList<>();
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +37,10 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
         listView = findViewById(R.id.list_view);
 
         ridesList = new ArrayList<>();
-        MyListAdapter_forDriver adapter = new MyListAdapter_forDriver(this, R.layout.list_item_driver, ridesList);
+        Context ApplicationContext = getApplicationContext();
+        Activity activity = My_rides_Driver_Activity.this;
+
+        MyListAdapter_forDriver adapter = new MyListAdapter_forDriver(this, R.layout.list_item_driver, ridesList,rides, ApplicationContext, activity);
         listView.setAdapter(adapter);
 
 
@@ -44,6 +53,7 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 // if something has left from the last use
                 ridesList.clear();
+                rides.clear();
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                         Ride ride = snapshot.getValue(Ride.class);
@@ -52,6 +62,8 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
                     String curr_id=mAuth.getCurrentUser().getUid();
                     String driver_id=ride.getDriver().getId();
                     if (driver_id.equals(curr_id)) {
+                        rides.add(ride);
+                        System.out.println("add to ride");
                         String txt_to_add;
                         String dest_src = ride.getSrc_city();
                         if (!ride.getSrc_details().isEmpty())

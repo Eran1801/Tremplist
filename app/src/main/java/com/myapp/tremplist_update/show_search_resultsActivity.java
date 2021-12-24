@@ -88,9 +88,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
                             || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0)))) {
 
                         String ride_key= snapshot.getKey();
-                        System.out.println("key= "+ride_key);
                         ride.setId(ride_key);
-                        System.out.println(ride.toString());
                         rides.add(ride);
 
                         String txt_to_add;

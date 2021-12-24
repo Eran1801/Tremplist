@@ -1,5 +1,6 @@
 package com.myapp.tremplist_update;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,11 +25,15 @@ public class MyListAdapter_forTrempist extends ArrayAdapter<String> {
     private int layout;
     private int curr_position;
     List<Ride> rides;
+    Context ApplicationContext;
+    Activity activity;
 
-    public MyListAdapter_forTrempist(@NonNull Context context, int resource, @NonNull List<String> objects, List<Ride> rides) {
+    public MyListAdapter_forTrempist(@NonNull Context context, int resource, @NonNull List<String> objects, List<Ride> rides, Context ApplicationContext, Activity activity) {
         super(context, resource, objects);
         layout=resource;
         this.rides=rides;
+        this.ApplicationContext=ApplicationContext;
+        this.activity=activity;
     }
 
 
@@ -48,10 +53,12 @@ public class MyListAdapter_forTrempist extends ArrayAdapter<String> {
                 public void onClick(View v) {
                     Ride curr_ride= new Ride(rides.get(position));
                     int free_sits = curr_ride.getFree_sits();
-                    curr_ride.setFree_sits(free_sits-1);
+                    curr_ride.setFree_sits(free_sits+1);
                     fb = new FireBaseDBActivity();
                     fb.setContext(getContext());
-                    fb.updateRideOnDB(curr_ride);
+                    fb.setApplicationContext(ApplicationContext);
+                    fb.setActivity(activity);
+                    fb.updateRideOnDB_Cancel(curr_ride);
                 }
             });
             convertView.setTag(viewHolder);
