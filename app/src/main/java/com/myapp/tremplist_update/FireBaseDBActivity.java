@@ -37,6 +37,8 @@ public class FireBaseDBActivity extends FirebaseBaseModel{
                     // Adding the driver to the ride
                     User driver= Objects.requireNonNull(task.getResult()).getValue(User.class);
                     ride.setDriver(driver);
+                    assert driver != null;
+                    System.out.println(driver.toString());
                     myRef.child("rides").push().setValue(ride).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

@@ -172,7 +172,7 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
 
                     }
                 }
-            });
+            } );
     }
 
 

@@ -15,6 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 // In this class we implement the search result that will show when a passenger want to find a ride
 
@@ -49,7 +50,7 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
 
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
-                    if (ride.getDriver().id.equals(mAuth.getCurrentUser().getUid())) {
+                    if (ride.getDriver().id.equals(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())) {
                         String txt_to_add;
                         String dest_src = ride.getSrc_city();
                         if (!ride.getSrc_details().isEmpty())
@@ -59,7 +60,6 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
                             dest_src += "(" + ride.getDst_details() + ")";
 
                         String available_sits = "\n" + "מקומות פנויים: " + ride.getFree_sits() + " מתוך " + ride.getSits();
-
 
                         String hour = "";
                         if (ride.getHour().getHour() < 10)

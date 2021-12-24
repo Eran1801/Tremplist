@@ -77,11 +77,6 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
         ProfilePicture = findViewById(R.id.profile_picture);
         StorageReference storageReference = storage.child("profilePictures");
 
-
-
-
-
-
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -141,7 +136,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
 
     public void saveUser(View view) {
-        User user = new User(first_name.getText().toString(), last_name.getText().toString(), telephone.getText().toString(), _email.getText().toString());
+        User user = new User(UID,first_name.getText().toString(), last_name.getText().toString(), telephone.getText().toString(), _email.getText().toString());
         try {
             myRef.setValue(user);
             Toast.makeText(PersonalUserInfoActivity.this, "הידד הפרטים מעודכנים", Toast.LENGTH_SHORT).show();
@@ -208,7 +203,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String [] permissions, @NonNull int [] grantResults ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:

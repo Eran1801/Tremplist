@@ -9,14 +9,6 @@
     tools:context=".RegisterActivity">
 
 
-    <ImageView
-        android:id="@+id/window_for_picture"
-        android:layout_width="144dp"
-        android:layout_height="101dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:src="@drawable/logo_hitchhiker" />
-
     <LinearLayout
         android:layout_width="354dp"
         android:layout_height="544dp"
