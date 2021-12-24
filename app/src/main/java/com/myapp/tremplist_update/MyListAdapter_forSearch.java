@@ -1,6 +1,8 @@
 package com.myapp.tremplist_update;
 
+import android.app.Activity;
 import android.content.Context;
+import android.service.voice.VoiceInteractionSession;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyListAdapter_forSearch extends ArrayAdapter<String> {
@@ -18,12 +21,17 @@ public class MyListAdapter_forSearch extends ArrayAdapter<String> {
     private int layout;
     private int curr_position;
     List<Ride> rides;
+    Context ApplicationContext;
+    Activity activity;
 
-    public MyListAdapter_forSearch(@NonNull Context context, int resource, @NonNull List<String> objects, List<Ride> rides) {
+    public MyListAdapter_forSearch(@NonNull Context context, int resource, @NonNull List<String> objects, List<Ride> rides, Context ApplicationContext, Activity activity) {
         super(context, resource, objects);
         layout=resource;
         this.rides=rides;
+        this.ApplicationContext=ApplicationContext;
+        this.activity=activity;
     }
+
 
 
     @NonNull
@@ -31,6 +39,10 @@ public class MyListAdapter_forSearch extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         ViewHolder_search mainViewHolder=null;
         if(convertView==null){
+
+
+
+
             LayoutInflater inflater=LayoutInflater.from(getContext());
             convertView=inflater.inflate(layout, null, false);
             ViewHolder_search viewHolder=new ViewHolder_search();
@@ -45,7 +57,10 @@ public class MyListAdapter_forSearch extends ArrayAdapter<String> {
                     curr_ride.setFree_sits(free_sits-1);
                     fb = new FireBaseDBActivity();
                     fb.setContext(getContext());
+                    fb.setApplicationContext(ApplicationContext);
+                    fb.setActivity(activity);
                     fb.updateRideOnDB(curr_ride);
+
                 }
             });
             convertView.setTag(viewHolder);

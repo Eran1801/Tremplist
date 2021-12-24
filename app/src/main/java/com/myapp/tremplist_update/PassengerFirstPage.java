@@ -2,12 +2,9 @@ package com.myapp.tremplist_update;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 /*
 In this class we implement the Passenger HomePage
@@ -31,9 +28,9 @@ public class PassengerFirstPage extends AppCompatActivity {
         });
 
         My_ridesBtn.setOnClickListener(view -> {
-            System.out.println("111111111111");
             startActivity(new Intent(PassengerFirstPage.this, My_rides_Passenger_Activity.class));
         });
+
 
 
     }

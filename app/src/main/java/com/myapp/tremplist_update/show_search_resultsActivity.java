@@ -1,5 +1,7 @@
 package com.myapp.tremplist_update;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -61,9 +63,10 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.list_view);
         ridesList = new ArrayList<>();
+        Context ApplicationContext = getApplicationContext();
+        Activity activity = show_search_resultsActivity.this;
 
-
-        MyListAdapter_forSearch adapter = new MyListAdapter_forSearch(this, R.layout.list_item_search, ridesList, rides);
+        MyListAdapter_forSearch adapter = new MyListAdapter_forSearch(this, R.layout.list_item_search, ridesList, rides, ApplicationContext, activity);
         listView.setAdapter(adapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
