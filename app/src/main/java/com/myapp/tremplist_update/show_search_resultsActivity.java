@@ -63,7 +63,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
         ridesList = new ArrayList<>();
 
 
-        MyListAdapter_forTrempist adapter = new MyListAdapter_forTrempist(this, R.layout.list_item_trempist, ridesList, rides);
+        MyListAdapter_forSearch adapter = new MyListAdapter_forSearch(this, R.layout.list_item_search, ridesList, rides);
         listView.setAdapter(adapter);
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
