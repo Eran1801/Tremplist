@@ -46,11 +46,12 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
                 ridesList.clear();
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                    Ride ride = snapshot.getValue(Ride.class);
-
+                        Ride ride = snapshot.getValue(Ride.class);
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
-                    if (ride.getDriver().id.equals(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())) {
+                    String curr_id=mAuth.getCurrentUser().getUid();
+                    String driver_id=ride.getDriver().getId();
+                    if (driver_id.equals(curr_id)) {
                         String txt_to_add;
                         String dest_src = ride.getSrc_city();
                         if (!ride.getSrc_details().isEmpty())
@@ -61,13 +62,14 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
 
                         String available_sits = "\n" + "מקומות פנויים: " + ride.getFree_sits() + " מתוך " + ride.getSits();
 
+
                         String hour = "";
                         if (ride.getHour().getHour() < 10)
-                            hour += "0"+ride.getHour().getHour();
+                            hour += "0" + ride.getHour().getHour();
                         else
                             hour += ride.getHour().getHour() + ":";
                         if (ride.getHour().getMinute() < 10)
-                            hour += "0"+ride.getHour().getMinute();
+                            hour += "0" + ride.getHour().getMinute();
                         else hour += ride.getHour().getMinute();
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
