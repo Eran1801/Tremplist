@@ -28,6 +28,17 @@ public class User {
 
     }
 
+    // for update details
+
+    public static User create_user_for_personal_info(String id, String first_name, String last_name, String phone) {
+        User user = new User();
+        user.id = id;
+        user.first_name = first_name;
+        user.last_name = last_name;
+        user.phone = phone;
+        return user;
+    }
+
     public User(String first_name, String last_name, String phone, String email) {
         this.id = id;
         this.first_name = first_name;

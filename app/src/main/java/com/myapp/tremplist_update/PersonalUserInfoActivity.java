@@ -45,10 +45,12 @@ import java.util.Objects;
 public class PersonalUserInfoActivity extends AppCompatActivity {
 
     static final int PERMISSION_REQUEST_CODE = 200;
-    EditText first_name, last_name, telephone, _email;
+    EditText first_name, last_name, telephone;
     Button update;
     Button AddProfileImage;
     ImageView ProfilePicture;
+
+    FireBaseDBActivity fb;
 
     User user; //for profile picture
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -69,9 +71,8 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
         first_name = findViewById(R.id.personal_firstName);
         last_name = findViewById(R.id.personal_lastName);
         telephone = findViewById(R.id.personal_telephone);
-        _email = findViewById(R.id.personal_email);
 
-        user=null;
+        user = null;
 
         AddProfileImage = findViewById(R.id.take_picture);
         ProfilePicture = findViewById(R.id.profile_picture);
@@ -85,11 +86,10 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
                 first_name.setText(user.getFirst_name());
                 last_name.setText(user.getLast_name());
                 telephone.setText(user.getPhone());
-                _email.setText(user.getEmail());
 
                 try {
                     final File localFile = File.createTempFile("img", "jpg");
-                    storageReference.child(user.getEmail()).getFile(localFile).addOnSuccessListener(new OnSuccessListener< FileDownloadTask.TaskSnapshot >() {
+                    storageReference.child(user.getEmail()).getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
@@ -116,7 +116,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
         update.setOnClickListener(v -> saveUser(v));
 
         AddProfileImage.setOnClickListener(view -> {
-            if(user != null) {
+            if (user != null) {
                 if (checkPermission()) {
                     //main logic or main code
 
@@ -126,8 +126,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
                     requestPermission();
                 }
                 uploadImage(view);
-            }
-            else {
+            } else {
                 Toast.makeText(PersonalUserInfoActivity.this, "register user first then add a photo", Toast.LENGTH_SHORT).show();
             }
         });
@@ -136,25 +135,26 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
 
     public void saveUser(View view) {
-        User user = new User(UID,first_name.getText().toString(), last_name.getText().toString(), telephone.getText().toString(), _email.getText().toString());
+        User user = User.create_user_for_personal_info(UID, first_name.getText().toString(), last_name.getText().toString(), telephone.getText().toString());
         try {
             myRef.setValue(user);
+            fb.update_relevant_driver_details(user, UID);
             Toast.makeText(PersonalUserInfoActivity.this, "הידד הפרטים מעודכנים", Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void uploadImage(View v){
+    public void uploadImage(View v) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, 101);
     }
-    protected void onActivityResult(int rcode, int rscode, Intent data){
+
+    protected void onActivityResult(int rcode, int rscode, Intent data) {
         super.onActivityResult(rcode, rscode, data);
 
-        if(rscode == Activity.RESULT_OK){
-            if(rcode == 101){
+        if (rscode == Activity.RESULT_OK) {
+            if (rcode == 101) {
                 onCaptureImageResult(data);
             }
         }
@@ -172,7 +172,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
     private void uploadPhototofirebase(byte[] bb) {
         String email = user.getEmail();
-        StorageReference sr =  storage.child("profilePictures/"+email);
+        StorageReference sr = storage.child("profilePictures/" + email);
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -203,7 +203,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String [] permissions, @NonNull int [] grantResults ) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case PERMISSION_REQUEST_CODE:
