@@ -21,7 +21,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import java.util.Objects;
 
 public class FireBaseDBActivity extends FirebaseBaseModel {
-    String token_to_send_to="";
+    String token_to_send_to = "";
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     Context context;
     Context ApplicationContext;
@@ -84,8 +84,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
+                } else {
                     // Adding the driver to the ride
                     User Trempist = Objects.requireNonNull(task.getResult()).getValue(User.class);
                     curr_ride.add_to_trempists(Trempist);
@@ -107,7 +106,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                                             FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
                                                     TOKEN,
                                                     "מצטרפ/ת חדש/ה!",
-                                                    Trempist.getFirst_name()+" "+Trempist.getLast_name()+" הצטרפ/ה לנסיעה שלך",
+                                                    Trempist.getFirst_name() + " " + Trempist.getLast_name() + " הצטרפ/ה לנסיעה שלך",
                                                     ApplicationContext, activity);
                                             notificationsSender.SendNotifications();
 
@@ -138,8 +137,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
-                }
-                else {
+                } else {
                     // Adding the driver to the ride
                     User Trempist = Objects.requireNonNull(task.getResult()).getValue(User.class);
                     curr_ride.remove_from_Tremplists(Trempist);
@@ -160,7 +158,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                                             FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
                                                     TOKEN,
                                                     "ביטול הצטרפות",
-                                                    Trempist.getFirst_name()+" "+Trempist.getLast_name()+" ביטל את ההצטרפות לנסיעה שלך",
+                                                    Trempist.getFirst_name() + " " + Trempist.getLast_name() + " ביטל את ההצטרפות לנסיעה שלך",
                                                     ApplicationContext, activity);
                                             notificationsSender.SendNotifications();
 
@@ -188,7 +186,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
         myRef.child("rides").child(curr_ride.getId()).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                for (String trempist_id: curr_ride.getTrempists().keySet()){
+                for (String trempist_id : curr_ride.getTrempists().keySet()) {
                     myRef.child("tokens").child(trempist_id).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<DataSnapshot> task) {
@@ -200,7 +198,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                                 FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
                                         TOKEN,
                                         "ביטול נסיעה",
-                                        "): "+curr_ride.getDriver().getFirst_name()+" "+curr_ride.getDriver().getLast_name()+" ביטל את הנסיעה",
+                                        "): " + curr_ride.getDriver().getFirst_name() + " " + curr_ride.getDriver().getLast_name() + " ביטל את הנסיעה",
                                         ApplicationContext, activity);
                                 notificationsSender.SendNotifications();
 
@@ -219,34 +217,50 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        reference.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    Ride ride = dataSnapshot.getValue(Ride.class);
-                    assert ride != null; // make sure Ride not null
-                    User driver_to_change = ride.getDriver();
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    for (DataSnapshot rides : Objects.requireNonNull(task.getResult()).getChildren()) {
+                        for (DataSnapshot trempists : rides.getChildren()) {
+                            for (DataSnapshot tremp_user : trempists.getChildren()) {
 
-                    if (driver_to_change.getId().equals(UID)) {
-                        ride.setDriver(user_to_update);
+                                // Update driver details inside a ride
+                                Ride ride = rides.getValue(Ride.class);
+                                assert ride != null;
+                                User driver_to_change = ride.getDriver();
+                                String uid = driver_to_change.getId();
+                                if (uid.equals(UID)) {
+                                    String ride_id = rides.getKey();
+                                    assert ride_id != null;
+                                    reference.child(ride_id).child("driver").setValue(user_to_update);
+                                }
+
+                                // update a trempitss details inside a ride
+                                String user_id = tremp_user.getKey();
+                                System.out.println(user_id);
+                                assert user_id != null;
+                                if (user_id.equals(UID)) {
+                                    reference.child(Objects.requireNonNull(rides.getKey())).child("trempists")
+                                            .child(user_id).setValue(user_to_update);
+                                }
+                            }
+                        }
                     }
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
     }
 
     public void setActivity(Activity activity) {
-        this.activity=activity;
+        this.activity = activity;
     }
 
     public void setApplicationContext(Context applicationContext) {
-        this.ApplicationContext=ApplicationContext;
+        this.ApplicationContext = ApplicationContext;
     }
 }
 

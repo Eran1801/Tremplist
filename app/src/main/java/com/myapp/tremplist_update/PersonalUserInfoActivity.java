@@ -89,7 +89,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
                 try {
                     final File localFile = File.createTempFile("img", "jpg");
-                    storageReference.child(user.getEmail()).getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    storageReference.child(user.getFirst_name()).getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
@@ -138,6 +138,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
         User user = User.create_user_for_personal_info(UID, first_name.getText().toString(), last_name.getText().toString(), telephone.getText().toString());
         try {
             myRef.setValue(user);
+            fb = new FireBaseDBActivity();
             fb.update_relevant_driver_details(user, UID);
             Toast.makeText(PersonalUserInfoActivity.this, "הידד הפרטים מעודכנים", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
@@ -164,15 +165,15 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
         Bitmap bit = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        byte bb[] = bytes.toByteArray();
+        byte [] bb = bytes.toByteArray();
         ProfilePicture.setImageBitmap(bit);
 
         uploadPhototofirebase(bb);
     }
 
     private void uploadPhototofirebase(byte[] bb) {
-        String email = user.getEmail();
-        StorageReference sr = storage.child("profilePictures/" + email);
+        String first_name = user.getFirst_name();
+        StorageReference sr = storage.child("profilePictures/" + first_name);
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
