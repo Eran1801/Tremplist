@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -16,6 +16,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.myapp.tremplist_update.R;
+import com.myapp.tremplist_update.model.Date;
+import com.myapp.tremplist_update.model.Hour;
 
 import java.util.Calendar;
 import java.util.Objects;

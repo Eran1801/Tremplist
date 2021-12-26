@@ -20,63 +20,63 @@
         android:label="TrempList">
 
         <activity
-            android:name=".PersonalUserInfoActivity"
+            android:name=".UI.PersonalUserInfoActivity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="update details"
-            android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
+            android:parentActivityName="com.myapp.tremplist_update.UI.MainActivity"/>
 
         <activity
-            android:name=".DriverFirstPage"
+            android:name=".UI.DriverFirstPage"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="Driver Page"
-            android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
+            android:parentActivityName="com.myapp.tremplist_update.UI.MainActivity"/>
 
         <activity
-            android:name=".Publish_activity"
+            android:name=".UI.Publish_activity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="Publish ride"
-            android:parentActivityName=".DriverFirstPage"/>
+            android:parentActivityName=".UI.DriverFirstPage"/>
 
         <activity
-            android:name=".My_rides_Driver_Activity"
+            android:name=".UI.My_rides_Driver_Activity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".DriverFirstPage"/>
+            android:parentActivityName=".UI.DriverFirstPage"/>
 
         <activity
-            android:name=".My_rides_Passenger_Activity"
+            android:name=".UI.My_rides_Passenger_Activity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".PassengerFirstPage"/>
+            android:parentActivityName=".UI.PassengerFirstPage"/>
 
         <activity
-            android:name=".PassengerFirstPage"
+            android:name=".UI.PassengerFirstPage"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="Passenger Page"
-            android:parentActivityName="com.myapp.tremplist_update.MainActivity"/>
+            android:parentActivityName="com.myapp.tremplist_update.UI.MainActivity"/>
 
         <activity
-            android:name=".Search_ridesActivity"
+            android:name=".UI.Search_ridesActivity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="Search ride"
-            android:parentActivityName=".PassengerFirstPage"/>
+            android:parentActivityName=".UI.PassengerFirstPage"/>
 
         <activity
-            android:name=".show_search_resultsActivity"
+            android:name=".UI.show_search_resultsActivity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="Rides"
-            android:parentActivityName=".Search_ridesActivity"/>
+            android:parentActivityName=".UI.Search_ridesActivity"/>
 
         <service
-            android:name=".FirebaseMessagingService"
+            android:name=".fireBase.FirebaseMessagingService"
             android:permission="TODO"
             tools:ignore="ExportedService"
             android:exported="false">
@@ -85,13 +85,13 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".LoginActivity"/>
-        <activity android:name=".ForgotPasswordActivity"/>
+        <activity android:name=".UI.LoginActivity"/>
+        <activity android:name=".UI.ForgotPasswordActivity"/>
 
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".UI.RegisterActivity"/>
+        <activity android:name=".UI.MainActivity"/>
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".UI.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/AppTheme.Splash" >
             <intent-filter>

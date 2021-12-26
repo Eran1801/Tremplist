@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

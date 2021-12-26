@@ -1,6 +1,4 @@
-package com.myapp.tremplist_update;
-
-import java.util.Comparator;
+package com.myapp.tremplist_update.model;
 
 public class Hour implements Comparable<Hour> {
     private int hour;

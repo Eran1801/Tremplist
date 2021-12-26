@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.myapp.tremplist_update.R;
+import com.myapp.tremplist_update.model.Date;
+import com.myapp.tremplist_update.model.Hour;
+import com.myapp.tremplist_update.model.Ride;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

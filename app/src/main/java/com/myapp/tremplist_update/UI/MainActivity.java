@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.myapp.tremplist_update.R;
 
 
 // This is the main screen after Login to the app

@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.fireBase;
 
 import android.app.Activity;
 import android.content.Context;
@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.myapp.tremplist_update.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,10 +1,10 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.model;
 
 import androidx.annotation.NonNull;
 
 public class User {
     private String first_name, last_name, phone, password, email;
-    String id;
+    public String id;
 
 
     public User() {

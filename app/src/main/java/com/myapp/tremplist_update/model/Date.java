@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.model;
 
 public class Date implements Comparable<Date> {
     private int day;

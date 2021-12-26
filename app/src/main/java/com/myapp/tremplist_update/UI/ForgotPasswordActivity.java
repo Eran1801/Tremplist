@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.myapp.tremplist_update.R;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 

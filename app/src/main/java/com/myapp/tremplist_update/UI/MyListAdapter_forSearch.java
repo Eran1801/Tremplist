@@ -1,8 +1,7 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.app.Activity;
 import android.content.Context;
-import android.service.voice.VoiceInteractionSession;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
+import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
+import com.myapp.tremplist_update.R;
+import com.myapp.tremplist_update.model.Ride;
+
 import java.util.List;
 
 public class MyListAdapter_forSearch extends ArrayAdapter<String> {

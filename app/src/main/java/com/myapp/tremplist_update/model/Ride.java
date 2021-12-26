@@ -1,12 +1,8 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.model;
 
 // In this class we implement the Ride class
 
-import com.google.firebase.database.collection.ArraySortedMap;
-
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 public class Ride {

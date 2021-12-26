@@ -1,10 +1,12 @@
-package com.myapp.tremplist_update;
+package com.myapp.tremplist_update.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.myapp.tremplist_update.R;
 
 public class DriverFirstPage extends AppCompatActivity {
     Button publish_rideBtn;
