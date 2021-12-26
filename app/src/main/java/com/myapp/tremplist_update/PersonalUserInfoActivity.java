@@ -22,8 +22,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.storage.images.FirebaseImageLoader;
+//import com.bumptech.glide.Glide;
+//import com.firebase.ui.storage.images.FirebaseImageLoader;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -89,7 +89,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
                 try {
                     final File localFile = File.createTempFile("img", "jpg");
-                    storageReference.child(user.getFirst_name()).getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    storageReference.child(Objects.requireNonNull(mAuth.getUid())).getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                             my_image = BitmapFactory.decodeFile(localFile.getAbsolutePath());
@@ -173,7 +173,7 @@ public class PersonalUserInfoActivity extends AppCompatActivity {
 
     private void uploadPhototofirebase(byte[] bb) {
         String first_name = user.getFirst_name();
-        StorageReference sr = storage.child("profilePictures/" + first_name);
+        StorageReference sr = storage.child("profilePictures/" + mAuth.getUid());
         sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {

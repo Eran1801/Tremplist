@@ -2,10 +2,13 @@ package com.myapp.tremplist_update;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -44,6 +47,7 @@ public class RegisterActivity<privete> extends AppCompatActivity {
 
     FirebaseDatabase rootNode;
     DatabaseReference reference;
+    StorageReference storage = FirebaseStorage.getInstance().getReference();
 
     TextInputEditText etRegEmail;
     TextInputEditText etRegPassword;
@@ -51,12 +55,15 @@ public class RegisterActivity<privete> extends AppCompatActivity {
     TextInputEditText etRegLastName;
     TextInputEditText etRegTelephone;
 
+    byte [] bb;
 
     TextView tvLoginHere; // if you already register and want to login
     Button btnRegister;
+    Button profile_picture;
 
     FirebaseAuth mAuth;
 
+    static final int PERMISSION_REQUEST_CODE = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +79,7 @@ public class RegisterActivity<privete> extends AppCompatActivity {
 
         tvLoginHere = findViewById(R.id.tvLoginHere);
         btnRegister = findViewById(R.id.btnRegister);
+        profile_picture = findViewById(R.id.camera);
 
 
         mAuth = FirebaseAuth.getInstance();
@@ -83,7 +91,79 @@ public class RegisterActivity<privete> extends AppCompatActivity {
             createUser();
         });
 
+        profile_picture.setOnClickListener(view ->{
+            uploadImage(view);
+        });
 
+
+    }
+    public void uploadImage(View v) {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, 101);
+    }
+
+    protected void onActivityResult(int rcode, int rscode, Intent data) {
+        super.onActivityResult(rcode, rscode, data);
+        checkPermission();
+        if (rscode == Activity.RESULT_OK) {
+            if (rcode == 101) {
+                onCaptureImageResult(data);
+            }
+        }
+    }
+
+    private void onCaptureImageResult(Intent data) {
+        Bitmap bit = (Bitmap) data.getExtras().get("data");
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        bit.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        bb = bytes.toByteArray();
+        //TODO: put image on screen
+    }
+
+    private boolean checkPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            return false;
+        }
+        return true;
+    }
+
+    private void requestPermission() {
+
+        ActivityCompat.requestPermissions(this,
+                new String[]{Manifest.permission.CAMERA},
+                PERMISSION_REQUEST_CODE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_CODE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(), "Permission Granted", Toast.LENGTH_SHORT).show();
+
+                    // main logic
+                } else {
+                    Toast.makeText(getApplicationContext(), "Permission Denied", Toast.LENGTH_SHORT).show();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                                != PackageManager.PERMISSION_GRANTED) {
+                            showMessageOKCancel("You need to allow access permissions",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                                                requestPermission();
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                }
+                break;
+        }
     }
 
 
@@ -126,6 +206,22 @@ public class RegisterActivity<privete> extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Toast.makeText(RegisterActivity.this, "User registered successfully", Toast.LENGTH_SHORT).show();
                         register_user_to_Database(Objects.requireNonNull(mAuth.getCurrentUser()).getUid(), firstName,lastName,telephone,email);
+
+                        if (bb!=null) {
+                            StorageReference sr = storage.child("profilePictures/" + mAuth.getUid());
+                            sr.putBytes(bb).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(RegisterActivity.this, "photo update to DB", Toast.LENGTH_SHORT).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(RegisterActivity.this, "Failed upload", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, "Registration Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
@@ -141,7 +237,14 @@ public class RegisterActivity<privete> extends AppCompatActivity {
         FireBaseDBActivity fb = new FireBaseDBActivity();
         fb.addUserToDB(user);
     }
-
+    private void showMessageOKCancel(String message, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(RegisterActivity.this)
+                .setMessage(message)
+                .setPositiveButton("OK", okListener)
+                .setNegativeButton("Cancel", null)
+                .create()
+                .show();
+    }
 
 
 
