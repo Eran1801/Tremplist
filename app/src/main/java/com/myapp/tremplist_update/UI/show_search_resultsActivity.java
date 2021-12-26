@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +23,7 @@ import com.myapp.tremplist_update.model.Ride;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 // In this class we implement the search result that will show when a passenger want to find a ride
 
@@ -34,6 +37,8 @@ public class show_search_resultsActivity extends AppCompatActivity {
     ListView listView;
     List<Ride> rides=new LinkedList<>();
     ArrayList<String> ridesList;
+
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 //    public static void setRideToJoin(int position) {
 //        Ride ride_to_join =new Ride(rides.get(position));
@@ -89,7 +94,8 @@ public class show_search_resultsActivity extends AppCompatActivity {
                     if (ride.getFree_sits()>0 && ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
                             && ((ride.getDate().compareTo(date_from) > 0 || (ride.getDate().compareTo(date_from) == 0 && ride.getHour().compareTo(hour_from) >= 0))
                             && (ride.getDate().compareTo(date_to) < 0
-                            || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0)))) {
+                            || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0))) &&
+                            !ride.getDriver().getId().equals(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())) {
 
                         String ride_key= snapshot.getKey();
                         ride.setId(ride_key);
@@ -109,12 +115,11 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
                         String hour = "";
                         if (ride.getHour().getHour() < 10)
-                            hour += "0"+ride.getHour().getHour();
-                        else
-                            hour += ride.getHour().getHour() + ":";
+                            hour += "0";
+                        hour += ride.getHour().getHour() + ":";
                         if (ride.getHour().getMinute() < 10)
-                            hour += "0"+ride.getHour().getMinute();
-                        else hour += ride.getHour().getMinute();
+                            hour += "0";
+                        hour += ride.getHour().getMinute();
 
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
@@ -133,6 +138,9 @@ public class show_search_resultsActivity extends AppCompatActivity {
                         ridesList.add(txt_to_add);
                     }
                 }
+                if(ridesList.size() == 0)
+                    Toast.makeText(show_search_resultsActivity.this, "No rides found!", Toast.LENGTH_SHORT).show();
+
                 adapter.notifyDataSetChanged();
             }
 

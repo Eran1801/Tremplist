@@ -18,7 +18,7 @@ import com.myapp.tremplist_update.model.Ride;
 
 import java.util.List;
 
-public class MyListAdapter_forSearch extends ArrayAdapter<String> {
+public class    MyListAdapter_forSearch extends ArrayAdapter<String> {
     FireBaseDBActivity fb;
     private int layout;
     private int curr_position;

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,12 +78,11 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
 
                         String hour = "";
                         if (ride.getHour().getHour() < 10)
-                            hour += "0" + ride.getHour().getHour();
-                        else
-                            hour += ride.getHour().getHour() + ":";
+                            hour += "0";
+                        hour += ride.getHour().getHour() + ":";
                         if (ride.getHour().getMinute() < 10)
-                            hour += "0" + ride.getHour().getMinute();
-                        else hour += ride.getHour().getMinute();
+                            hour += "0";
+                        hour += ride.getHour().getMinute();
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
 
@@ -100,6 +100,9 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
                         ridesList.add(txt_to_add);
                     }
                 }
+                if(ridesList.size() == 0)
+                    Toast.makeText(My_rides_Driver_Activity.this, "No rides found!", Toast.LENGTH_SHORT).show();
+
                 adapter.notifyDataSetChanged();
             }
 

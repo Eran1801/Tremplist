@@ -67,7 +67,7 @@ public class Ride {
         this.date = new Date(other.date);
         this.hour =new Hour(other.hour);
         this.sits = other.sits;
-        this.free_sits = other.sits;
+        this.free_sits = other.free_sits;
         this.ride_cost = other.ride_cost;
         this.src_details = other.src_details;
         this.dst_details = other.dst_details;
