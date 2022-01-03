@@ -64,6 +64,8 @@ public class RegisterActivity<privete> extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        int requestCode=101;
+        ActivityCompat.requestPermissions(RegisterActivity.this, new String[] {Manifest.permission.CAMERA}, requestCode);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
