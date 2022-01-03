@@ -29,9 +29,9 @@
         android:layout_marginLeft="64dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textColor="@color/black"
         android:layout_toEndOf="@+id/user_im"
-        android:layout_toRightOf="@+id/user_im" />
+        android:layout_toRightOf="@+id/user_im"
+        android:textColor="@color/black" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/join_ride"

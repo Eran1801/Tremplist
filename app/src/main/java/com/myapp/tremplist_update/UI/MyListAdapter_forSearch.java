@@ -50,6 +50,7 @@ public class    MyListAdapter_forSearch extends ArrayAdapter<String> {
             ViewHolder_search viewHolder=new ViewHolder_search();
             viewHolder.user_img=(ImageView) convertView.findViewById(R.id.user_im);
             viewHolder.ride_details=(TextView) convertView.findViewById(R.id.ride_details);
+
             viewHolder.join_ride=(androidx.appcompat.widget.AppCompatButton) convertView.findViewById(R.id.join_ride);
             viewHolder.join_ride.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,7 +63,6 @@ public class    MyListAdapter_forSearch extends ArrayAdapter<String> {
                     fb.setApplicationContext(ApplicationContext);
                     fb.setActivity(activity);
                     fb.updateRideOnDB_join(curr_ride);
-
                 }
             });
             convertView.setTag(viewHolder);
@@ -82,7 +82,7 @@ public class    MyListAdapter_forSearch extends ArrayAdapter<String> {
 
 class ViewHolder_search{
     ImageView user_img;
-    TextView ride_details;
+    TextView ride_details, driver_rate;
     androidx.appcompat.widget.AppCompatButton join_ride;
 
 

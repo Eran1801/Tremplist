@@ -113,6 +113,14 @@ public class show_search_resultsActivity extends AppCompatActivity {
                         String available_sits = "\n" + "מקומות פנויים: " + ride.getFree_sits() + " מתוך " + ride.getSits();
                         String Driver = "\nנהג/ת: " + ride.getDriver().getFirst_name() + " " + ride.getDriver().getLast_name()
                                 + "\nמספר פלאפון: " + ride.getDriver().getPhone();
+                        try{
+                            int rate = Math.round(ride.getDriver().getSum_rate() / ride.getDriver().getCount_rate());
+                            Driver += "\nדירוג נהג: ";
+                            Driver += ""+rate;
+                            Driver += "/5";
+                        }catch (Exception exc){
+
+                        }
 
                         String hour = "";
                         if (ride.getHour().getHour() < 10)
@@ -124,7 +132,6 @@ public class show_search_resultsActivity extends AppCompatActivity {
 
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
 
-
                         String car_details = "";
                         if (!ride.getCar_color().isEmpty() && !ride.getCar_type().isEmpty())
                             car_details = "\nפרטי הרכב: " + ride.getCar_type() + " ," + ride.getCar_color();
@@ -132,6 +139,8 @@ public class show_search_resultsActivity extends AppCompatActivity {
                             car_details = "\nסוג הרכב: " + ride.getCar_type();
                         else if (!ride.getCar_color().isEmpty())
                             car_details = "\nצבע הרכב: " + ride.getCar_color();
+
+
 
 
                         txt_to_add = dest_src + date_hour + available_sits + car_details + Driver;

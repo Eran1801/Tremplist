@@ -295,8 +295,8 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                     User driver = Objects.requireNonNull(task.getResult()).getValue(User.class);
                     try {
                         if (driver.getCount_rate() > 0) {
-                            double totalRate = driver.getSum_rate() / driver.getCount_rate();
-                            rate.setText(String.format("%.2f", totalRate));
+                            int totalRate = Math.round(driver.getSum_rate() / driver.getCount_rate());
+                            rate.setText(totalRate+"/5");
                         }
                     }catch(Exception exc){
                         Log.e("Old account", "Error getting data - need to re-register", exc);
@@ -305,7 +305,6 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
             }
         });
     }
-
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
