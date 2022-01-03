@@ -15,6 +15,7 @@ import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 public class DriverFirstPage extends AppCompatActivity {
     Button publish_rideBtn;
     Button myRidesBtn;
+    Button Mywaiting_list;
     TextView rate;
 
     FirebaseAuth mauth;
@@ -32,6 +33,8 @@ public class DriverFirstPage extends AppCompatActivity {
 
         publish_rideBtn = (Button)findViewById(R.id.publish_ride);
         myRidesBtn = (Button)findViewById(R.id.driver_my_rides);
+        Mywaiting_list = (Button)findViewById(R.id.waiting_to_approve);
+
         rate = findViewById(R.id.rate);
         fb.showRate(rate);
 
@@ -41,6 +44,10 @@ public class DriverFirstPage extends AppCompatActivity {
 
         myRidesBtn.setOnClickListener(view -> {
             startActivity(new Intent(DriverFirstPage.this, My_rides_Driver_Activity.class));
+        });
+
+        Mywaiting_list.setOnClickListener(view -> {
+            startActivity(new Intent(DriverFirstPage.this, driver_waiting_listActivity.class));
         });
 
 

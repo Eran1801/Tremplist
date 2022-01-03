@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.myapp.tremplist_update.UI.PassengerFirstPage;
+import com.myapp.tremplist_update.UI.driver_waiting_listActivity;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
@@ -44,7 +45,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         int resourceImage = getResources().getIdentifier(remoteMessage.getNotification().getIcon(), "drawable", getPackageName());
 
-
+//        Intent intent=new Intent(getApplicationContext(),  driver_waiting_listActivity.class);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(), 1, intent, PendingIntent.FLAG_ONE_SHOT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -54,10 +57,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 //            builder.setSmallIcon(R.drawable.icon_kritikar);
             builder.setSmallIcon(resourceImage);
         }
+//        builder.setContentIntent(pendingIntent);
 
 
-
-        Intent resultIntent = new Intent(this, PassengerFirstPage.class);
+        Intent resultIntent = new Intent(this, driver_waiting_listActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 1, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 

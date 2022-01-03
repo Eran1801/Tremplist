@@ -48,6 +48,13 @@
             android:parentActivityName=".UI.DriverFirstPage"/>
 
         <activity
+            android:name=".UI.driver_waiting_listActivity"
+            android:launchMode="singleTop"
+            android:exported="true"
+            android:label="My rides"
+            android:parentActivityName=".UI.DriverFirstPage"/>
+
+        <activity
             android:name=".UI.My_rides_Passenger_Activity"
             android:launchMode="singleTop"
             android:exported="true"

@@ -91,40 +91,44 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                 } else {
                     // Adding the driver to the ride
                     User Trempist = Objects.requireNonNull(task.getResult()).getValue(User.class);
-                    curr_ride.add_to_trempists(Trempist);
-                    myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(context, "you are successfully joined to the ride", Toast.LENGTH_SHORT).show();
+                    if (!curr_ride.add_to_waiting_list(Trempist)) {
+                        Toast.makeText(context, "כבר שלחת בקשה להצטרף לנסיעה זו", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(context, "הבקשה שלך נשלחה לנהג בהצלחה", Toast.LENGTH_SHORT).show();
 
-                                String driver_UID = curr_ride.getDriver().id;
-                                myRef.child("tokens").child(driver_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
-                                        if (!task.isSuccessful()) {
-                                            Log.e("firebase", "Error getting data", task.getException());
-                                        } else {
-                                            // Adding the driver to the ride
-                                            String TOKEN = Objects.requireNonNull(task.getResult()).getValue(String.class);
-                                            FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
-                                                    TOKEN,
-                                                    "מצטרפ/ת חדש/ה!",
-                                                    Trempist.getFirst_name() + " " + Trempist.getLast_name() + " הצטרפ/ה לנסיעה שלך",
-                                                    ApplicationContext, activity);
-                                            notificationsSender.SendNotifications();
+                                    String driver_UID = curr_ride.getDriver().id;
+                                    myRef.child("tokens").child(driver_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if (!task.isSuccessful()) {
+                                                Log.e("firebase", "Error getting data", task.getException());
+                                            } else {
+                                                // Adding the driver to the ride
+                                                String TOKEN = Objects.requireNonNull(task.getResult()).getValue(String.class);
+                                                FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                                        TOKEN,
+                                                        "מצטרפ/ת חדש/ה!",
+                                                        Trempist.getFirst_name() + " " + Trempist.getLast_name() + " מעוניינ/ת להצטרף לנסיעה שלך",
+                                                        ApplicationContext, activity);
+                                                notificationsSender.SendNotifications();
 
+                                            }
                                         }
-                                    }
 
-                                });
+                                    });
 
 
-                            } else {
-                                Toast.makeText(context, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
                 }
             }
         });
@@ -305,6 +309,101 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
             }
         });
     }
+
+    public void approve_joining(Ride curr_ride, User curr_trempist) {
+        myRef.child("rides").child(curr_ride.getId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    // Adding the driver to the ride
+//                    Ride ride = Objects.requireNonNull(task.getResult()).getValue(Ride.class);
+                    curr_ride.add_to_trempists(curr_trempist);
+                    curr_ride.remove_from_waitingList(curr_trempist);
+
+                    myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                myRef.child("tokens").child(curr_trempist.getId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (!task.isSuccessful()) {
+                                            Log.e("firebase", "Error getting data", task.getException());
+                                        } else {
+                                            // Adding the driver to the ride
+                                            String TOKEN = Objects.requireNonNull(task.getResult()).getValue(String.class);
+                                            FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                                    TOKEN,
+                                                    "אישור הצטרפות!",
+                                                    curr_ride.getDriver().getFirst_name() + " " + curr_ride.getDriver().getLast_name() + " אישר את ההצטרפות שלך",
+                                                    ApplicationContext, activity);
+                                            notificationsSender.SendNotifications();
+
+                                        }
+                                    }
+
+                                });
+
+
+                            } else {
+                                Toast.makeText(context, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    public void reject_joining(Ride curr_ride, User curr_trempist) {
+        myRef.child("rides").child(curr_ride.getId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    // Adding the driver to the ride
+//                    Ride ride = Objects.requireNonNull(task.getResult()).getValue(Ride.class);
+                    curr_ride.remove_from_waitingList(curr_trempist);
+
+                    myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                myRef.child("tokens").child(curr_trempist.getId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (!task.isSuccessful()) {
+                                            Log.e("firebase", "Error getting data", task.getException());
+                                        } else {
+                                            // Adding the driver to the ride
+                                            String TOKEN = Objects.requireNonNull(task.getResult()).getValue(String.class);
+                                            FcmNotificationsSender notificationsSender = new FcmNotificationsSender(
+                                                    TOKEN,
+                                                    "דחיית הצטרפות",
+                                                    curr_ride.getDriver().getFirst_name() + " " + curr_ride.getDriver().getLast_name() + " דחה/תה את ההצטרפות שלך",
+                                                    ApplicationContext, activity);
+                                            notificationsSender.SendNotifications();
+
+                                        }
+                                    }
+
+                                });
+
+
+                            } else {
+                                Toast.makeText(context, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
@@ -312,5 +411,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
     public void setApplicationContext(Context applicationContext) {
         this.ApplicationContext = ApplicationContext;
     }
+
+
 }
 

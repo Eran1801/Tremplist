@@ -27,8 +27,12 @@ public class Ride {
     private User Driver;
     private Map<String , User> trempists; // will be tha list of passengers in the Ride
     private Map<String, User> user_rate;
+    private Map<String, User> waiting_list;
 
     public Ride() {
+        this.user_rate = new HashMap<>();
+        this.waiting_list = new HashMap<>();
+        this.user_rate = new HashMap<>();
     }
 
     public Ride(String src, String dst, Date date, Hour hour, int sits, int cost) {
@@ -46,6 +50,7 @@ public class Ride {
         this.trempists=new HashMap<>();
         this.Driver=new User();
         this.user_rate = new HashMap<>();
+        this.waiting_list = new HashMap<>();
     }
 
     public Ride(String src, String src_details, String dst, String dst_details, Date date, Hour hour, int sits, int cost, String car_color, String car_type) {
@@ -63,6 +68,7 @@ public class Ride {
         this.trempists=new HashMap<>();
         this.Driver=new User();
         this.user_rate = new HashMap<>();
+        this.waiting_list = new HashMap<>();
     }
 
     public Ride(Ride other) {
@@ -87,6 +93,9 @@ public class Ride {
         if(other.user_rate != null)
             this.user_rate = new HashMap<>(other.user_rate);
         else this.user_rate = new HashMap<>();
+        if(other.waiting_list != null)
+            this.waiting_list = new HashMap<>(other.waiting_list);
+        else this.waiting_list= new HashMap<>();
     }
 
 
@@ -193,12 +202,22 @@ public class Ride {
     public void add_to_trempists(User trempist){
         trempists.put(trempist.id, trempist);
     }
+
+    public boolean add_to_waiting_list(User trempist){
+        if(waiting_list.containsKey(trempist.getId()))
+            return false;
+        waiting_list.put(trempist.id, trempist);
+        return true;
+    }
     public void add_rated(User trempist){
         user_rate.put(trempist.id, trempist);
     }
 
     public void remove_from_Tremplists(User trempist) {
         trempists.remove(trempist.id);
+    }
+    public void remove_from_waitingList(User trempist) {
+        waiting_list.remove(trempist.id);
     }
 
     public void setTrempists(Map<String, User> trempists){
@@ -221,6 +240,14 @@ public class Ride {
         this.user_rate = user_rate;
     }
 
+    public Map<String, User> getWaiting_list() {
+        return waiting_list;
+    }
+
+    public void setWaiting_list(Map<String, User> waiting_list) {
+        this.waiting_list = waiting_list;
+    }
+
     @Override
     public String toString() {
         return "Ride{" +
@@ -240,6 +267,7 @@ public class Ride {
                 ", trempists=" + trempists +
                 '}';
     }
+
 
 
 }

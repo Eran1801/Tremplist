@@ -2,8 +2,11 @@ package com.myapp.tremplist_update.UI;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,87 +19,66 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.myapp.tremplist_update.R;
-import com.myapp.tremplist_update.model.Date;
-import com.myapp.tremplist_update.model.Hour;
+import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 import com.myapp.tremplist_update.model.Ride;
+import com.myapp.tremplist_update.model.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
-// In this class we implement the search result that will show when a passenger want to find a ride
+import javax.xml.transform.Source;
 
-public class show_search_resultsActivity extends AppCompatActivity {
-    private Hour hour_from;
-    private Hour hour_to;
-    private Date date_from;
-    private Date date_to;
-    private String from;
-    private String to;
+public class driver_waiting_listActivity extends AppCompatActivity {
     ListView listView;
-    List<Ride> rides=new LinkedList<>();
+    FirebaseAuth mAuth;
     ArrayList<String> ridesList;
+    List<Ride> rides=new LinkedList<>();
+    List<User> trempists=new LinkedList<>();
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results);
 
-        from = getIntent().getStringExtra("src_city");
-        to = getIntent().getStringExtra("dest_city");
-
-        /*
-        Here we store the date and the hour in a String array and each index store a part of the date and hour
-        d1 = [day,month,year]
-        h1 = [ hour, minutes]
-         */
-
-        String[] d1 = getIntent().getStringExtra("date_from").split("/");
-        String[] d2 = getIntent().getStringExtra("date_to").split("/");
-        String[] h1 = getIntent().getStringExtra("hour_from").split(":");
-        String[] h2 = getIntent().getStringExtra("hour_to").split(":");
-
-        date_from = new Date(Integer.parseInt(d1[0]), Integer.parseInt(d1[1]), Integer.parseInt(d1[2]));
-        date_to = new Date(Integer.parseInt(d2[0]), Integer.parseInt(d2[1]), Integer.parseInt(d2[2]));
-        hour_from = new Hour(Integer.parseInt(h1[0]), Integer.parseInt(h1[1]));
-        hour_to = new Hour(Integer.parseInt(h2[0]), Integer.parseInt(h2[1]));
-
-
         listView = findViewById(R.id.list_view);
+
         ridesList = new ArrayList<>();
         Context ApplicationContext = getApplicationContext();
-        Activity activity = show_search_resultsActivity.this;
+        Activity activity = driver_waiting_listActivity.this;
 
-        MyListAdapter_forSearch adapter = new MyListAdapter_forSearch(this, R.layout.list_item_search, ridesList, rides, ApplicationContext, activity);
+        MyListAdapter_forWaitingList adapter = new MyListAdapter_forWaitingList(this, R.layout.list_item_waitinglist, ridesList, rides, trempists, ApplicationContext, activity);
         listView.setAdapter(adapter);
 
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
 
-        reference.addValueEventListener(new ValueEventListener() {
+        mAuth = FirebaseAuth.getInstance();
+        DatabaseReference referenceRide = FirebaseDatabase.getInstance().getReference().child("rides");
+
+        referenceRide.addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                 // if something has left from the last use
                 ridesList.clear();
+                trempists.clear();
                 rides.clear();
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
+                    System.out.println("key= "+snapshot.getKey());
+//                    if(snapshot.getKey().equals("-MsVqRxxBuZJaQmxrWNf")){
+//                        System.out.println("here");
+//                    }
                     Ride ride = snapshot.getValue(Ride.class);
-                    System.out.println(ride.toString());
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
-                    if (ride.getFree_sits()>0 && ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)
-                            && ((ride.getDate().compareTo(date_from) > 0 || (ride.getDate().compareTo(date_from) == 0 && ride.getHour().compareTo(hour_from) >= 0))
-                            && (ride.getDate().compareTo(date_to) < 0
-                            || (ride.getDate().compareTo(date_to) == 0 && ride.getHour().compareTo(hour_to) < 0))) &&
-                            !ride.getDriver().getId().equals(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())) {
+                    String curr_id=mAuth.getCurrentUser().getUid();
+                    String driver_id=ride.getDriver().getId();
+                    Map<String, User> waiting_list=new HashMap<>(ride.getWaiting_list());
 
-                        String ride_key= snapshot.getKey();
-                        ride.setId(ride_key);
-                        rides.add(ride);
-
+                    if (driver_id.equals(curr_id) && waiting_list.size()>0) {
                         String txt_to_add;
                         String dest_src = ride.getSrc_city();
                         if (!ride.getSrc_details().isEmpty())
@@ -106,16 +88,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
                             dest_src += "(" + ride.getDst_details() + ")";
 
                         String available_sits = "\n" + "מקומות פנויים: " + ride.getFree_sits() + " מתוך " + ride.getSits();
-                        String Driver = "\nנהג/ת: " + ride.getDriver().getFirst_name() + " " + ride.getDriver().getLast_name()
-                                + "\nמספר פלאפון: " + ride.getDriver().getPhone();
-                        try{
-                            int rate = Math.round(ride.getDriver().getSum_rate() / ride.getDriver().getCount_rate());
-                            Driver += "\nדירוג נהג: ";
-                            Driver += ""+rate;
-                            Driver += "/5";
-                        }catch (Exception exc){
 
-                        }
 
                         String hour = "";
                         if (ride.getHour().getHour() < 10)
@@ -124,8 +97,8 @@ public class show_search_resultsActivity extends AppCompatActivity {
                         if (ride.getHour().getMinute() < 10)
                             hour += "0";
                         hour += ride.getHour().getMinute();
-
                         String date_hour = "\n" + hour + " ," + ride.getDate().getDay() + "/" + ride.getDate().getMonth() + "/" + ride.getDate().getYear();
+
 
                         String car_details = "";
                         if (!ride.getCar_color().isEmpty() && !ride.getCar_type().isEmpty())
@@ -136,15 +109,18 @@ public class show_search_resultsActivity extends AppCompatActivity {
                             car_details = "\nצבע הרכב: " + ride.getCar_color();
 
 
-
-
-                        txt_to_add = dest_src + date_hour + available_sits + car_details + Driver;
+                        txt_to_add = dest_src + date_hour + available_sits + car_details;
+                        for(User u: waiting_list.values()){
+                            rides.add(ride);
+                            trempists.add(u);
+                            String trempist_details="\n"+"שם הטרמפיסט: "+u.getFirst_name()+" "+u.getLast_name();
+                            ridesList.add(txt_to_add+trempist_details);
+                        }
                         //add the current ride (as a string) to the list
-                        ridesList.add(txt_to_add);
                     }
                 }
                 if(ridesList.size() == 0)
-                    Toast.makeText(show_search_resultsActivity.this, "No rides found!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(driver_waiting_listActivity.this, "אין בקשות לאישור", Toast.LENGTH_SHORT).show();
 
                 adapter.notifyDataSetChanged();
             }
