@@ -3,6 +3,7 @@ package com.myapp.tremplist_update.UI;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -170,7 +171,6 @@ public class Publish_activity extends AppCompatActivity implements DatePickerDia
                         // Sending the ride to a function that will add it to the Database
                         fb.addRideToDB(ride);
 //                        startActivity(new Intent(Publish_activity.this,DriverFirstPage.class));
-
 
                     }
                 }

@@ -81,8 +81,6 @@ public class RegisterActivity<privete> extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-
-
         // Register button
         btnRegister.setOnClickListener(view -> {
             createUser();
@@ -90,6 +88,13 @@ public class RegisterActivity<privete> extends AppCompatActivity {
 
         profile_picture.setOnClickListener(view ->{
             uploadImage(view);
+        });
+
+        tvLoginHere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+            }
         });
 
 
