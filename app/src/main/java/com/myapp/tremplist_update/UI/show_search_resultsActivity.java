@@ -89,6 +89,7 @@ public class show_search_resultsActivity extends AppCompatActivity {
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
                     Ride ride = snapshot.getValue(Ride.class);
+                    System.out.println(ride.toString());
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
                     if (ride.getFree_sits()>0 && ride.getSrc_city().equals(from) && ride.getDst_city().equals(to)

@@ -2,6 +2,7 @@ package com.myapp.tremplist_update.model;
 
 // In this class we implement the Ride class
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,6 +26,7 @@ public class Ride {
 
     private User Driver;
     private Map<String , User> trempists; // will be tha list of passengers in the Ride
+    private Map<String, User> user_rate;
 
     public Ride() {
     }
@@ -43,6 +45,7 @@ public class Ride {
         this.car_type = "";
         this.trempists=new HashMap<>();
         this.Driver=new User();
+        this.user_rate = new HashMap<>();
     }
 
     public Ride(String src, String src_details, String dst, String dst_details, Date date, Hour hour, int sits, int cost, String car_color, String car_type) {
@@ -59,6 +62,7 @@ public class Ride {
         this.car_type = car_type;
         this.trempists=new HashMap<>();
         this.Driver=new User();
+        this.user_rate = new HashMap<>();
     }
 
     public Ride(Ride other) {
@@ -80,6 +84,9 @@ public class Ride {
         if(other.trempists!=null)
             this.trempists = new HashMap<>(other.trempists);
         else this.trempists=new HashMap<>();
+        if(other.user_rate != null)
+            this.user_rate = new HashMap<>(other.user_rate);
+        else this.user_rate = new HashMap<>();
     }
 
 
@@ -186,6 +193,9 @@ public class Ride {
     public void add_to_trempists(User trempist){
         trempists.put(trempist.id, trempist);
     }
+    public void add_rated(User trempist){
+        user_rate.put(trempist.id, trempist);
+    }
 
     public void remove_from_Tremplists(User trempist) {
         trempists.remove(trempist.id);
@@ -203,6 +213,14 @@ public class Ride {
         return id;
     }
 
+    public Map<String, User> getUser_rate() {
+        return user_rate;
+    }
+
+    public void setUser_rate(HashMap<String, User> user_rate) {
+        this.user_rate = user_rate;
+    }
+
     @Override
     public String toString() {
         return "Ride{" +
@@ -218,7 +236,7 @@ public class Ride {
                 ", free_sits=" + free_sits +
                 ", ride_cost=" + ride_cost +
                 ", id='" + id + '\'' +
-                ", Driver=" + Driver +
+                ", Driver=" + Driver+
                 ", trempists=" + trempists +
                 '}';
     }

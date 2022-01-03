@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 
 public class User {
     private String first_name, last_name, phone, password, email;
+    private int sum_rate, count_rate;
     public String id;
+
 
 
     public User() {
@@ -17,7 +19,21 @@ public class User {
         this.password = other.password;
         this.email = other.email;
         this.id = other.id;
+        this.sum_rate = other.sum_rate;
+        this.count_rate = other.count_rate;
     }
+
+//    public User(String id, String first_name, String last_name, String phone, String email, int count_rate, int sum_rate) {
+////    public User(String id, String first_name, String last_name, String phone, String email) {
+//        this.id = id;
+//        this.first_name = first_name;
+//        this.last_name = last_name;
+//        this.phone = phone;
+//        this.email = email;
+//        this.sum_rate = sum_rate;
+//        this.count_rate = count_rate;
+//
+//    }
 
     public User(String id, String first_name, String last_name, String phone, String email) {
         this.id = id;
@@ -25,12 +41,27 @@ public class User {
         this.last_name = last_name;
         this.phone = phone;
         this.email = email;
+    }
 
+    public int getSum_rate() {
+        return sum_rate;
+    }
+
+    public void setSum_rate(int sum_rate) {
+        this.sum_rate = sum_rate;
+    }
+
+    public int getCount_rate() {
+        return count_rate;
+    }
+
+    public void setCount_rate(int count_rate) {
+        this.count_rate = count_rate;
     }
 
     // for update details
-
     public static User create_user_for_personal_info(String id, String first_name, String last_name, String phone) {
+//    public static User create_user_for_personal_info(String id, String first_name, String last_name, String phone) {
         User user = new User();
         user.id = id;
         user.first_name = first_name;
@@ -39,12 +70,15 @@ public class User {
         return user;
     }
 
-    public User(String first_name, String last_name, String phone, String email) {
+    public User(String first_name, String last_name, String phone, String email, int sum_rate, int count_rate ) {
+//    public User(String first_name, String last_name, String phone, String email) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
         this.email = email;
+        this.sum_rate = sum_rate;
+        this.count_rate = count_rate;
 
     }
 

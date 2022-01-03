@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 import com.myapp.tremplist_update.UI.DriverFirstPage;
+import com.myapp.tremplist_update.R;
 import com.myapp.tremplist_update.model.Ride;
 import com.myapp.tremplist_update.model.User;
 
@@ -214,7 +216,31 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
 
     }
 
+    public void updateRate(Ride ride,int rate, String uid_passenger){
+        myRef.child("users").child(uid_passenger).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    User passenger = Objects.requireNonNull(task.getResult()).getValue(User.class);
+                    ride.add_rated(passenger);
+                    myRef.child("rides").child(ride.getId()).setValue(ride);
 
+                    myRef.child("users").child(ride.getDriver().getId()).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                            User driver = task.getResult().getValue(User.class);
+                            assert driver != null;
+                            driver.setCount_rate(driver.getCount_rate()+1);
+                            driver.setSum_rate(driver.getSum_rate()+rate);
+                            myRef.child("users").child(ride.getDriver().getId()).setValue(driver);
+                        }
+                    });
+                }
+            }
+        }) ;
+            }
     public void update_relevant_driver_details(User user_to_update, String UID) {
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("rides");
@@ -255,6 +281,29 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
             }
         });
 
+    }
+
+    public void showRate(TextView rate) {
+        String UID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        myRef.child("users").child(UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    // Adding the driver to the ride
+                    User driver = Objects.requireNonNull(task.getResult()).getValue(User.class);
+                    try {
+                        if (driver.getCount_rate() > 0) {
+                            double totalRate = driver.getSum_rate() / driver.getCount_rate();
+                            rate.setText(String.format("%.2f", totalRate));
+                        }
+                    }catch(Exception exc){
+                        Log.e("Old account", "Error getting data - need to re-register", exc);
+                    }
+                }
+            }
+        });
     }
 
     public void setActivity(Activity activity) {
