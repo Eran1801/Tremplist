@@ -303,6 +303,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                             rate.setText(totalRate+"/5");
                         }
                     }catch(Exception exc){
+                        rate.setTextSize(20);
                         Log.e("Old account", "Error getting data - need to re-register", exc);
                     }
                 }
