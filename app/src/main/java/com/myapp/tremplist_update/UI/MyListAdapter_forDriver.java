@@ -87,18 +87,21 @@ public class MyListAdapter_forDriver extends ArrayAdapter<String> {
     private void openPopupWindow(int position) {
         Intent popupView = new Intent(getContext(), PopUpWindow.class);
         ArrayList<String> passenger_list=new ArrayList<>();
+        ArrayList<String> passenger_phones=new ArrayList<>();
+
         Ride curr_ride = new Ride(rides.get(position));
 //        LinkedList<User> passengers = (LinkedList<User>) curr_ride.getTrempists().values();
         for (User u: curr_ride.getTrempists().values()){
             String s = "שם: "+u.getFirst_name()+" "+u.getLast_name();
             s+="\n"+"פלאפון: "+ u.getPhone();
             passenger_list.add(s);
+            passenger_phones.add(u.getPhone());
         }
         if(passenger_list.size()==0){
             Toast.makeText(getContext(), "אין לך טרמפיסטים לנסיעה זו",Toast.LENGTH_SHORT).show();
         }else {
             popupView.putExtra("passenger_list", passenger_list);
-            popupView.putExtra("driver_phone", curr_ride.getDriver().getPhone());
+            popupView.putExtra("passenger_phones", passenger_phones);
             activity.startActivity(popupView);
         }
     }

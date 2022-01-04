@@ -43,7 +43,7 @@ public class PopUpWindow extends AppCompatActivity {
         Button back_btn=findViewById(R.id.back_btn);
 
         ArrayList<String> passenger_list =getIntent().getStringArrayListExtra("passenger_list");
-        String trempist_phone =getIntent().getStringExtra("trempist_phone");
+        ArrayList<String> passengers_phones =getIntent().getStringArrayListExtra("passenger_phones");
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -66,7 +66,7 @@ public class PopUpWindow extends AppCompatActivity {
         Context ApplicationContext = getApplicationContext();
         Activity activity = PopUpWindow.this;
 
-        MyListAdapter_MyPassengers adapter = new MyListAdapter_MyPassengers(this, R.layout.list_item_passenger, passenger_list,trempist_phone, ApplicationContext, activity);
+        MyListAdapter_MyPassengers adapter = new MyListAdapter_MyPassengers(this, R.layout.list_item_passenger, passenger_list,passengers_phones, ApplicationContext, activity);
         listView.setAdapter(adapter);
 
         adapter.notifyDataSetChanged();

@@ -21,19 +21,20 @@ import com.myapp.tremplist_update.R;
 import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 import com.myapp.tremplist_update.model.Ride;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MyListAdapter_MyPassengers extends ArrayAdapter<String> {
     FireBaseDBActivity fb;
     private int layout;
-    String trempist_phone;
+    ArrayList<String > passengers_phones ;
     Context ApplicationContext;
     Activity activity;
 
-    public MyListAdapter_MyPassengers(@NonNull Context context, int resource, @NonNull List<String> objects, String trempist_phone, Context ApplicationContext, Activity activity) {
+    public MyListAdapter_MyPassengers(@NonNull Context context, int resource, @NonNull List<String> objects, ArrayList<String> passengers_phones, Context ApplicationContext, Activity activity) {
         super(context, resource, objects);
         layout=resource;
-        this.trempist_phone=trempist_phone;
+        this.passengers_phones=passengers_phones;
         this.ApplicationContext=ApplicationContext;
         this.activity=activity;
     }
@@ -55,7 +56,7 @@ public class MyListAdapter_MyPassengers extends ArrayAdapter<String> {
             viewHolder.call_passenger.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String phone_number = "tel:"+trempist_phone;
+                    String phone_number = "tel:"+passengers_phones.get(position);
                     Intent intent=new Intent(Intent.ACTION_VIEW);
                     intent.setData(Uri.parse(phone_number));
                     getContext().startActivity(intent);
@@ -65,7 +66,7 @@ public class MyListAdapter_MyPassengers extends ArrayAdapter<String> {
             viewHolder.whatsapp_passenger.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String phone_number =trempist_phone;
+                    String phone_number =passengers_phones.get(position);
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         phone_number = phone_number.substring(1);
