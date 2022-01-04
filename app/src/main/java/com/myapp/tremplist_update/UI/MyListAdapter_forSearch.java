@@ -64,7 +64,6 @@ public class MyListAdapter_forSearch extends ArrayAdapter<String> {
                     fb.setApplicationContext(ApplicationContext);
                     fb.setActivity(activity);
                     fb.updateRideOnDB_join(curr_ride);
-
                 }
             });
 

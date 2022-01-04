@@ -58,7 +58,7 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
                 rides.clear();
                 //go over all the rides in the firebase
                 for (DataSnapshot snapshot : datasnapshot.getChildren()) {
-                        Ride ride = snapshot.getValue(Ride.class);
+                    Ride ride = snapshot.getValue(Ride.class);
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
                     String curr_id= Objects.requireNonNull(mAuth.getCurrentUser()).getUid();

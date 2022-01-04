@@ -67,9 +67,9 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(context, "Publish successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "הנסיעה פורסמה בהצלחה!", Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(context, "Publishing Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "חלה שגיאה במהלך הפרסום" + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
                     });
@@ -153,7 +153,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(context, "you are successfully canceled the ride", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "הנסיעה בוטלה", Toast.LENGTH_SHORT).show();
                                 String driver_UID = curr_ride.getDriver().id;
                                 myRef.child("tokens").child(driver_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                     @Override
@@ -403,6 +403,47 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
         });
 
     }
+    public void updateRideOnDB_Cancel_request(Ride curr_ride) {
+        String trempist_UID = Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
+        myRef.child("users").child(trempist_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    // Adding the driver to the ride
+                    User Trempist = Objects.requireNonNull(task.getResult()).getValue(User.class);
+                    curr_ride.remove_from_waitingList(Trempist);
+                    myRef.child("rides").child(curr_ride.getId()).setValue(curr_ride).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(context, "הבקשה בוטלה", Toast.LENGTH_SHORT).show();
+                                String driver_UID = curr_ride.getDriver().id;
+                                myRef.child("tokens").child(driver_UID).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                        if (!task.isSuccessful()) {
+                                            Log.e("firebase", "Error getting data", task.getException());
+                                        } else {
+
+                                        }
+                                    }
+
+                                });
+
+
+                            } else {
+                                Toast.makeText(context, "Error: " + Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+
+    }
 
     public void setActivity(Activity activity) {
         this.activity = activity;
@@ -411,6 +452,7 @@ public class FireBaseDBActivity extends FirebaseBaseModel {
     public void setApplicationContext(Context applicationContext) {
         this.ApplicationContext = ApplicationContext;
     }
+
 
 
 }

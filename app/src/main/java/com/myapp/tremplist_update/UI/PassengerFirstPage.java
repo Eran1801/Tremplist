@@ -14,7 +14,7 @@ The option we have is a Search ride, My rides, and Personal info
 */
 
 public class PassengerFirstPage extends AppCompatActivity {
-    Button search_rideBtn,My_ridesBtn;
+    Button search_rideBtn,My_ridesBtn, My_request;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class PassengerFirstPage extends AppCompatActivity {
 
         search_rideBtn = findViewById(R.id.search_ride);
         My_ridesBtn= findViewById(R.id.my_tremps);
+        My_request= findViewById(R.id.My_requests);
 
         // When you choose the search button
         search_rideBtn.setOnClickListener(view -> {
@@ -31,6 +32,10 @@ public class PassengerFirstPage extends AppCompatActivity {
 
         My_ridesBtn.setOnClickListener(view -> {
             startActivity(new Intent(PassengerFirstPage.this, My_rides_Passenger_Activity.class));
+        });
+
+        My_request.setOnClickListener(view -> {
+            startActivity(new Intent(PassengerFirstPage.this, My_requests_Activity.class));
         });
 
 
