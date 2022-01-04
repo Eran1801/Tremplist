@@ -36,11 +36,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rate_ride"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
+        android:layout_width="98dp"
+        android:layout_height="38dp"
         android:layout_below="@id/cancel_ride_trempist"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="2dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
         android:layout_toEndOf="@id/ride_details_trempist"
         android:layout_toRightOf="@id/ride_details_trempist"
         android:text="דרג"
@@ -48,17 +48,50 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_ride_trempist"
-        android:layout_width="72dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
         android:layout_alignBottom="@+id/user_im_trempist"
+        android:layout_alignParentTop="true"
         android:layout_centerVertical="true"
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="9dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="0dp"
         android:layout_toEndOf="@id/ride_details_trempist"
         android:layout_toRightOf="@id/ride_details_trempist"
         android:text="בטל הצטרפות"
         android:textSize="12dp" />
+
+    <ImageButton
+        android:id="@+id/call_Mydriver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="328dp"
+        android:layout_marginLeft="328dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="0dp"
+        android:foregroundGravity="center"
+        android:padding="7dp"
+        android:src="@drawable/cell" />
+
+    <ImageButton
+        android:id="@+id/whatsapp_MyDriver"
+        android:layout_width="32dp"
+        android:layout_height="27dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="282dp"
+        android:layout_marginLeft="282dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="5dp"
+        android:foregroundGravity="center"
+        android:src="@mipmap/ic_whatsapp" />
 
 
 </RelativeLayout>

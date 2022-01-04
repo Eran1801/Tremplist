@@ -109,19 +109,6 @@ public class MyListAdapter_forSearch extends ArrayAdapter<String> {
         this.rides=rides;
     }
 
-//    public boolean appInstallOrNot(String url){
-//        PackageManager packageManager= getContext().getPackageManager();
-//        boolean appInstalled;
-//        try {
-//            packageManager.getPackageInfo(url, PackageManager.GET_ACTIVITIES);
-//            appInstalled=true;
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//            appInstalled=false;
-//        }
-//        return appInstalled;
-//    }
-
 }
 
 

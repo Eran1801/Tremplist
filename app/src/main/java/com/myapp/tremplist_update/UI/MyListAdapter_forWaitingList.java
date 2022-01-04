@@ -68,7 +68,7 @@ public class MyListAdapter_forWaitingList extends ArrayAdapter<String> {
                         fb.approve_joining(curr_ride, curr_trempist);
                     }
                     else
-                        Toast.makeText(getContext(),"לא נשאר לך מקום כדי לאשר עוד נסיעות", Toast.LENGTH_SHORT);
+                        Toast.makeText(getContext(),"לא נשאר לך מקום כדי לאשר עוד נסיעות", Toast.LENGTH_SHORT).show();
                 }
             });
 

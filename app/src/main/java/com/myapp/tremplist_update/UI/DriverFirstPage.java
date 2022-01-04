@@ -43,7 +43,6 @@ public class DriverFirstPage extends AppCompatActivity {
         });
 
         myRidesBtn.setOnClickListener(view -> {
-            System.out.println("ddfdf");
             startActivity(new Intent(DriverFirstPage.this, My_rides_Driver_Activity.class));
         });
 

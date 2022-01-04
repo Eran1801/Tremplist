@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +19,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 import com.myapp.tremplist_update.R;
 import com.myapp.tremplist_update.model.Ride;
+import com.myapp.tremplist_update.model.User;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class MyListAdapter_forDriver extends ArrayAdapter<String> {
@@ -66,7 +70,7 @@ public class MyListAdapter_forDriver extends ArrayAdapter<String> {
             viewHolder.my_passengers.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openPopupWindow();
+                    openPopupWindow(position);
                 }
             });
 
@@ -80,9 +84,23 @@ public class MyListAdapter_forDriver extends ArrayAdapter<String> {
         return convertView;
     }
 
-    private void openPopupWindow() {
+    private void openPopupWindow(int position) {
         Intent popupView = new Intent(getContext(), PopUpWindow.class);
-        activity.startActivity(popupView);
+        ArrayList<String> passenger_list=new ArrayList<>();
+        Ride curr_ride = new Ride(rides.get(position));
+//        LinkedList<User> passengers = (LinkedList<User>) curr_ride.getTrempists().values();
+        for (User u: curr_ride.getTrempists().values()){
+            String s = "שם: "+u.getFirst_name()+" "+u.getLast_name();
+            s+="\n"+"פלאפון: "+ u.getPhone();
+            passenger_list.add(s);
+        }
+        if(passenger_list.size()==0){
+            Toast.makeText(getContext(), "אין לך טרמפיסטים לנסיעה זו",Toast.LENGTH_SHORT).show();
+        }else {
+            popupView.putExtra("passenger_list", passenger_list);
+            popupView.putExtra("driver_phone", curr_ride.getDriver().getPhone());
+            activity.startActivity(popupView);
+        }
     }
 
 
