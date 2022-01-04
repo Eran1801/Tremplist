@@ -34,24 +34,15 @@
         android:layout_toRightOf="@+id/user_im_trempist"
         android:textColor="@color/black" />
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cancel_ride_trempist"
-        android:layout_marginLeft="2dp"
-        android:layout_marginRight="260dp"
-        android:background="@android:drawable/btn_dropdown"
-        android:spinnerMode="dropdown" />
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/rate_ride"
-        android:layout_width="80dp"
+        android:layout_width="72dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/cancel_ride_trempist"
+        android:layout_marginStart="20dp"
         android:layout_marginLeft="2dp"
-        android:layout_toEndOf="@id/spinner1"
-        android:layout_toRightOf="@+id/spinner1"
+        android:layout_toEndOf="@id/ride_details_trempist"
+        android:layout_toRightOf="@id/ride_details_trempist"
         android:text="דרג"
         android:textSize="12dp" />
 

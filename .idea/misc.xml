@@ -49,6 +49,9 @@
         <entry key="..\:/Tremplist7/app/src/main/res/layout/search_results.xml" value="0.1" />
         <entry key="..\:/TremplistNew/app/src/main/res/drawable-v24/button_vg.xml" value="0.1234375" />
         <entry key="..\:/TremplistNew/app/src/main/res/drawable-v24/edit_text_bg.xml" value="0.13125" />
+        <entry key="..\:/TremplistNew/app/src/main/res/drawable/dialog_bg.xml" value="0.12760416666666666" />
+        <entry key="..\:/TremplistNew/app/src/main/res/drawable/icon.xml" value="0.1" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_driver_first_page.xml" value="0.264" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_driver_first_page.xml" value="0.2" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_find_ride.xml" value="0.264" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_forget_password.xml" value="0.1109375" />
@@ -60,6 +63,10 @@
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_register.xml" value="0.2406576980568012" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/activity_splash_screen.xml" value="0.10208333333333333" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/content_scrolling.xml" value="0.4" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/list_item_driver.xml" value="0.6" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/list_item_search.xml" value="0.536" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/list_item_trempist.xml" value="0.536" />
+        <entry key="..\:/TremplistNew/app/src/main/res/layout/rate_dialog.xml" value="0.264" />
         <entry key="..\:/TremplistNew/app/src/main/res/layout/search_results.xml" value="0.1109375" />
         <entry key="..\:/TremplistNew/app/src/main/res/menu/menu_list_of_relevant_rides.xml" value="0.10208333333333333" />
         <entry key="..\:/Users/ERAN LEVY/AndroidStudioProjects/Tremplist/app/src/main/res/layout/activity_driver_first_page.xml" value="0.20416666666666666" />
