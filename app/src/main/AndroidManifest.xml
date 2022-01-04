@@ -5,102 +5,98 @@
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/tremplist_logo"
+        android:label="TrempList"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Tremplist_update"
-        android:label="TrempList">
-
+        android:theme="@style/Theme.Tremplist_update">
+        <activity
+            android:name=".UI.PopUpWindow"
+            android:theme="@style/AppTheme.popMe"
+            android:exported="false" />
         <activity
             android:name=".UI.PersonalUserInfoActivity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="update details"
-            android:parentActivityName="com.myapp.tremplist_update.UI.MainActivity"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.MainActivity" />
         <activity
             android:name=".UI.DriverFirstPage"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Driver Page"
-            android:parentActivityName="com.myapp.tremplist_update.UI.MainActivity"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.MainActivity" />
         <activity
             android:name=".UI.Publish_activity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Publish ride"
-            android:parentActivityName=".UI.DriverFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.DriverFirstPage" />
         <activity
             android:name=".UI.My_rides_Driver_Activity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".UI.DriverFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.DriverFirstPage" />
         <activity
             android:name=".UI.driver_waiting_listActivity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".UI.DriverFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.DriverFirstPage" />
         <activity
             android:name=".UI.My_rides_Passenger_Activity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".UI.PassengerFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.PassengerFirstPage" />
         <activity
             android:name=".UI.PassengerFirstPage"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Passenger Page"
-            android:parentActivityName="com.myapp.tremplist_update.UI.MainActivity"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.MainActivity" />
         <activity
             android:name=".UI.Search_ridesActivity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Search ride"
-            android:parentActivityName=".UI.PassengerFirstPage"/>
-
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.PassengerFirstPage" />
         <activity
             android:name=".UI.show_search_resultsActivity"
-            android:launchMode="singleTop"
             android:exported="true"
             android:label="Rides"
-            android:parentActivityName=".UI.Search_ridesActivity"/>
+            android:launchMode="singleTop"
+            android:parentActivityName=".UI.Search_ridesActivity" />
 
         <service
             android:name=".fireBase.FirebaseMessagingService"
+            android:exported="false"
             android:permission="TODO"
-            tools:ignore="ExportedService"
-            android:exported="false">
+            tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <activity android:name=".UI.LoginActivity"/>
-        <activity android:name=".UI.ForgotPasswordActivity"/>
-
-        <activity android:name=".UI.RegisterActivity"/>
-        <activity android:name=".UI.MainActivity"/>
+        <activity android:name=".UI.LoginActivity" />
+        <activity android:name=".UI.ForgotPasswordActivity" />
+        <activity android:name=".UI.RegisterActivity" />
+        <activity android:name=".UI.MainActivity" />
         <activity
             android:name=".UI.SplashScreenActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.Splash" >
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

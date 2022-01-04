@@ -21,6 +21,7 @@ import com.myapp.tremplist_update.model.Ride;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 // In this class we implement the search result that will show when a passenger want to find a ride
 
@@ -60,7 +61,7 @@ public class My_rides_Driver_Activity extends AppCompatActivity {
                         Ride ride = snapshot.getValue(Ride.class);
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
-                    String curr_id=mAuth.getCurrentUser().getUid();
+                    String curr_id= Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                     String driver_id=ride.getDriver().getId();
                     if (driver_id.equals(curr_id)) {
                         rides.add(ride);

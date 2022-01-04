@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.xml.transform.Source;
 
@@ -74,7 +75,7 @@ public class driver_waiting_listActivity extends AppCompatActivity {
                     Ride ride = snapshot.getValue(Ride.class);
                     assert ride != null; // make sure Ride not null
                     //check if the current ride is fit to the search details
-                    String curr_id=mAuth.getCurrentUser().getUid();
+                    String curr_id= Objects.requireNonNull(mAuth.getCurrentUser()).getUid();
                     String driver_id=ride.getDriver().getId();
                     Map<String, User> waiting_list=new HashMap<>(ride.getWaiting_list());
 
