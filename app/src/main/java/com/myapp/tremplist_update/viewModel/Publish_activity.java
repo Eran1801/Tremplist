@@ -1,9 +1,8 @@
-package com.myapp.tremplist_update.UI;
+package com.myapp.tremplist_update.viewModel;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;

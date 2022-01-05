@@ -16,8 +16,7 @@ import androidx.core.app.NotificationCompat;
 
 
 import com.google.firebase.messaging.RemoteMessage;
-import com.myapp.tremplist_update.UI.PassengerFirstPage;
-import com.myapp.tremplist_update.UI.driver_waiting_listActivity;
+import com.myapp.tremplist_update.viewModel.driver_waiting_listActivity;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 

@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update.UI;
+package com.myapp.tremplist_update.viewModel;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.FirebaseDatabase;
 import com.myapp.tremplist_update.R;
 import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 

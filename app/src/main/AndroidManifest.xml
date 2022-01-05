@@ -22,74 +22,74 @@
         android:theme="@style/Theme.Tremplist_update">
 
         <activity
-            android:name=".UI.PersonalUserInfoActivity"
+            android:name=".viewModel.PersonalUserInfoActivity"
             android:exported="true"
             android:label="update details"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.MainActivity" />
+            android:parentActivityName=".viewModel.MainActivity" />
 
         <activity
-            android:name=".UI.PopUpWindow"
+            android:name=".viewModel.PopUpWindow"
             android:theme="@style/AppTheme.popMe"
             android:exported="false"/>
 
         <activity
-            android:name=".UI.DriverFirstPage"
+            android:name=".viewModel.DriverFirstPage"
             android:exported="true"
             android:label="Driver Page"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.MainActivity" />
+            android:parentActivityName=".viewModel.MainActivity" />
         <activity
-            android:name=".UI.Publish_activity"
+            android:name=".viewModel.Publish_activity"
             android:exported="true"
             android:label="Publish ride"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.DriverFirstPage" />
+            android:parentActivityName=".viewModel.DriverFirstPage" />
         <activity
-            android:name=".UI.My_rides_Driver_Activity"
+            android:name=".viewModel.My_rides_Driver_Activity"
             android:exported="true"
             android:label="My rides"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.DriverFirstPage" />
+            android:parentActivityName=".viewModel.DriverFirstPage" />
             android:parentActivityName=".UI.DriverFirstPage"/>
 
         <activity
-            android:name=".UI.My_requests_Activity"
+            android:name=".viewModel.My_requests_Activity"
             android:launchMode="singleTop"
             android:exported="true"
             android:label="My rides"
-            android:parentActivityName=".UI.PassengerFirstPage"/>
+            android:parentActivityName=".viewModel.PassengerFirstPage"/>
 
         <activity
-            android:name=".UI.driver_waiting_listActivity"
+            android:name=".viewModel.driver_waiting_listActivity"
             android:exported="true"
             android:label="My rides"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.DriverFirstPage" />
+            android:parentActivityName=".viewModel.DriverFirstPage" />
         <activity
-            android:name=".UI.My_rides_Passenger_Activity"
+            android:name=".viewModel.My_rides_Passenger_Activity"
             android:exported="true"
             android:label="My rides"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.PassengerFirstPage" />
+            android:parentActivityName=".viewModel.PassengerFirstPage" />
         <activity
-            android:name=".UI.PassengerFirstPage"
+            android:name=".viewModel.PassengerFirstPage"
             android:exported="true"
             android:label="Passenger Page"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.MainActivity" />
+            android:parentActivityName=".viewModel.MainActivity" />
         <activity
-            android:name=".UI.Search_ridesActivity"
+            android:name=".viewModel.Search_ridesActivity"
             android:exported="true"
             android:label="Search ride"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.PassengerFirstPage" />
+            android:parentActivityName=".viewModel.PassengerFirstPage" />
         <activity
-            android:name=".UI.show_search_resultsActivity"
+            android:name=".viewModel.show_search_resultsActivity"
             android:exported="true"
             android:label="Rides"
             android:launchMode="singleTop"
-            android:parentActivityName=".UI.Search_ridesActivity" />
+            android:parentActivityName=".viewModel.Search_ridesActivity" />
 
         <service
             android:name=".fireBase.FirebaseMessagingService"
@@ -101,12 +101,12 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".UI.LoginActivity" />
-        <activity android:name=".UI.ForgotPasswordActivity" />
-        <activity android:name=".UI.RegisterActivity" />
-        <activity android:name=".UI.MainActivity" />
+        <activity android:name=".viewModel.LoginActivity" />
+        <activity android:name=".viewModel.ForgotPasswordActivity" />
+        <activity android:name=".viewModel.RegisterActivity" />
+        <activity android:name=".viewModel.MainActivity" />
         <activity
-            android:name=".UI.SplashScreenActivity"
+            android:name=".viewModel.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/AppTheme.Splash">
             <intent-filter>

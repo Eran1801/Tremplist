@@ -1,7 +1,6 @@
-package com.myapp.tremplist_update.UI;
+package com.myapp.tremplist_update.viewModel;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 import com.myapp.tremplist_update.R;
@@ -22,7 +20,6 @@ import com.myapp.tremplist_update.model.Ride;
 import com.myapp.tremplist_update.model.User;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class MyListAdapter_forDriver extends ArrayAdapter<String> {

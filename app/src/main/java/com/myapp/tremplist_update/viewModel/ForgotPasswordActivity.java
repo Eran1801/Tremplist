@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update.UI;
+package com.myapp.tremplist_update.viewModel;
 
 import android.os.Bundle;
 import android.text.TextUtils;

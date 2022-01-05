@@ -1,4 +1,4 @@
-package com.myapp.tremplist_update.UI;
+package com.myapp.tremplist_update.viewModel;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,15 +12,12 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.google.android.material.tabs.TabLayout;
 import com.myapp.tremplist_update.R;
 import com.myapp.tremplist_update.fireBase.FireBaseDBActivity;
 import com.myapp.tremplist_update.model.Ride;
 import com.myapp.tremplist_update.model.User;
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 public class MyListAdapter_forWaitingList extends ArrayAdapter<String> {
     private int layout;
