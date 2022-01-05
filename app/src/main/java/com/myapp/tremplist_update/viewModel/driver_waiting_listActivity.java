@@ -114,8 +114,8 @@ public class driver_waiting_listActivity extends AppCompatActivity {
                         //add the current ride (as a string) to the list
                     }
                 }
-                if(ridesList.size() == 0)
-                    Toast.makeText(driver_waiting_listActivity.this, "אין בקשות לאישור", Toast.LENGTH_SHORT).show();
+//                if(ridesList.size() == 0)
+//                    Toast.makeText(driver_waiting_listActivity.this, "אין בקשות לאישור", Toast.LENGTH_SHORT).show();
 
                 adapter.notifyDataSetChanged();
             }

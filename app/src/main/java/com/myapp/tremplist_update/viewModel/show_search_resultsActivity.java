@@ -143,8 +143,8 @@ public class show_search_resultsActivity extends AppCompatActivity {
                         ridesList.add(txt_to_add);
                     }
                 }
-                if(ridesList.size() == 0)
-                    Toast.makeText(show_search_resultsActivity.this, "No rides found!", Toast.LENGTH_SHORT).show();
+//                if(ridesList.size() == 0)
+//                    Toast.makeText(show_search_resultsActivity.this, "No rides found!", Toast.LENGTH_SHORT).show();
 
                 adapter.notifyDataSetChanged();
             }

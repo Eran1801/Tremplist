@@ -108,8 +108,8 @@ public class My_rides_Passenger_Activity extends AppCompatActivity {
                     }
 
                 }
-                if(ridesList.size() == 0)
-                    Toast.makeText(My_rides_Passenger_Activity.this, "No rides found!", Toast.LENGTH_SHORT).show();
+//                if(ridesList.size() == 0)
+//                    Toast.makeText(My_rides_Passenger_Activity.this, "No rides found!", Toast.LENGTH_SHORT).show();
 
                 adapter.notifyDataSetChanged();
 
